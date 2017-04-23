@@ -1,2 +1,2 @@
-This repo is created to store my personal setting for vim and other
-applications.
+This repo is created to store my personal setting for Vim and other apps.
+
