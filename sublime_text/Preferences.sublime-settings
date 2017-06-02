@@ -1,0 +1,45 @@
+{
+	"always_show_minimap_viewport": true,
+	"auto_complete": false,
+	"color_scheme": "Packages/Color Scheme - Default/Monokai.tmTheme",
+	"draw_minimap_border": true,
+	"draw_white_space": "selection",
+	"ensure_newline_at_eof_on_save": true,
+	"file_exclude_patterns":
+	[
+		".DS_Store",
+		"*.pid",
+		"*.pyc"
+	],
+	"folder_exclude_patterns":
+	[
+		".git",
+		"__pycache__",
+		".vscode"
+	],
+	"font_face": "Source Han Serif SC",
+	"font_options":
+	[
+		"gray_antialias",
+		"directwrite"
+	],
+	"font_size": 11,
+	"highlight_line": true,
+	"ignored_packages":
+	[
+		"Vintage"
+	],
+	"line_padding_bottom": 1,
+	"line_padding_top": 1,
+	"save_on_focus_lost": true,
+	"scroll_past_end": false,
+	"show_encoding": true,
+	"show_full_path": true,
+	"show_line_endings": false,
+	"tab_size": 4,
+	"translate_tabs_to_spaces": true,
+	"trim_trailing_white_space_on_save": true,
+	"rulers": [80],
+	"word_wrap": "auto",
+	 "wrap_width": 80,
+}

@@ -1,0 +1,15 @@
+{
+	"bootstrapped": true,
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"ConvertToUTF8",
+		"IMESupport",
+		"Markdown Preview",
+		"MarkdownEditing",
+		"MarkdownLight",
+		"Package Control"
+	]
+}
