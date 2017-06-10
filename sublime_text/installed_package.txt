@@ -1,0 +1,11 @@
+Windows:
+1. ConvertToUTF8
+2. IMESupport
+3. Markdown Preview
+4. MarkdownEditting
+5. MarkdownLight
+
+Linux(CentOS 7):
+1. EasyClangComplete
+2. Shell Turtlestein
+
