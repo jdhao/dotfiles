@@ -116,9 +116,12 @@ nnoremap <C-l> <C-W><C-l>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                       auto command                              "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"automatically save current python file and execute it when 
-"pressing the <F9> key
+"automatically save current file and execute it when pressing the <F9> key
 au FileType python nnoremap <buffer> <F9> :exec 'w !python' shellescape(@%, 1)<cr>
+
+
+"au FileType cpp nnoremap <F9> :w <bar> exec '!g++ '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
+au FileType cpp nnoremap <F9> :w <CR> :!g++ -Wall -std=c++11 % -o %<&&./%<<CR>
 
 "comment a line when using <localleader>c 
 au FileType python nnoremap <buffer> <localleader>c I#<esc>
@@ -130,6 +133,8 @@ au BufWritePost $MYVIMRC source $MYVIMRC
 " setting related to tab in order to follow PEP8
 au BufNewFile,BufRead *.py setlocal tabstop=4 softtabstop=4 shiftwidth=4 
 						\textwidth=79 expandtab autoindent fileformat=unix
+
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                    vim.syntastic setting                  "

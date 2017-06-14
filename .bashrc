@@ -22,6 +22,5 @@ alias mv='mv -i'
 set -o ignoreeof
 set +o noclobber
 set +o notify
+shopt -s extglob
 
-# added by Anaconda2 4.1.1 installer
-export PATH="/home/jdhao/anaconda2/bin:$PATH"
