@@ -1,0 +1,6 @@
+1, OneTab, https://www.one-tab.com/
+2, Vimium, https://vimium.github.io/
+3, Proxy SwitchyOmega, https://github.com/FelisCatus/SwitchyOmega
+4, Quick QR Code Generator, https://chrome.google.com/webstore/detail/quick-qr-code-generator/afpbjjgbdimpioenaedcjgkaigggcdpp?hl=en
+5, Short URL, https://chrome.google.com/webstore/detail/short-url-googl/gmcofljannieocjefhglfanemdmkafgg
+6, Extension Manager, https://chrome.google.com/webstore/detail/extension-manager/gjldcdngmdknpinoemndlidpcabkggco?utm_source=chrome-app-launcher-info-dialog
