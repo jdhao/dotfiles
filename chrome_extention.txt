@@ -4,3 +4,4 @@
 4, Quick QR Code Generator, https://chrome.google.com/webstore/detail/quick-qr-code-generator/afpbjjgbdimpioenaedcjgkaigggcdpp?hl=en
 5, Short URL, https://chrome.google.com/webstore/detail/short-url-googl/gmcofljannieocjefhglfanemdmkafgg
 6, Extension Manager, https://chrome.google.com/webstore/detail/extension-manager/gjldcdngmdknpinoemndlidpcabkggco?utm_source=chrome-app-launcher-info-dialog
+7, LastPass, https://chrome.google.com/webstore/detail/lastpass-free-password-ma/hdokiejnpimakedhajhdlcegeplioahd

@@ -1,0 +1,23 @@
+<snippet>
+	<content><![CDATA[
+#include <iostream>
+#include <vector>
+#include <string>
+#include <algorithm>
+
+using std::cout;
+using std::vector;
+using std::string;
+
+int main(){
+	
+	return 0;
+}
+
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>cpp</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+	<description>Insert a default C++ template</description>
+</snippet>

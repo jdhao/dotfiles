@@ -1,0 +1,18 @@
+{
+  "common_flags": [
+  // some example includes
+    "-I/usr/include",
+    // "-I/usr/lib/gcc/x86_64-redhat-linux/4.8.5/../../../../include/c++/4.8.5",
+ 	  // "-I/usr/lib/gcc/x86_64-redhat-linux/4.8.5/../../../../include/c++/4.8.5/x86_64-redhat-linux",
+    // "-I/usr/lib/gcc/x86_64-redhat-linux/4.8.5/../../../../include/c++/4.8.5/backward",
+    // "-I/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include",
+    "-I/usr/local/include",
+    // this is needed to include the correct headers for clang
+    "-I/usr/local/lib/clang/4.0.1/include",
+  ],
+  //"verbose" : true,
+  "libclang_path": "/usr/local/lib/libclang.so.4.0",
+  "use_libclang" : true,
+  "show_type_info": false,
+  "progress_style": "ColorSublime",
+}

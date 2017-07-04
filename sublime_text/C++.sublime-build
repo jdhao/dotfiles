@@ -1,0 +1,19 @@
+{
+	"shell_cmd": "g++ -std=c++11 -Wall \"${file}\" -o \"${file_path}/${file_base_name}\" && \"${file_path}/${file_base_name}\"",
+	"file_regex": "^(..[^:]*):([0-9]+):?([0-9]+)?:? (.*)$",
+	"working_dir": "${file_path}",
+	"selector": "source.c++, source.cpp, source.cc, source.cxx",
+
+	"variants":
+	[
+		{
+			"name": "Run in Terminal",
+			"shell_cmd": "g++ -std=c++11 -Wall \"${file}\" -o \"${file_path}/${file_base_name}\" && xterm -e '${file_path}/${file_base_name} && echo && echo Press ENTER to continue && read line && exit'",
+		   // "shell_cmd": "gnome-terminal -e 'bash -c \"${file_path}/${file_base_name}&& echo && echo Press ENTER to continue && read line && exit\"'",
+           // "shell_cmd": "xterm -e '${file_path}/${file_base_name}; bash'",
+           // "shell_cmd": "xterm -hold -e ${file_path}/${file_base_name}",
+           // "shell_cmd": "konsole --hold -e ${file_path}/./${file_base_name}",
+			"shell": true,
+		},
+	]
+}

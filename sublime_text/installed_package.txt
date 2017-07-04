@@ -4,8 +4,10 @@ Windows:
 3. Markdown Preview
 4. MarkdownEditting
 5. MarkdownLight
+6. Material Theme
 
 Linux(CentOS 7):
 1. EasyClangComplete
-2. Shell Turtlestein
-
+2. BracketHighlighter
+3. Material Theme
+4. PackageResourceViewer

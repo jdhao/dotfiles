@@ -1,7 +1,7 @@
 {
 	"always_show_minimap_viewport": true,
 	"auto_complete": false,
-	"color_scheme": "Packages/Color Scheme - Default/Monokai.tmTheme",
+	"color_scheme": "Packages/Material Theme/schemes/Material-Theme-Darker.tmTheme",
 	"draw_minimap_border": true,
 	"draw_white_space": "selection",
 	"ensure_newline_at_eof_on_save": true,
@@ -23,7 +23,6 @@
 		"gray_antialias",
 		"directwrite"
 	],
-	"font_size": 11,
 	"highlight_line": true,
 	"ignored_packages":
 	[
@@ -31,15 +30,19 @@
 	],
 	"line_padding_bottom": 1,
 	"line_padding_top": 1,
+	"rulers":
+	[
+		80
+	],
 	"save_on_focus_lost": true,
 	"scroll_past_end": false,
 	"show_encoding": true,
 	"show_full_path": true,
 	"show_line_endings": false,
 	"tab_size": 4,
+	"theme": "Material-Theme-Darker.sublime-theme",
 	"translate_tabs_to_spaces": true,
 	"trim_trailing_white_space_on_save": true,
-	"rulers": [80],
 	"word_wrap": "auto",
-	 "wrap_width": 80,
+	"wrap_width": 80,
 }
