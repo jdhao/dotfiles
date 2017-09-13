@@ -5,11 +5,12 @@
 	],
 	"installed_packages":
 	[
-		"ConvertToUTF8",
-		"IMESupport",
-		"Markdown Preview",
-		"MarkdownEditing",
-		"MarkdownLight",
-		"Package Control"
+		"A File Icon",
+		"BracketHighlighter",
+		"Clang Format",
+		"EasyClangComplete",
+		"Material Theme",
+		"Package Control",
+		"PackageResourceViewer"
 	]
 }

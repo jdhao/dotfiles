@@ -3,11 +3,38 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <bitset>
+#include <map>
+#include <list>
+#include <set>
+#include <queue>
+#include <limits>
 #include <algorithm>
+#include <cmath>
+#include <cctype>
 
 using std::cout;
+using std::cin;
+using std::endl;
+using std::bitset;
+using std::list;
 using std::vector;
 using std::string;
+using std::queue;
+using std::set;
+
+// method from algorithm
+using std::find;
+using std::max;
+using std::min;
+using std::reverse;
+using std::max_element;
+using std::min_element;
+
+// method from ctype
+using std::abs;
+using std::pow;
+using std::sqrt;
 
 int main(){
 	

@@ -13,4 +13,5 @@
   "errors_style": "phantoms",
   "hide_default_completions": true,
   "progress_style": "ColorSublime",
+  "show_type_info": false,
 }
