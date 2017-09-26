@@ -5,3 +5,6 @@
 5, Short URL, https://chrome.google.com/webstore/detail/short-url-googl/gmcofljannieocjefhglfanemdmkafgg
 6, Extension Manager, https://chrome.google.com/webstore/detail/extension-manager/gjldcdngmdknpinoemndlidpcabkggco?utm_source=chrome-app-launcher-info-dialog
 7, LastPass, https://chrome.google.com/webstore/detail/lastpass-free-password-ma/hdokiejnpimakedhajhdlcegeplioahd
+8, Unsplash Instant, https://instant.unsplash.com/
+9, Just Read, https://github.com/ZachSaucier/Just-Read
+10, Tampermonkey, https://tampermonkey.net/
