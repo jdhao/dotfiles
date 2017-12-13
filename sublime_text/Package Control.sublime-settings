@@ -9,8 +9,11 @@
 		"BracketHighlighter",
 		"Clang Format",
 		"EasyClangComplete",
+		"Jedi - Python autocompletion",
 		"Material Theme",
 		"Package Control",
-		"PackageResourceViewer"
+		"PackageResourceViewer",
+		"SideBarEnhancements",
+		"Theme - Brogrammer"
 	]
 }

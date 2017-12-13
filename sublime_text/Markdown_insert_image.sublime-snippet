@@ -1,0 +1,12 @@
+<snippet>
+	<description>insert an image in html syntax</description>
+	<content>
+		<![CDATA[<img src="${1:image link}?imageMogr2/thumbnail/!80p"
+		 title="${2:image title}"
+		 style="float: middle;"
+		 >]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>iimg</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>text.html.markdown, text.html.markdown.multimarkdown</scope>
+</snippet>

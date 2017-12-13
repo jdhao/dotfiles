@@ -1,5 +1,6 @@
 {
 	"auto_match_enabled": true,
+	"font_face": "Source Code Pro",
 	"caret_extra_bottom": 3,
 	"caret_extra_top": 3,
 	"caret_style": "wide",
@@ -7,6 +8,7 @@
 	"draw_centered": true,
 	"extensions":
 	[
+		"md",
 		"md"
 	],
 	"highlight_line": true,

@@ -1,6 +1,13 @@
 {
 	"Highlight_line": true,
 	"always_show_minimap_viewport": true,
+	"auto_complete_triggers":
+	[
+		{
+			"characters": ".",
+			"selector": "source.python"
+		}
+	],
 	"bold_folder_labels": true,
 	"color_scheme": "Packages/Material Theme/schemes/Material-Theme-Darker.tmTheme",
 	"fade_fold_buttons": false,
@@ -29,10 +36,12 @@
 	"match_brackets_square": false,
 	"match_tags": false,
 	"overlay_scroll_bars": "enabled",
+	"preview_on_click": false,
 	"rulers":
 	[
 		80
 	],
-	"theme": "Material-Theme-Darker.sublime-theme",
+	"shift_tab_unindent": true,
+	"theme": "Brogrammer.sublime-theme",
 	"translate_tabs_to_spaces": true
 }
