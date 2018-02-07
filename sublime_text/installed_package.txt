@@ -1,19 +1,23 @@
 Windows:
-1. ConvertToUTF8
-2. IMESupport
-3. Markdown Preview
-4. MarkdownEditting
-5. MarkdownLight
-6. Material Theme
-7. HexViewer
-8. WordCount
-9. SideBarEnhancements
++ ConvertToUTF8
++ BoxyTheme
++ BracketHighlighter
++ LaTeX-cwl
++ LaTeXTools
++ LaTeXYZ
++ IMESupport
++ Markdown Preview
++ MarkdownEditting
++ MarkdownLight
++ Material Theme
++ PackageResourceViewer
++ SideBarEnhancements
 
 Linux(CentOS 7):
-1. EasyClangComplete
-2. BracketHighlighter
-3. Material Theme
-4. PackageResourceViewer
-5. Clang Format
-6. Jedi - pyhon autocompletion
-7. SideBarEnhancements
++ EasyClangComplete
++ Boxy Theme
++ BracketHighlighter
++ Material Theme
++ PackageResourceViewer
++ Clang Format
++ SideBarEnhancements

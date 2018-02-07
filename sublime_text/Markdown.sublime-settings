@@ -1,14 +1,12 @@
 {
 	"auto_match_enabled": true,
-	"font_face": "Source Code Pro",
 	"caret_extra_bottom": 3,
 	"caret_extra_top": 3,
 	"caret_style": "wide",
-	"color_scheme": "Packages/MarkdownLight/MarkdownDark.tmTheme",
+	"color_scheme": "Packages/Boxy Theme/schemes/Boxy Monokai.tmTheme",
 	"draw_centered": true,
 	"extensions":
 	[
-		"md",
 		"md"
 	],
 	"highlight_line": true,
@@ -51,10 +49,17 @@
 	"mde.match_header_hashes": false,
 	"rulers":
 	[
+		80
 	],
 	"tab_size": 4,
 	"translate_tabs_to_spaces": true,
 	"trim_trailing_white_space_on_save": false,
 	"word_wrap": true,
-	"wrap_width": 80
+	"wrap_width": 80,
+	"font_face": "Fira Code",
+	"font_size": 10.5,
+	"font_options":
+	[
+		"directwrite"
+	],
 }

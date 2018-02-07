@@ -2,4 +2,7 @@
     { "keys": ["ctrl+shift+m"], "command": "markdown_preview_select", "args": {"target": "browser"} },
     {"keys": ["ctrl+shift+w"], "command": "close_all"},
     { "keys": ["ctrl+k", "ctrl+t"], "command": "title_case" },
+    { "keys": ["ctrl+shift+o"], "command": "prompt_open_folder" },
+    { "keys": ["ctrl+alt+p"], "command": "open_dir", "args": {"dir": "$packages/User"} },
+    { "keys": ["ctrl+'"], "command": "show_panel", "args": {"panel": "console", "toggle": true} },
 ]

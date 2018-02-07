@@ -1,15 +1,71 @@
 {
+	"added_words":
+	[
+		"cdot",
+		"convolutional",
+		"cv2",
+		"imshow",
+		"imread",
+		"jdhao",
+		"learnable",
+		"loss1",
+		"seperately",
+		"Matplotlib",
+		"advocator"
+	],
 	"always_show_minimap_viewport": true,
 	"auto_complete": false,
-	"color_scheme": "Packages/Material Theme/schemes/Material-Theme-Darker.tmTheme",
+	"auto_complete_triggers":
+	[
+		{
+			"characters": "<",
+			"selector": "text.html"
+		},
+		{
+			"characters": "\\",
+			"selector": "text.tex.latex"
+		}
+	],
+	"binary_file_patterns":
+	[
+		"*.tga",
+		"*.dds",
+		"*.ico",
+		"*.eot",
+		"*.pdf",
+		"*.swf",
+		"*.jar",
+		"*.zip"
+	],
+	"bold_folder_labels": true,
+	"caret_style": "phase",
+	"color_scheme": "Packages/Theme - Monokai Pro/Monokai Classic.tmTheme",
 	"draw_minimap_border": true,
 	"draw_white_space": "selection",
 	"ensure_newline_at_eof_on_save": true,
 	"file_exclude_patterns":
 	[
+		"*.pyc",
+		"*.pyo",
+		"*.exe",
+		"*.dll",
+		"*.obj",
+		"*.o",
+		"*.a",
+		"*.lib",
+		"*.so",
+		"*.dylib",
+		"*.ncb",
+		"*.sdf",
+		"*.suo",
+		"*.pdb",
+		"*.idb",
 		".DS_Store",
-		"*.pid",
-		"*.pyc"
+		"*.class",
+		"*.psd",
+		"*.db",
+		"*.sublime-workspace",
+		".*"
 	],
 	"folder_exclude_patterns":
 	[
@@ -17,19 +73,22 @@
 		"__pycache__",
 		".vscode"
 	],
-	"font_face": "Source Han Serif SC",
+	"font_face": "Fira Mono",
 	"font_options":
 	[
-		"gray_antialias",
 		"directwrite"
 	],
+	"font_size": 11,
 	"highlight_line": true,
+	"highlight_modified_tabs": false,
 	"ignored_packages":
 	[
 		"Vintage"
 	],
 	"line_padding_bottom": 1,
 	"line_padding_top": 1,
+	"margin": 2,
+	"preview_on_click": false,
 	"rulers":
 	[
 		80
@@ -38,11 +97,18 @@
 	"scroll_past_end": false,
 	"show_encoding": true,
 	"show_full_path": true,
-	"show_line_endings": false,
+	"show_line_endings": true,
 	"tab_size": 4,
-	"theme": "Material-Theme-Darker.sublime-theme",
-	"translate_tabs_to_spaces": true,
+	"theme": "Material-Theme.sublime-theme",
+	"theme_font_options":
+	[
+		"directwrite"
+	],
+	"theme_sidebar_folder_materialized": true,
+	"theme_sidebar_font_lg": true,
+	"theme_sidebar_indent_md": true,
+	"theme_sidebar_size_xs": true,
 	"trim_trailing_white_space_on_save": true,
 	"word_wrap": "auto",
-	"wrap_width": 80,
+	"wrap_width": 80
 }

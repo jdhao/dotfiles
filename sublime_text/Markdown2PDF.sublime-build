@@ -1,0 +1,17 @@
+{
+	"shell_cmd": "pandoc -f markdown-raw_tex --pdf-engine=xelatex --highlight-style zenburn -Vurlcolor=NavyBlue -V CJKmainfont=\"Source Han Serif SC\" \"${file}\" -o \"${file_path}/${file_base_name}.pdf\" ",
+	"path": "C:/Users/east/AppData/Local/Pandoc/;%PATH%",
+	"file_regex": "^(..[^:]*):([0-9]+):?([0-9]+)?:? (.*)$",
+	"working_dir": "${file_path}",
+	"selector": "text.html.markdown",
+
+	"variants":
+	[
+		{
+			"name": "Build and View",
+			"shell_cmd": "pandoc -f markdown-raw_tex --pdf-engine=xelatex --highlight-style zenburn -Vurlcolor=NavyBlue -V geometry:\"top=2cm, bottom=1.5cm, left=2cm, right=2cm\"  -V CJKmainfont=\"STKaiti\" \"${file}\" -o \"${file_base_name}.pdf\"  && SumatraPDF \"${file_base_name}.pdf\" ",
+			"path": "C:/Users/east/AppData/Local/Pandoc/;%PATH%",
+			// "shell_cmd":   "start \"$file_base_name\" call $file_base_name"
+		}
+	]
+}

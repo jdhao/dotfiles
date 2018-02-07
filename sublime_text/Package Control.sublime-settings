@@ -3,17 +3,27 @@
 	"in_process_packages":
 	[
 	],
+	"install_prereleases":
+	[
+		"LaTeXTools"
+	],
 	"installed_packages":
 	[
 		"A File Icon",
+		"Boxy Theme",
 		"BracketHighlighter",
-		"Clang Format",
-		"EasyClangComplete",
-		"Jedi - Python autocompletion",
+		"ConvertToUTF8",
+		"IMESupport",
+		"LaTeX-cwl",
+		"LaTeXTools",
+		"LaTeXYZ",
+		"LiveReload",
+		"Markdown Preview",
+		"MarkdownEditing",
 		"Material Theme",
 		"Package Control",
 		"PackageResourceViewer",
 		"SideBarEnhancements",
-		"Theme - Brogrammer"
+		"Theme - Monokai Pro"
 	]
 }
