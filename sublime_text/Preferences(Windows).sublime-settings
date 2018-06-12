@@ -11,19 +11,21 @@
 		"loss1",
 		"seperately",
 		"Matplotlib",
-		"advocator"
+		"advocator",
+		"favicon",
+		"blog"
 	],
 	"always_show_minimap_viewport": true,
 	"auto_complete": false,
 	"auto_complete_triggers":
 	[
 		{
-			"characters": "<",
-			"selector": "text.html"
-		},
-		{
 			"characters": "\\",
 			"selector": "text.tex.latex"
+		},
+		{
+			"characters": ".",
+			"selector": "source.python"
 		}
 	],
 	"binary_file_patterns":
@@ -39,7 +41,7 @@
 	],
 	"bold_folder_labels": true,
 	"caret_style": "phase",
-	"color_scheme": "Packages/Theme - Monokai Pro/Monokai Classic.tmTheme",
+	"color_scheme": "Packages/Color Scheme - Default/Monokai.tmTheme",
 	"draw_minimap_border": true,
 	"draw_white_space": "selection",
 	"ensure_newline_at_eof_on_save": true,
@@ -73,12 +75,13 @@
 		"__pycache__",
 		".vscode"
 	],
-	"font_face": "Fira Mono",
+	"font_face": "Fira Code",
 	"font_options":
 	[
-		"directwrite"
+		"directwrite",
+		"subpixel_antialias"
 	],
-	"font_size": 11,
+	"font_size": 10,
 	"highlight_line": true,
 	"highlight_modified_tabs": false,
 	"ignored_packages":
@@ -99,7 +102,7 @@
 	"show_full_path": true,
 	"show_line_endings": true,
 	"tab_size": 4,
-	"theme": "Material-Theme.sublime-theme",
+	"theme": "Boxy Monokai.sublime-theme",
 	"theme_font_options":
 	[
 		"directwrite"

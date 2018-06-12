@@ -1,4 +1,5 @@
 {
     "auto_complete_function_params": "",
     "sublime_completions_visibility": "default",
+    "logging_level": "info",
 }

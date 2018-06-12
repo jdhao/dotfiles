@@ -1,7 +1,7 @@
 <snippet>
 	<description>insert an image in html syntax</description>
 	<content>
-		<![CDATA[<img src="${1:image link}?imageMogr2/thumbnail/!100p"
+		<![CDATA[<img src="${1:image link}?imageMogr2/thumbnail/!100p/format/webp"
 		 title="${2:image title}"
 		 style="float: middle;">]]></content>
 

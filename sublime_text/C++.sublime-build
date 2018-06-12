@@ -1,19 +1,33 @@
 {
-	"shell_cmd": "g++ -std=c++11 -Wall \"${file}\" -o \"${file_path}/${file_base_name}\" && \"${file_path}/${file_base_name}\"",
-	"file_regex": "^(..[^:]*):([0-9]+):?([0-9]+)?:? (.*)$",
-	"working_dir": "${file_path}",
-	"selector": "source.c++, source.cpp, source.cc, source.cxx",
+    "shell_cmd": "g++ -std=c++11 -Wall -Wextra -Werror \"${file}\" -o \"${file_path}/${file_base_name}\" && \"${file_path}/${file_base_name}\"",
+    "file_regex": "^(..[^:]*):([0-9]+):?([0-9]+)?:? (.*)$",
+    "working_dir": "${file_path}",
+    "selector": "source.c++, source.cpp, source.cc, source.cxx",
 
-	"variants":
-	[
-		{
-			"name": "Run in Terminal",
-			"shell_cmd": "g++ -std=c++11 -Wall \"${file}\" -o \"${file_path}/${file_base_name}\" && xterm -e '${file_path}/${file_base_name} && echo && echo Press ENTER to continue && read line && exit'",
-		   // "shell_cmd": "gnome-terminal -e 'bash -c \"${file_path}/${file_base_name}&& echo && echo Press ENTER to continue && read line && exit\"'",
-           // "shell_cmd": "xterm -e '${file_path}/${file_base_name}; bash'",
-           // "shell_cmd": "xterm -hold -e ${file_path}/${file_base_name}",
-           // "shell_cmd": "konsole --hold -e ${file_path}/./${file_base_name}",
-			"shell": true,
-		},
-	]
+    "variants":
+    [
+        {
+            "name": "Run in Terminal",
+
+            "linux": {
+                "shell_cmd": "g++ -std=c++11 -Wall -Wextra -Werror \"${file}\" -o \"${file_path}/${file_base_name}\" && xterm -e '${file_path}/${file_base_name} && echo && echo Press ENTER to continue && read line && exit'",
+                // "shell_cmd": "g++ -std=c++11 -Wall \"${file}\" -o \"${file_path}/${file_base_name}\" && gnome-terminal -e 'bash -c \"${file_path}/${file_base_name}&& echo && echo Press ENTER to continue && read line && exit\"'", // for gnome-terminal
+                // "shell_cmd": "g++ -std=c++11 -Wall \"${file}\" -o \"${file_path}/${file_base_name}\" && xterm -e '${file_path}/${file_base_name}; bash'", // for xterm
+                // "shell_cmd": "g++ -std=c++11 -Wall \"${file}\" -o \"${file_path}/${file_base_name}\" && xterm -hold -e ${file_path}/${file_base_name}", // for xterm
+                // "shell_cmd": "g++ -std=c++11 -Wall \"${file}\" -o \"${file_path}/${file_base_name}\" && konsole --hold -e ${file_path}/./${file_base_name}", // for konsole
+
+            },
+
+            "windows":{
+                "shell_cmd":   "g++ -std=c++11 -Wall -Wextra -Werror \"${file}\" -o \"${file_path}/${file_base_name}\" && start cmd /k  $file_base_name "
+                // "shell_cmd":   "g++ -std=c++11 -Wall \"${file}\" -o \"${file_path}/${file_base_name}\" && start \"$file_base_name\" call $file_base_name"
+            },
+
+            "osx":{
+                "shell_cmd": "g++ -std=c++11 -Wall -Wextra -Werror \"${file}\" -o \"${file_path}/${file_base_name}\" && xterm -e '${file_path}/${file_base_name} && echo && echo Press ENTER to continue && read line && exit'",
+            },
+
+            "shell": true,
+        },
+    ]
 }

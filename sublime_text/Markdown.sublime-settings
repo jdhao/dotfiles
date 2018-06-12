@@ -4,7 +4,6 @@
 	"caret_extra_top": 3,
 	"caret_style": "wide",
 	"color_scheme": "Packages/Boxy Theme/schemes/Boxy Monokai.tmTheme",
-	"draw_centered": true,
 	"extensions":
 	[
 		"md"
@@ -18,7 +17,7 @@
 	{
 		"mde.keep_centered": true
 	},
-	"mde.keep_centered": false,
+	"mde.keep_centered": true,
 	"mde.lint":
 	{
 		"disable":
@@ -56,10 +55,6 @@
 	"trim_trailing_white_space_on_save": false,
 	"word_wrap": true,
 	"wrap_width": 80,
-	"font_face": "Fira Code",
-	"font_size": 10.5,
-	"font_options":
-	[
-		"directwrite"
-	],
+	"font_face": "Microsoft YaHei Mono",
+	"font_size": 11,
 }

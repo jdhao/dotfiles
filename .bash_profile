@@ -1,8 +1,5 @@
 # .bash_profile
 
-#Environment virables
-export PATH="${HOME}/util/anaconda3/bin:${PATH}"
-
 export HISTSIZE=50
 export VISUAL=vi
 export PAGER=less 
@@ -11,8 +8,6 @@ export LESS='-MNs'
 
 #set the shell prompt
 export PS1='[\w]$ '
-
-export PYTHONPATH=/home/jdhao/util/mxnet/python:$PYTHONPATH
 
 #set the PERMISSIONS for newly-created files
 umask 077

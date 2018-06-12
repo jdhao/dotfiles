@@ -90,7 +90,7 @@
 	// "all"       to show a phantom for each math environment
 	// "selected"  to show a phantom only for the currently selected math environment
 	// "none"      to disable math live preview
-	"preview_math_mode": "selected",
+	"preview_math_mode": "none",
 
 	// Change the scope selectors to preview math
 	// E.g. set it to "text.tex.latex meta.environment.math.block.be"
@@ -288,7 +288,7 @@
 	// if you do so, however, note that the path will be interpreted
 	// relative to the location of your project file
 
-	"aux_directory": "",
+	"aux_directory": "<<temp>>",
 
 	// OPTION: "output_directory"
 	// Specifies the output directory
@@ -324,7 +324,7 @@
 	// if you do so, however, note that the path will be interpreted
 	// relative to the location of your project file
 
-	"output_directory": "<<temp>>",
+	"output_directory": "",
 
 	// OPTION: "jobname"
 	// Specifies the jobname to use when building the document

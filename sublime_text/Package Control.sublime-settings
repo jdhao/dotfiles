@@ -5,7 +5,8 @@
 	],
 	"install_prereleases":
 	[
-		"LaTeXTools"
+		"LaTeXTools",
+		"MarkdownEditing"
 	],
 	"installed_packages":
 	[
@@ -13,17 +14,19 @@
 		"Boxy Theme",
 		"BracketHighlighter",
 		"ConvertToUTF8",
+		"FileSystem Autocompletion",
 		"IMESupport",
+		"Jedi - Python autocompletion",
 		"LaTeX-cwl",
 		"LaTeXTools",
 		"LaTeXYZ",
 		"LiveReload",
-		"Markdown Preview",
 		"MarkdownEditing",
+		"MarkdownPreview",
 		"Material Theme",
+		"Monokai Extended",
 		"Package Control",
 		"PackageResourceViewer",
-		"SideBarEnhancements",
-		"Theme - Monokai Pro"
+		"SideBarEnhancements"
 	]
 }
