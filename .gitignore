@@ -1,3 +1,4 @@
 *.last-run
 *.merged-ca-bundle
 *.user-ca-bundle
+tags
