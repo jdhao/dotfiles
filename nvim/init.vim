@@ -23,7 +23,7 @@
 "
 " Author: jdhao (jdhao@hotmail.com). My blog: https://jdhao.github.io
 "
-" Update: 2019-04-18 15:45:03+0800
+" Update: 2019-04-23 20:19:49+0800
 "
 " License: MIT License
 "
@@ -48,10 +48,7 @@
 " IN THE SOFTWARE.
 " }}}
 
-" Builtin variables {{{
-
-" disable Python 2 support
-let g:loaded_python_provider = 1
+" Variables {{{
 
 " path to Python 3 interpreter (must be an absolute path), make startup faster.
 " see https://neovim.io/doc/user/provider.html. You should change this
@@ -66,12 +63,29 @@ endif
 
 " set custom mapping <leader> (use `:h mapleader` for more info)
 let mapleader = ','
+
+" do not load netrw by default since I do not use it, see
+" https://github.com/bling/dotvim/issues/4
+let g:loaded_netrwPlugin = 1
+
+" do not load tohtml.vim
+let g:loaded_2html_plugin = 1
+
+" do not load zipPlugin.vim, gzip.vim and tarPlugin.vim (all these plugins are
+" related to compressed files)
+let g:loaded_zipPlugin = 1
+let loaded_gzip = 1
+let g:loaded_tarPlugin = 1
+
+" do not use matchit.vim and matchparen.vim
+let loaded_matchit = 1
+let g:loaded_matchparen = 1
 " }}}
 
 " Custom functions {{{
 
 " remove trailing white space, see https://goo.gl/sUjgFi
-" fun! s:StripTrailingWhitespaces()
+" function! s:StripTrailingWhitespaces() abort
 "    let l:save = winsaveview()
 "    keeppatterns %s/\s\+$//e
 "    call winrestview(l:save)
@@ -80,23 +94,21 @@ let mapleader = ','
 " create command alias safely, see https://bit.ly/2ImFOpL
 " the following two functions are taken from answer below on SO
 " https://stackoverflow.com/a/10708687/6064933
-fun! Cabbrev(key, value)
-  exe printf('cabbrev <expr> %s (getcmdtype() == ":" && getcmdpos() <= %d) ? %s : %s',
+function! Cabbrev(key, value) abort
+  execute printf('cabbrev <expr> %s (getcmdtype() == ":" && getcmdpos() <= %d) ? %s : %s',
     \ a:key, 1+len(a:key), Single_quote(a:value), Single_quote(a:key))
 endfunction
 
-fun! Single_quote(str)
+function! Single_quote(str) abort
   return "'" . substitute(copy(a:str), "'", "''", 'g') . "'"
 endfunction
 
 " check the syntax group in the current cursor position,
 " see http://tinyurl.com/yyzgswxz and http://tinyurl.com/y3lxozey
-function! s:SynGroup()
-
+function! s:SynGroup() abort
     if !exists('*synstack')
         return
     endif
-
     echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunction
 nnoremap <silent> <leader>st :call <SID>SynGroup()<CR>
@@ -105,15 +117,35 @@ nnoremap <silent> <leader>st :call <SID>SynGroup()<CR>
 " https://stackoverflow.com/a/5703164/6064933 (with adaptation)
 
 " check if a colorscheme exists in runtimepath
-function! HasColorscheme(name)
+function! HasColorscheme(name) abort
     let pat = 'colors/'.a:name.'.vim'
     return !empty(globpath(&runtimepath, pat))
 endfunction
 
 " check if an Airline theme exists in runtimepath
-function! HasAirlinetheme(name)
+function! HasAirlinetheme(name) abort
     let pat = 'autoload/airline/themes/'.a:name.'.vim'
     return !empty(globpath(&runtimepath, pat))
+endfunction
+
+" generate a random integer from range [Low, High] using Python
+function! RandInt(Low, High) abort
+" if you use Python 3, the python block should start with `python3` instead of
+" `python`, see https://github.com/neovim/neovim/issues/9927
+python3 << EOF
+import vim
+import random
+
+# using vim.eval to import variable outside Python script to python
+idx = random.randint(int(vim.eval('a:Low')), int(vim.eval('a:High')))
+
+# using vim.command to export variable inside Python script to vim script so
+# we can return its value in vim script
+vim.command("let index = {}".format(idx))
+EOF
+
+" vint: next-line -ProhibitUsingUndeclaredVariable
+return index
 endfunction
 " }}}
 
@@ -244,7 +276,7 @@ set title
 set titlestring=%{hostname()}\ \ %F\ \ \ %{strftime('%Y-%m-%d\ %H:%M',getftime(expand('%')))}
 
 " speed up updatetime so gigutter is quicker
-set updatetime=250
+set updatetime=1000
 
 " whether to use modelines for security concerns, see https://is.gd/FEzuc7.
 " Note that to use modeline in file, you must enable this option
@@ -275,6 +307,10 @@ set virtualedit=block
 
 " always show sign column
 set signcolumn=yes
+
+" correctly break multi-byte characters such as CJK,
+" see http://tinyurl.com/y4sq6vf3
+set formatoptions+=mM
 " }}}
 
 " Custom key mappings {{{
@@ -304,16 +340,16 @@ nnoremap <silent> <leader>q :q<CR>
 nnoremap <silent> <leader>Q :qa<CR>
 
 " go to previous and next item in location list
-nnoremap [l :lprevious<CR>
-nnoremap ]l :lnext<CR>
+nnoremap [l :lprevious<CR>zv
+nnoremap ]l :lnext<CR>zv
 
 " go to previous and next item in quickfix list
-nnoremap [q :cprevious<CR>
-nnoremap ]q :cnext<CR>
+nnoremap [q :cprevious<CR>zv
+nnoremap ]q :cnext<CR>zv
 
 " close location list or quickfix list if they are present,
 " see https://goo.gl/uXncnS
-nnoremap<silent> \x :windo lcl\|ccl<CR>
+nnoremap<silent> \x :windo lclose\|cclose<CR>
 
 " toggle highlight search, see https://goo.gl/3H85hh
 nnoremap <silent><expr> <Leader>hl (&hls && v:hlsearch ? ':nohls' : ':set hls')."\n"
@@ -381,11 +417,11 @@ inoremap <expr> <cr> ((pumvisible())?("\<C-Y>"):("\<cr>"))
 inoremap <expr> <esc> ((pumvisible())?("\<C-e>"):("\<esc>"))
 
 " switching buffers quickly, extracted from vim-unimpaired
-nnoremap <silent> [b :bp<cr> " go to previous buffer
-nnoremap <silent> ]b :bn<cr> " go to next buffer
+nnoremap <silent> [b :bprevious<cr> " go to previous buffer
+nnoremap <silent> ]b :bnext<cr> " go to next buffer
 
 " reload init.vim quickly and give a message
-nnoremap <silent> <leader>sv :so $MYVIMRC<cr>
+nnoremap <silent> <leader>sv :source $MYVIMRC<cr>
     \ :echom "Nvim config successfully reloaded!"<cr>
 
 " edit init.vim in a vertical split
@@ -421,6 +457,9 @@ nnoremap <leader>cd :lcd %:p:h<CR>:pwd<CR>
 
 " reduce indent level in insert mode with shift+tab
 inoremap <S-Tab> <ESC><<i
+
+" use esc to quit builtin terminal
+tnoremap <ESC>   <C-\><C-n>
 " }}}
 
 " Auto commands {{{
@@ -429,7 +468,7 @@ inoremap <S-Tab> <ESC><<i
 " it is useful for small script
 augroup filetype_auto_build_exec
     autocmd!
-    autocmd FileType python nnoremap <buffer> <F9> :exec 'w !python'
+    autocmd FileType python nnoremap <buffer> <F9> :execute 'w !python'
                 \ shellescape(@%, 1)<CR>
     autocmd FileType cpp nnoremap <F9> :w <CR> :!g++ -Wall -std=c++11 %
                 \ -o %<&&./%<<CR>
@@ -515,9 +554,9 @@ augroup END
 
 " set up directory to install all the plugins depending on the platform
 if has('win32')
-    let s:PLUGIN_HOME='~/AppData/Local/nvim/plugged'
+    let s:PLUGIN_HOME=expand('~/AppData/Local/nvim/plugged')
 else
-    let s:PLUGIN_HOME='~/.local/share/nvim/plugged'
+    let s:PLUGIN_HOME=expand('~/.local/share/nvim/plugged')
 endif
 
 " auto-install vim-plug on different systems.
@@ -619,6 +658,9 @@ Plug 'osyo-manga/vim-anzu'
 " TODO: worth trying and exploring
 Plug 'dyng/ctrlsf.vim'
 
+" a grep tool
+Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
+
 " file search, tag search and more
 if has('win32')
     Plug 'Yggdroot/LeaderF', { 'do': '.\install.bat' }
@@ -670,6 +712,7 @@ Plug 'ajmwagar/vim-deus'
 " Plug 'kaicataldo/material.vim'
 
 Plug 'hzchirs/vim-material'
+Plug 'nanotech/jellybeans.vim'
 
 " wonderful status line
 Plug 'vim-airline/vim-airline'
@@ -696,7 +739,6 @@ Plug 'itchyny/vim-highlighturl'
 " For Windows and Mac, we can open URL in browser. For Linux, it may not be
 " possible since we maybe in a server which disable X11
 if has('win32') || has('macunix')
-
     " open URL in browser
     Plug 'tyru/open-browser.vim'
 endif
@@ -828,6 +870,9 @@ Plug 'tpope/vim-surround'
 " add indent object for vim (useful for languages like Python)
 Plug 'michaeljsmith/vim-indent-object'
 
+" text object for entire buffer, add `ae` and `ie`
+Plug 'kana/vim-textobj-entire'
+
 """"""""""""""""""""""latex editting and previewing plugin"""""""""""""""""
 
 " Only use these plugin on Windows and Mac and when a LaTeX distribution has
@@ -877,6 +922,8 @@ Plug 'andymass/vim-matchup'
 
 " simulating smooth scroll motions with physcis
 Plug 'yuttie/comfortable-motion.vim'
+
+Plug 'tpope/vim-scriptease'
 call plug#end()
 " }}}
 
@@ -1028,8 +1075,8 @@ let g:NERDToggleCheckAllLines = 1
 if has('win32')
     " TODO: test yoink on Mac to see if it works
     " it seems that ctrl-n and ctrl-p does not work on neovim
-    " nmap <c-n> <plug>(YoinkPostPasteSwapBack)
-    " nmap <c-p> <plug>(YoinkPostPasteSwapForward)
+    nmap <c-n> <plug>(YoinkPostPasteSwapBack)
+    nmap <c-p> <plug>(YoinkPostPasteSwapForward)
 
     nmap p <plug>(YoinkPaste_p)
     nmap P <plug>(YoinkPaste_P)
@@ -1043,7 +1090,7 @@ if has('win32')
     xmap y <plug>(YoinkYankPreserveCursorPosition)
 
     " move cursor to end of paste after multiline paste
-    let g:yoinkMoveCursorToEndOfPaste = 1
+    let g:yoinkMoveCursorToEndOfPaste = 0
 
     " record yanks in system clipboard
     let g:yoinkSyncSystemClipboardOnFocus = 1
@@ -1168,15 +1215,27 @@ nnoremap <silent> <C-K><C-T> :TagbarToggle<CR>
 """""""""""""""""""""""""""vim-airline setting""""""""""""""""""""""""""""""
 
 " set a airline theme only if it exists, else we resort to default color
-if HasAirlinetheme('deus')
-    let g:airline_theme='deus'
-else
-    let g:airline_theme='dark_minimal'
+let s:candidate_airlinetheme = ['alduin', 'ayu_mirage', 'base16_flat',
+    \ 'monochrome', 'base16_grayscale', 'lucius', 'base16_tomorrow',
+    \ 'base16color', 'biogoo', 'distinguished', 'gruvbox', 'jellybeans',
+    \ 'luna', 'raven', 'seagull', 'solarized_flood', 'term', 'vice', 'zenburn']
+let s:idx = RandInt(0, len(s:candidate_airlinetheme)-1)
+let s:theme = s:candidate_airlinetheme[s:idx]
+
+if HasAirlinetheme(s:theme)
+    let g:airline_theme=s:theme
 endif
 
+" tabline settings
 " show tabline
 let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#formatter = 'default'
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+" buffer number display format
+let g:airline#extensions#tabline#buffer_nr_format = '%s. '
+
+" show buffer number for easier switching between buffer
+" see https://github.com/vim-airline/vim-airline/issues/1149
+let g:airline#extensions#tabline#buffer_nr_show = 1
 
 " whether to show function or other tags on status line
 let g:airline#extensions#tagbar#enabled = 0
@@ -1184,10 +1243,6 @@ let g:airline#extensions#tagbar#enabled = 0
 " skip empty sections if nothing to show
 " extract from https://vi.stackexchange.com/a/9637/15292
 let g:airline_skip_empty_sections = 1
-
-" show buffer number for easier switching between buffer
-" see https://github.com/vim-airline/vim-airline/issues/1149
-let g:airline#extensions#tabline#buffer_nr_show = 1
 
 "make airline more beautiful, see https://goo.gl/XLY19H for more info
 let g:airline_powerline_fonts = 1
@@ -1536,8 +1591,8 @@ endif
 
 """"""""""""""""""""""""""""vim-matchup settings"""""""""""""""""""""""""""""
 
-" disable matching inside comment
-let g:matchup_delim_noskips = 2   " don't recognize anything in comments
+" whether to enable matching inside comment or string
+let g:matchup_delim_noskips = 0
 
 " change highlight color of matching bracket for better visual effects
 augroup matchup_matchparen_highlight
@@ -1612,9 +1667,10 @@ if HasColorscheme('gruvbox')
     " see https://goo.gl/8nXhcp
     let g:gruvbox_italic=1
     let g:gruvbox_contrast_dark='hard'
+
     colorscheme gruvbox
 else
-    " fall back to pre-installed theme
+    " fall back to a pre-installed theme
     colorscheme desert
 endif
 
