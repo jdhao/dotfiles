@@ -9,10 +9,9 @@
 "                                                              |___/         "
 "                                                                            "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" The above ascii art is generated using http://tinyurl.com/y6szckgd
 
-" Notes and frontpage {{{
-
+"{ Header and Licence
+"{{ header info
 " Description: This is my Nvim configuration which supports Mac, Linux and
 " Windows, with various plugins configured. This configuration evolves as I
 " learn more about Nvim and becomes more proficient in using Nvim. Since this
@@ -20,12 +19,11 @@
 " carefully and only take the settings and options which suits you.  I would
 " not recommend downloading this file and replace your own init.vim. Good
 " configurations are built over time and take your time to polish.
-"
-" Author: jdhao (jdhao@hotmail.com). My blog: https://jdhao.github.io
-"
-" Update: 2019-04-23 20:19:49+0800
-"
-" License: MIT License
+" Author: jdhao (jdhao@hotmail.com). Blog: https://jdhao.github.io
+" Update: 2019-04-24 22:19:37+0800
+"}}
+
+"{{ License: MIT License
 "
 " Copyright (c) 2018 Jie-dong Hao
 "
@@ -46,10 +44,11 @@
 " LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 " FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 " IN THE SOFTWARE.
-" }}}
+"}}
+"}
 
-" Variables {{{
-
+"{ Variable
+"{{ builtin variables
 " path to Python 3 interpreter (must be an absolute path), make startup faster.
 " see https://neovim.io/doc/user/provider.html. You should change this
 " variable in accordance with your system.
@@ -63,7 +62,9 @@ endif
 
 " set custom mapping <leader> (use `:h mapleader` for more info)
 let mapleader = ','
+"}}
 
+"{{ disable loading certain plugin
 " do not load netrw by default since I do not use it, see
 " https://github.com/bling/dotvim/issues/4
 let g:loaded_netrwPlugin = 1
@@ -80,10 +81,10 @@ let g:loaded_tarPlugin = 1
 " do not use matchit.vim and matchparen.vim
 let loaded_matchit = 1
 let g:loaded_matchparen = 1
-" }}}
+"}}
+"}
 
-" Custom functions {{{
-
+"{ Custom functions
 " remove trailing white space, see https://goo.gl/sUjgFi
 " function! s:StripTrailingWhitespaces() abort
 "    let l:save = winsaveview()
@@ -147,12 +148,48 @@ EOF
 " vint: next-line -ProhibitUsingUndeclaredVariable
 return index
 endfunction
-" }}}
 
-" Builtin options and settings {{{
+" custom fold expr, adapted from https://vi.stackexchange.com/a/9094/15292
+function! VimFolds(lnum)
+    let l:cur_line = getline(a:lnum)
+    let l:next_line = getline(a:lnum+1)
 
+    if l:cur_line =~# '^"{'
+        return '>' . (matchend(l:cur_line, '"{*')-1)
+    else
+        if l:cur_line ==# '' && (matchend(l:next_line, '"{*')-1) == 1
+            return 0
+        else
+            return '='
+        endif
+    endif
+endfunction
+
+" custom fold text, adapted from https://vi.stackexchange.com/a/3818/15292
+" and https://vi.stackexchange.com/a/6608/15292
+function! MyFoldText()
+    let line = getline(v:foldstart)
+
+    let nucolwidth = &foldcolumn + &number * &numberwidth
+    let windowwidth = winwidth(0) - nucolwidth - 3
+    let foldedlinecount = v:foldend - v:foldstart
+
+    " expand tabs into spaces
+    let chunks = split(line, "\t", 1)
+    let line = join(map(chunks[:-2], 'v:val . repeat(" ", &tabstop - strwidth(v:val) % &tabstop)'), '') . chunks[-1]
+
+    let line = strpart(line, 0, windowwidth - 2 - len(foldedlinecount))
+    " let fillcharcount = windowwidth - len(line) - len(foldedlinecount) - 80
+    let fillcharcount = &textwidth - len(line) - len(foldedlinecount) - 8
+    let l_fillcount = fillcharcount/2
+    let r_fillcount = fillcharcount - l_fillcount
+    return line . '...'. repeat('-', l_fillcount) . ' (' . foldedlinecount . ' L) ' . repeat('-', r_fillcount)
+endfunction
+"}
+
+"{ Builtin options and settings
 " changing fillchars for folding, so there is no garbage charactes
-set fillchars=fold:-,vert:\|
+set fillchars=fold:\ ,vert:\|
 
 " paste mode toggle, it seems that neovim's bracketed paste mode
 " does not work very well for nvim-qt, so we use old paste mode
@@ -266,13 +303,11 @@ set showbreak=↪
 " auto write the file based on some condition
 set autowrite
 
-" change window title
-set title
-
 " show hostname, full path of file and lastmod time on the window title.
 " The meaning of the format str for strftime can be found in
 " http://tinyurl.com/l9nuj4a. The function to get lastmod time is drawn from
 " http://tinyurl.com/yxd23vo8
+set title
 set titlestring=%{hostname()}\ \ %F\ \ \ %{strftime('%Y-%m-%d\ %H:%M',getftime(expand('%')))}
 
 " speed up updatetime so gigutter is quicker
@@ -280,7 +315,7 @@ set updatetime=1000
 
 " whether to use modelines for security concerns, see https://is.gd/FEzuc7.
 " Note that to use modeline in file, you must enable this option
-set nomodeline
+set modeline
 
 " persistent undo even after you close and file and reopen it
 set undofile
@@ -294,6 +329,9 @@ set completeopt+=noinsert
 " completely disable the preview window during autocomplete process,
 " see https://goo.gl/18zNPD for more info
 set completeopt-=preview
+
+" scan files given by `dictionary` option
+set complete+=k,kspell
 
 " whether to show tabline to see currently opened files
 set showtabline=2
@@ -311,9 +349,33 @@ set signcolumn=yes
 " correctly break multi-byte characters such as CJK,
 " see http://tinyurl.com/y4sq6vf3
 set formatoptions+=mM
-" }}}
 
-" Custom key mappings {{{
+" dictionary files
+if has('unix')
+    set dictionary+=/usr/share/dict/words
+else
+    set dictionary+=~/AppData/Local/nvim/words
+endif
+
+" spell languages
+set spelllang=en,cjk
+
+" show more error message
+set debug=msg
+
+set lazyredraw
+
+" matching pairs of characters
+set matchpairs+=<:>,「:」
+
+" maximum number of items to show in popup menu
+set pumheight=15
+
+" pesudo-blend effect for popup menu
+set pumblend=15
+"}
+
+"{ Custom key mappings
 " save key strokes (now we do not need to press shift to enter command mode)
 nnoremap ; :
 vnoremap ; :
@@ -321,7 +383,7 @@ vnoremap ; :
 " quick way to open command window
 nnoremap q; q:
 
-" custom esc. I do not like `kk` because it will delay the vim default `k`
+" custom ESC. I do not like `kk` because it will delay the vim default `k`
 " motion by `timeoutlen` milliseconds (see `:h timeoutlen` for more info)
 inoremap <silent> <leader>k <ESC>
 
@@ -460,10 +522,12 @@ inoremap <S-Tab> <ESC><<i
 
 " use esc to quit builtin terminal
 tnoremap <ESC>   <C-\><C-n>
-" }}}
 
-" Auto commands {{{
+" tilde ~ is an operator (thus must be followed by motion like `c` or `d`)
+set tildeop
+"}
 
+"{ Auto commands
 " automatically save current file and execute it when pressing the <F9> key
 " it is useful for small script
 augroup filetype_auto_build_exec
@@ -526,16 +590,17 @@ augroup vim_script_setting
 
     " set the folding related options for vim script. Setting folding option in
     " modeline is annoying in that the modeline get executed each time the window
-    " focus is lost, also see http://tinyurl.com/yyqyyhnc
-    autocmd FileType vim set foldmethod=marker foldmarker={{{,}}}
-        \ foldlevel=0 foldlevelstart=-1
+    " focus is lost (see http://tinyurl.com/yyqyyhnc)
+    autocmd FileType vim set foldmethod=expr foldlevel=0 foldlevelstart=-1
+    autocmd FileType vim set foldexpr=VimFolds(v:lnum) foldtext=MyFoldText()
+    " autocmd FileType vim set foldexpr=VimFolds(v:lnum)
 
     " Simply set formatoptions without autocmd does not work for vim filetype
-    " because the option is overruled by vim's default ftplugin for vim
-    " unfortunately. The following way to use autocmd seems quick and dirty and
-    " may not be the best way to do it (I do this because I don't want to split my
-    " vim config).  For more discussions, see http://tinyurl.com/yyznar7r and
-    " http://tinyurl.com/zehso5h
+    " because the options are overruled by vim's default ftplugin for vim
+    " script unfortunately. The following way to use autocmd seems quick and
+    " dirty and may not be the best way (I do this because I don't want to
+    " split my vim config).  For more discussions, see
+    " http://tinyurl.com/yyznar7r and http://tinyurl.com/zehso5h
 
     " some format options when editting text file
     " donot insert comment leader after hitting o or O
@@ -548,10 +613,10 @@ augroup vim_script_setting
     " see `:h K` and https://bre.is/wC3Ih-26u
     autocmd FileType vim setlocal keywordprg=:help
 augroup END
-" }}}
+"}
 
-" Plugin install part {{{
-
+"{ Plugin install part
+"{{ Vim-plug Install and plugin initialization
 " set up directory to install all the plugins depending on the platform
 if has('win32')
     let s:PLUGIN_HOME=expand('~/AppData/Local/nvim/plugged')
@@ -597,11 +662,10 @@ else
         endif
     endif
 endif
+"}
 
 call plug#begin(s:PLUGIN_HOME)
-
-""""""""""""""""""""""" autocompletion related plugins """""""""""""""""""""""
-
+"{{ autocompletion related plugins
 " settings for deoplete
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
@@ -620,8 +684,15 @@ Plug 'zchee/deoplete-jedi', { 'for': 'python' }
 " vim source for deoplete
 Plug 'Shougo/neco-vim', { 'for': 'vim' }
 
-""""""""""""""""""""""" python-related plugins """""""""""""""""""""""
+" dictionary source for English words completion (not available on Windows)
+" Find this plugin on http://tinyurl.com/gttcxwh
+if has('unix')
+    " Plug 'ujihisa/neco-look'
+endif
+Plug 'deathlyfrantic/deoplete-spell'
+"}}
 
+"{{ python-related plugins
 " Python completion, goto definition etc.
 Plug 'davidhalter/jedi-vim', { 'for': 'python' }
 
@@ -636,9 +707,9 @@ Plug 'tmhedberg/SimpylFold', { 'for': 'python' }
 
 " python indent (follows the PEP8 style)
 Plug 'Vimjas/vim-python-pep8-indent', {'for': 'python'}
+"}}
 
-""""""""""""""""""""""" search related plugins"""""""""""""""""""""""
-
+"{{ search related plugins
 " extend vim's default search behaviour
 Plug 'inkarkat/vim-SearchHighlighting'
 
@@ -676,11 +747,10 @@ if has('unix')
     Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
     Plug 'junegunn/fzf.vim'
 endif
+"}}
 
-""""""""""""""""""""""""""" color, theme, look """"""""""""""""""""""""""""""
-
+"{{ color, theme, look
 " A list of colorscheme plugin you may want to try. Find what suits you.
-
 " colorscheme gruvbox
 Plug 'morhetz/gruvbox'
 
@@ -688,10 +758,10 @@ Plug 'morhetz/gruvbox'
 " Plug 'joshdick/onedark.vim'
 
 " monokai theme for vim
-" Plug 'sickill/vim-monokai'
+Plug 'sickill/vim-monokai'
 
 " sublime-monokai colorscheme
-Plug 'ErichDonGubler/vim-sublime-monokai'
+" Plug 'ErichDonGubler/vim-sublime-monokai'
 
 " deus theme for vim
 Plug 'ajmwagar/vim-deus'
@@ -730,9 +800,9 @@ Plug 'Yggdroot/indentLine'
 
 " fancy vim start screen
 Plug 'mhinz/vim-startify'
+"}}
 
-""""""""""""""""""""""""""plugin to deal with URL """""""""""""""""""""""""""
-
+"{{ plugin to deal with URL
 " highlight URLs inside vim
 Plug 'itchyny/vim-highlighturl'
 
@@ -742,8 +812,9 @@ if has('win32') || has('macunix')
     " open URL in browser
     Plug 'tyru/open-browser.vim'
 endif
+"}}
 
-""""""""""""""""""""""""""navigation and tags plugin"""""""""""""""""""""""""""
+"{{ navigation and tags plugin
 " file explorer for vim
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
 
@@ -756,9 +827,9 @@ if executable('ctags')
     " show file tags in vim windows (must install ctags on system)
     Plug 'majutsushi/tagbar', { 'on': ['TagbarToggle', 'TagbarOpen'] }
 endif
+"}}
 
-""""""""""""""""""""""""""""file editting plugin""""""""""""""""""""""""""""
-
+"{{ file editting plugin
 " automatic character pair insertion and deletion
 Plug 'jiangmiao/auto-pairs'
 
@@ -804,8 +875,11 @@ Plug 'kshenoy/vim-signature'
 " https://github.com/jeetsukumaran/vim-markology
 " Plug 'jeetsukumaran/vim-markology'
 
-""""""""""""""""""""""""""""linting, formating """"""""""""""""""""""""""""
+" handy unix command inside Vim
+Plug 'tpope/vim-eunuch'
+"}}
 
+"{{ linting, formating
 " auto format tool
 Plug 'sbdchd/neoformat'
 
@@ -817,9 +891,9 @@ Plug 'neomake/neomake'
 
 " another linting plugin
 " Plug 'w0rp/ale'
+"}}
 
-""""""""""""""""""""""""""""""git related plugins """"""""""""""""""""""""""
-
+"{{ git related plugins
 " show git change (change, delete, add) signs in vim sign column
 Plug 'airblade/vim-gitgutter'
 
@@ -828,9 +902,9 @@ Plug 'tpope/vim-fugitive'
 
 " git commit browser
 Plug 'junegunn/gv.vim', { 'on': 'GV' }
+"}}
 
-""""""""""""""""""""""""""""plugins for markdown writing""""""""""""""""""""
-
+"{{ plugins for markdown writing
 " distraction free writing
 Plug 'junegunn/goyo.vim', { 'for': 'markdown' }
 
@@ -857,9 +931,9 @@ Plug 'godlygeek/tabular'
 
 " markdown JSON header highlight plugin
 Plug 'elzr/vim-json', { 'for': ['json', 'markdown'] }
+"}}
 
-""""""""""""""""""""""""""text object plugins """"""""""""""""""""""""""
-
+"{{ text object plugins
 " additional powerful text object for vim, this plugin should be studied
 " carefully to use its full power
 Plug 'wellle/targets.vim'
@@ -870,27 +944,28 @@ Plug 'tpope/vim-surround'
 " add indent object for vim (useful for languages like Python)
 Plug 'michaeljsmith/vim-indent-object'
 
+" create custom text object
+Plug 'kana/vim-textobj-user'
+
 " text object for entire buffer, add `ae` and `ie`
 Plug 'kana/vim-textobj-entire'
+"}}
 
-""""""""""""""""""""""latex editting and previewing plugin"""""""""""""""""
-
+"{{ LaTeX editting and previewing plugin
 " Only use these plugin on Windows and Mac and when a LaTeX distribution has
 " been deteced
 if ( has('macunix') || has('win32') ) && executable('latex')
-
     " vimtex use autoload feature of Vim, so it is not necessary to use `for`
     " keyword of vim-plug to try to lazy-load it,
     " see http://tinyurl.com/y3ymc4qd
     Plug 'lervag/vimtex'
 
     " Plug 'matze/vim-tex-fold', {'for': 'tex'}
+    Plug 'Konfekt/FastFold'
 endif
+"}}
 
-Plug 'Konfekt/FastFold'
-
-"""""""""""""""""""""""""""""""tmux related plugins """""""""""""""""""""""""
-
+"{{ tmux related plugins
 " Since tmux is only available on Linux and Mac, we only enable these plugins
 " for Linux and Mac
 if has('unix') && executable('tmux')
@@ -902,9 +977,9 @@ if has('unix') && executable('tmux')
     " .tmux.conf syntax highlighting and setting check
     Plug 'tmux-plugins/vim-tmux', { 'for': 'tmux' }
 endif
+"}}
 
-""""""""""""""""""""""""""""""" misc plugins """""""""""""""""""""""""""""""""
-
+"{{ misc plugins
 " automatically toggle line number based on several conditions
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 
@@ -925,12 +1000,11 @@ Plug 'yuttie/comfortable-motion.vim'
 
 Plug 'tpope/vim-scriptease'
 call plug#end()
-" }}}
+"}}
+"}
 
-" Plugin settings {{{
-
-""""""""""""""""""""""" vim-plug settings""""""""""""""""""""""""""
-
+"{ Plugin settings
+"{{ vim-plug settings
 " use shortnames for common vim-plug command to reduce typing
 " To use these shortcut: first activate command line with `:`, then input the
 " short alias name, e.g., `pi`, then press <space>, the alias will be expanded
@@ -940,8 +1014,10 @@ call Cabbrev('pud', 'PlugUpdate')
 call Cabbrev('pug', 'PlugUpgrade')
 call Cabbrev('ps', 'PlugStatus')
 call Cabbrev('pc', 'PlugClean')
+"}}
 
-""""""""""""""""""""""" deoplete settings""""""""""""""""""""""""""
+"{{ auto-completion related
+"""""""""""""""""""""""""""" deoplete settings""""""""""""""""""""""""""
 
 " wheter to enable deoplete automatically after start nvim
 let g:deoplete#enable_at_startup = 0
@@ -996,105 +1072,21 @@ call deoplete#custom#option('auto_complete', v:true)
 " deoplete tab-complete, see https://goo.gl/LvwZZY
 " inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
-""""""""""""""""""deoplete-jedi settings"""""""""""""""""""""""""""
+"""""""""""""""""""""""""UltiSnips settings"""""""""""""""""""
 
-" whether to show doc string
-let g:deoplete#sources#jedi#show_docstring = 0
+" Trigger configuration. Do not use <tab> if you use
+" https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger='<tab>'
 
-" do not use typeinfo (for faster completion)
-let g:deoplete#sources#jedi#enable_typeinfo = 0
+" shortcut to go to next position
+let g:UltiSnipsJumpForwardTrigger='<c-j>'
 
-" for large package, set autocomplete wait time longer
-let g:deoplete#sources#jedi#server_timeout = 50
+" shortcut to go to previous position
+let g:UltiSnipsJumpBackwardTrigger='<c-k>'
 
-""""""""""""""""""""""""jedi-vim settings"""""""""""""""""""
-
-" disable autocompletion, because I use deoplete for auto-completion
-let g:jedi#completions_enabled = 0
-
-" open the go-to function in split, not another buffer
-" let g:jedi#use_splits_not_buffers = 'right'
-
-" show function call signature
-let g:jedi#show_call_signatures = '2'
-
-"""""""""""""""""""""""comfortable-motion settings """"""""""""""""""""""
-
-let g:comfortable_motion_scroll_down_key = 'j'
-let g:comfortable_motion_scroll_up_key = 'k'
-
-" mouse settings
-noremap <silent> <ScrollWheelDown> :call comfortable_motion#flick(40)<CR>
-noremap <silent> <ScrollWheelUp>   :call comfortable_motion#flick(-40)<CR>
-
-"""""""""""""""""""""""""""""vim-sneak settings"""""""""""""""""""""""
-
-let g:sneak#label = 1
-map f <Plug>Sneak_s
-map F <Plug>Sneak_S
-map t <Plug>Sneak_t
-map T <Plug>Sneak_T
-
-"""""""""""""""""""""""""""""vim-anzu settings"""""""""""""""""""""""
-
-" nmap n zzzv<Plug>(anzu-n-with-echo)
-" nmap N zzzv<Plug>(anzu-N-with-echo)
-nmap * <Plug>(anzu-star-with-echo)
-nmap # <Plug>(anzu-sharp-with-echo)
-
-" clear matching info on status line with double <Esc>
-nmap <Esc><Esc> <Plug>(anzu-clear-search-status)
-
-""""""""""""""""""""""""""""is.vim settings"""""""""""""""""""""""
-
-" to make is.vim work together well with vim-anzu and put current match in
-" the center of the window
-" `zz`: put cursor line in center of the window
-" `zv`: open a fold to reveal the text when cursor step into it
-nmap n <Plug>(is-nohl)<Plug>(anzu-n-with-echo)zzzv
-nmap N <Plug>(is-nohl)<Plug>(anzu-N-with-echo)zzzv
-
-""""""""""""""""""""""""""""nerdcommenter settings"""""""""""""""""""
-
-" Add spaces after comment delimiters by default
-let g:NERDSpaceDelims = 1
-
-" use one space after # comment character in python,
-" see http://tinyurl.com/y4hm29o3
-let g:NERDAltDelims_python = 1
-
-" Align line-wise comment delimiters flush left instead
-" of following code indentation
-let g:NERDDefaultAlign = 'left'
-
-" Enable NERDCommenterToggle to check all selected lines is commented or not
-let g:NERDToggleCheckAllLines = 1
-
-""""""""""""""""""""""""""""vim-yoink settings"""""""""""""""""""""""""
-
-if has('win32')
-    " TODO: test yoink on Mac to see if it works
-    " it seems that ctrl-n and ctrl-p does not work on neovim
-    nmap <c-n> <plug>(YoinkPostPasteSwapBack)
-    nmap <c-p> <plug>(YoinkPostPasteSwapForward)
-
-    nmap p <plug>(YoinkPaste_p)
-    nmap P <plug>(YoinkPaste_P)
-
-    " cycle the yank stack with the following mappings
-    nmap [y <plug>(YoinkRotateBack)
-    nmap ]y <plug>(YoinkRotateForward)
-
-    " not change the cursor position
-    nmap y <plug>(YoinkYankPreserveCursorPosition)
-    xmap y <plug>(YoinkYankPreserveCursorPosition)
-
-    " move cursor to end of paste after multiline paste
-    let g:yoinkMoveCursorToEndOfPaste = 0
-
-    " record yanks in system clipboard
-    let g:yoinkSyncSystemClipboardOnFocus = 1
-endif
+" directory `my_snippets` should be put under your config directory (use
+" `:echo stdpath('config')` to show the config directory).
+let g:UltiSnipsSnippetDirectories=['UltiSnips', 'my_snippets']
 
 """""""""""""""""""""""""supertab settings""""""""""""""""""""""""""
 
@@ -1109,202 +1101,71 @@ let g:SuperTabDefaultCompletionType = '<c-n>'
 let g:SuperTabMappingForward = '<tab>'
 let g:SuperTabMappingBackward = '<s-tab>'
 
-""""""""""""""""""""""""vim-auto-save settings"""""""""""""""""""""""
+""""""""""""""""""deoplete-jedi settings"""""""""""""""""""""""""""
 
-" enable AutoSave on nvim startup
-let g:auto_save = 1
+" whether to show doc string
+let g:deoplete#sources#jedi#show_docstring = 0
 
-" the event to trigger autosave
-let g:auto_save_events = ['InsertLeave', 'TextChanged']
+" do not use typeinfo (for faster completion)
+let g:deoplete#sources#jedi#enable_typeinfo = 0
 
-" show autosave status on command line
-let g:auto_save_silent = 0
+" for large package, set autocomplete wait time longer
+let g:deoplete#sources#jedi#server_timeout = 50
+"}}
 
-"""""""""""""""""""""""""indentLine settings""""""""""""""""""""""""""
+"{{ python-related
+""""""""""""""""""""""""jedi-vim settings"""""""""""""""""""
 
-" whether to enable indentLine
-let g:indentLine_enabled = 1
+" disable autocompletion, because I use deoplete for auto-completion
+let g:jedi#completions_enabled = 0
 
-" the character used for indicating indentation
-" let g:indentLine_char = '┊'
-let g:indentLine_char = '│'
+" open the go-to function in split, not another buffer
+" let g:jedi#use_splits_not_buffers = 'right'
 
-" whether to use conceal color by indentLine
-let g:indentLine_setColors = 0
+" show function call signature
+let g:jedi#show_call_signatures = '2'
 
-" show raw code when cursor is current line (mainly for markdown file)
-" see https://github.com/plasticboy/vim-markdown/issues/395
-let g:indentLine_concealcursor = ''
+"""""""""""""""""""""""""python-syntax highlight settings"""""""""""""""""""
 
-"""""""""""""""""""""""""""""" neomake settings """""""""""""""""""""""
+" highlight all
+let g:python_highlight_all = 1
 
-" when writing or reading a buffer, and
-" on changes in normal mode (after 0.5s; no delay when writing).
-call neomake#configure#automake('nrw', 50)
+"""""""""""""""""""""""""" semshi settings """""""""""""""""""""""""""""""
 
-" change warning signs and color, see https://goo.gl/eHcjSq
-" highlight NeomakeErrorMsg ctermfg=227 ctermbg=237
-let g:neomake_warning_sign={'text': '!', 'texthl': 'NeomakeWarningSign'}
-let g:neomake_error_sign={'text': '✗'}
+" do not highlight variable under cursor
+let g:semshi#mark_selected_nodes=0
 
-" which linter to enable for Python source file linting
-" let g:neomake_python_enabled_makers = ['flake8', 'pylint']
-let g:neomake_python_enabled_makers = ['flake8']
+" do not show error sign since neomake is specicialized for that
+let g:semshi#error_sign=v:false
+"}}
 
-" do not highlight columns, it works bad for sublimemonokai
-" see https://goo.gl/wd68ex for more info
-let g:neomake_highlight_columns = 1
+"{{ search related
+"""""""""""""""""""""""""""""vim-sneak settings"""""""""""""""""""""""
 
-" whether to open quickfix or location list automatically
-let g:neomake_open_list = 0
+let g:sneak#label = 1
+map f <Plug>Sneak_s
+map F <Plug>Sneak_S
+map t <Plug>Sneak_t
+map T <Plug>Sneak_T
 
-"let g:neomake_python_pylint_maker = {
-"  \ 'args': [
-"  \ '-d', 'C0103, C0111',
-"  \ '-f', 'text',
-"  \ '--msg-template="{path}:{line}:{column}:{C}: [{symbol}] {msg} [{msg_id}]"',
-"  \ '-r', 'n'
-"  \ ],
-"  \ 'errorformat':
-"  \ '%A%f:%l:%c:%t: %m,' .
-"  \ '%A%f:%l: %m,' .
-"  \ '%A%f:(%l): %m,' .
-"  \ '%-Z%p^%.%#,' .
-"  \ '%-G%.%#',
-"  \ }
+""""""""""""""""""""""""""""is.vim settings"""""""""""""""""""""""
 
-""""""""""""""""""""""" nerdtree settings """"""""""""""""""""""""""
+" to make is.vim work together well with vim-anzu and put current match in
+" the center of the window
+" `zz`: put cursor line in center of the window
+" `zv`: open a fold to reveal the text when cursor step into it
+nmap n <Plug>(is-nohl)<Plug>(anzu-n-with-echo)zzzv
+nmap N <Plug>(is-nohl)<Plug>(anzu-N-with-echo)zzzv
 
-" toggle nerdtree window and keep cursor in file window,
-" adapted from http://tinyurl.com/y2kt8cy9
-nnoremap <silent> <C-k><C-B> :NERDTreeToggle<CR>:wincmd p<CR>
+"""""""""""""""""""""""""""""vim-anzu settings"""""""""""""""""""""""
 
-" ignore certain files and folders
-let NERDTreeIgnore = ['\.pyc$', '^__pycache__$']
+" nmap n zzzv<Plug>(anzu-n-with-echo)
+" nmap N zzzv<Plug>(anzu-N-with-echo)
+nmap * <Plug>(anzu-star-with-echo)
+nmap # <Plug>(anzu-sharp-with-echo)
 
-" reveal currently editted file in nerdtree widnow,
-" see https://goo.gl/kbxDVK
-nmap <silent> ,nf :NERDTreeFind<CR>
-
-" exit vim when the only window is nerdtree window, see
-" https://github.com/scrooloose/nerdtree
-" autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") &&
-"     \ b:NERDTree.isTabTree()) | q | endif
-
-" automatically show nerdtree window on entering nvim,
-" see https://github.com/scrooloose/nerdtree, but now the cursor
-" is in nerdtree window, so we need to change it to the file window,
-" extracted from https://goo.gl/vumpvo
-" autocmd VimEnter * NERDTree | wincmd l
-
-" delete a file buffer when you have deleted it in nerdtree
-let NERDTreeAutoDeleteBuffer = 1
-
-" show current root as realtive path from HOME in status bar,
-" see https://github.com/scrooloose/nerdtree/issues/891
-let NERDTreeStatusline="%{exists('b:NERDTree')?fnamemodify(b:NERDTree.root.path.str(), ':~'):''}"
-
-" disable bookmark and 'press ? for help ' text
-let NERDTreeMinimalUI=0
-
-""""""""""""""""""""""""""" tagbar settings """"""""""""""""""""""""""""""""""
-
-" shortcut to toggle tagbar window
-nnoremap <silent> <C-K><C-T> :TagbarToggle<CR>
-
-"""""""""""""""""""""""""""vim-airline setting""""""""""""""""""""""""""""""
-
-" set a airline theme only if it exists, else we resort to default color
-let s:candidate_airlinetheme = ['alduin', 'ayu_mirage', 'base16_flat',
-    \ 'monochrome', 'base16_grayscale', 'lucius', 'base16_tomorrow',
-    \ 'base16color', 'biogoo', 'distinguished', 'gruvbox', 'jellybeans',
-    \ 'luna', 'raven', 'seagull', 'solarized_flood', 'term', 'vice', 'zenburn']
-let s:idx = RandInt(0, len(s:candidate_airlinetheme)-1)
-let s:theme = s:candidate_airlinetheme[s:idx]
-
-if HasAirlinetheme(s:theme)
-    let g:airline_theme=s:theme
-endif
-
-" tabline settings
-" show tabline
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
-" buffer number display format
-let g:airline#extensions#tabline#buffer_nr_format = '%s. '
-
-" show buffer number for easier switching between buffer
-" see https://github.com/vim-airline/vim-airline/issues/1149
-let g:airline#extensions#tabline#buffer_nr_show = 1
-
-" whether to show function or other tags on status line
-let g:airline#extensions#tagbar#enabled = 0
-
-" skip empty sections if nothing to show
-" extract from https://vi.stackexchange.com/a/9637/15292
-let g:airline_skip_empty_sections = 1
-
-"make airline more beautiful, see https://goo.gl/XLY19H for more info
-let g:airline_powerline_fonts = 1
-
-" show only hunks which is non-zero (git-related)
-let g:airline#extensions#hunks#non_zero_only = 1
-
-" enable gutentags integration
-let g:airline#extensions#gutentags#enabled = 1
-
-" custom status line symbols
-if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-endif
-
-let g:airline_left_sep = '»'
-let g:airline_left_sep = '▶'
-let g:airline_right_sep = '«'
-let g:airline_right_sep = '◀'
-let g:airline_symbols.crypt = '🔒'
-let g:airline_symbols.linenr = '☰'
-let g:airline_symbols.linenr = '␊'
-let g:airline_symbols.linenr = '␤'
-let g:airline_symbols.linenr = '¶'
-let g:airline_symbols.maxlinenr = ''
-let g:airline_symbols.maxlinenr = '㏑'
-let g:airline_symbols.branch = '⎇'
-let g:airline_symbols.paste = 'ρ'
-let g:airline_symbols.paste = 'Þ'
-let g:airline_symbols.paste = '∥'
-let g:airline_symbols.spell = 'Ꞩ'
-let g:airline_symbols.notexists = 'Ɇ'
-let g:airline_symbols.whitespace = 'Ξ'
-
-" powerline symbols
-let g:airline_left_sep = ''
-let g:airline_left_alt_sep = ''
-let g:airline_right_sep = ''
-let g:airline_right_alt_sep = ''
-let g:airline_symbols.branch = ''
-let g:airline_symbols.readonly = ''
-let g:airline_symbols.linenr = '☰'
-let g:airline_symbols.maxlinenr = ''
-
-""""""""""""""""""" vim-highlightedyank settings """"""""""""""
-
-" reverse the highlight color for yanked text for better visuals
-highlight HighlightedyankRegion cterm=reverse gui=reverse
-
-" let highlight endures longer
-let g:highlightedyank_highlight_duration = 1000
-
-""""""""""""""""""""""""""neoformat settins""""""""""""""""""""
-
-" Enable alignment
-let g:neoformat_basic_format_align = 1
-
-" Enable tab to spaces conversion
-let g:neoformat_basic_format_retab = 1
-
-" Enable trimmming of trailing whitespace
-let g:neoformat_basic_format_trim = 1
+" clear matching info on status line with double <Esc>
+nmap <Esc><Esc> <Plug>(anzu-clear-search-status)
 
 """""""""""""""""""""""""fzf settings""""""""""""""""""""""""""
 
@@ -1382,15 +1243,217 @@ if has('unix')
                 \ norelativenumber
                 \ signcolumn=no
     endfunction
+endif
+"}}
 
+"{{ URL related
+""""""""""""""""""""""""""""open-browser.vim settings"""""""""""""""""""
+
+if has('win32') || has('macunix')
+    " disable netrw's gx mapping.
+    let g:netrw_nogx = 1
+
+    " use another mapping for the open URL method
+    nmap ob <Plug>(openbrowser-smart-search)
+    vmap ob <Plug>(openbrowser-smart-search)
 endif
 
-""""""""""""""""""""""""""quickrun settings"""""""""""""""""""""""""""""
+"""""""""""""""""""""""""vim-highlighturl settings"""""""""""""""""""""""""
 
-let g:quickrun_no_default_key_mappings = 1
-nnoremap<silent> <F9> :QuickRun<CR>
-let g:quickrun_config = {'outputter/buffer/close_on_empty': 1}
+" whether to underline the URL
+let g:highlighturl_underline=1
 
+"{{ navigation and tags
+""""""""""""""""""""""" nerdtree settings """"""""""""""""""""""""""
+
+" toggle nerdtree window and keep cursor in file window,
+" adapted from http://tinyurl.com/y2kt8cy9
+nnoremap <silent> <C-k><C-B> :NERDTreeToggle<CR>:wincmd p<CR>
+
+" ignore certain files and folders
+let NERDTreeIgnore = ['\.pyc$', '^__pycache__$']
+
+" reveal currently editted file in nerdtree widnow,
+" see https://goo.gl/kbxDVK
+nmap <silent> ,nf :NERDTreeFind<CR>
+
+" exit vim when the only window is nerdtree window, see
+" https://github.com/scrooloose/nerdtree
+" autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") &&
+"     \ b:NERDTree.isTabTree()) | q | endif
+
+" automatically show nerdtree window on entering nvim,
+" see https://github.com/scrooloose/nerdtree, but now the cursor
+" is in nerdtree window, so we need to change it to the file window,
+" extracted from https://goo.gl/vumpvo
+" autocmd VimEnter * NERDTree | wincmd l
+
+" delete a file buffer when you have deleted it in nerdtree
+let NERDTreeAutoDeleteBuffer = 1
+
+" show current root as realtive path from HOME in status bar,
+" see https://github.com/scrooloose/nerdtree/issues/891
+let NERDTreeStatusline="%{exists('b:NERDTree')?fnamemodify(b:NERDTree.root.path.str(), ':~'):''}"
+
+" disable bookmark and 'press ? for help ' text
+let NERDTreeMinimalUI=0
+
+""""""""""""""""""""""""""" tagbar settings """"""""""""""""""""""""""""""""""
+
+" shortcut to toggle tagbar window
+nnoremap <silent> <C-K><C-T> :TagbarToggle<CR>
+"}}
+
+"{{ file editting
+"""""""""""""""""""""""""""""auto-pairs settings"""""""""""""""""""""""""
+
+augroup filetype_custom_autopair
+autocmd!
+    " only use the following character pairs for tex file
+    au FileType tex let b:AutoPairs = {'(':')', '[':']', '{':'}'}
+
+    " add `<>` pair to filetype vim
+    au FileType vim let b:AutoPairs = AutoPairsDefine({'<' : '>'})
+augroup END
+
+""""""""""""""""""""""""""""nerdcommenter settings"""""""""""""""""""
+
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+
+" use one space after # comment character in python,
+" see http://tinyurl.com/y4hm29o3
+let g:NERDAltDelims_python = 1
+
+" Align line-wise comment delimiters flush left instead
+" of following code indentation
+let g:NERDDefaultAlign = 'left'
+
+" Enable NERDCommenterToggle to check all selected lines is commented or not
+let g:NERDToggleCheckAllLines = 1
+
+""""""""""""""""""""""""""""vim-titlecase settings"""""""""""""""""""""""
+
+" do not use the default mapping provided
+let g:titlecase_map_keys = 0
+
+nmap <leader>gt <Plug>Titlecase
+vmap <leader>gt <Plug>Titlecase
+nmap <leader>gT <Plug>TitlecaseLine
+
+""""""""""""""""""""""""vim-auto-save settings"""""""""""""""""""""""
+
+" enable AutoSave on nvim startup
+let g:auto_save = 1
+
+" the event to trigger autosave
+let g:auto_save_events = ['InsertLeave', 'TextChanged']
+
+" show autosave status on command line
+let g:auto_save_silent = 0
+
+""""""""""""""""""""""""""""vim-yoink settings"""""""""""""""""""""""""
+
+if has('win32')
+    " TODO: test yoink on Mac to see if it works
+    " it seems that ctrl-n and ctrl-p does not work on neovim
+    nmap <c-n> <plug>(YoinkPostPasteSwapBack)
+    nmap <c-p> <plug>(YoinkPostPasteSwapForward)
+
+    nmap p <plug>(YoinkPaste_p)
+    nmap P <plug>(YoinkPaste_P)
+
+    " cycle the yank stack with the following mappings
+    nmap [y <plug>(YoinkRotateBack)
+    nmap ]y <plug>(YoinkRotateForward)
+
+    " not change the cursor position
+    nmap y <plug>(YoinkYankPreserveCursorPosition)
+    xmap y <plug>(YoinkYankPreserveCursorPosition)
+
+    " move cursor to end of paste after multiline paste
+    let g:yoinkMoveCursorToEndOfPaste = 0
+
+    " record yanks in system clipboard
+    let g:yoinkSyncSystemClipboardOnFocus = 1
+endif
+
+"""""""""""""""""""""vim-better-whitespace settings""""""""""""""""""""""""""
+
+" whether to highlight trailing whitespace with the default red color (I find
+" it distracting so I turn it off)
+let g:better_whitespace_enabled=0
+
+" set a mapping for StripWhitespace command
+nnoremap <silent> <leader><Space> :StripWhitespace<CR>
+
+" strip white line at the end of the file
+let g:strip_whitelines_at_eof=1
+
+" disable whitespace operator
+let g:better_whitespace_operator=''
+
+""""""""""""""""""""""""""""""vim-signature settings""""""""""""""""""""""""""
+
+" change mark highlight to be more visible
+augroup signature_highlight
+autocmd!
+autocmd ColorScheme * highlight SignatureMarkText cterm=bold ctermbg=10
+    \ gui=bold guifg=#aeee04
+augroup END
+"}}
+
+"{{ linting and formating
+""""""""""""""""""""""""""neoformat settins""""""""""""""""""""
+
+" Enable alignment
+let g:neoformat_basic_format_align = 1
+
+" Enable tab to spaces conversion
+let g:neoformat_basic_format_retab = 1
+
+" Enable trimmming of trailing whitespace
+let g:neoformat_basic_format_trim = 1
+
+"""""""""""""""""""""""""""""" neomake settings """""""""""""""""""""""
+
+" when writing or reading a buffer, and
+" on changes in normal mode (after 0.5s; no delay when writing).
+call neomake#configure#automake('nrw', 50)
+
+" change warning signs and color, see https://goo.gl/eHcjSq
+" highlight NeomakeErrorMsg ctermfg=227 ctermbg=237
+let g:neomake_warning_sign={'text': '!', 'texthl': 'NeomakeWarningSign'}
+let g:neomake_error_sign={'text': '✗'}
+
+" which linter to enable for Python source file linting
+" let g:neomake_python_enabled_makers = ['flake8', 'pylint']
+let g:neomake_python_enabled_makers = ['flake8']
+
+" do not highlight columns, it works bad for sublimemonokai
+" see https://goo.gl/wd68ex for more info
+let g:neomake_highlight_columns = 1
+
+" whether to open quickfix or location list automatically
+let g:neomake_open_list = 0
+
+"let g:neomake_python_pylint_maker = {
+"  \ 'args': [
+"  \ '-d', 'C0103, C0111',
+"  \ '-f', 'text',
+"  \ '--msg-template="{path}:{line}:{column}:{C}: [{symbol}] {msg} [{msg_id}]"',
+"  \ '-r', 'n'
+"  \ ],
+"  \ 'errorformat':
+"  \ '%A%f:%l:%c:%t: %m,' .
+"  \ '%A%f:%l: %m,' .
+"  \ '%A%f:(%l): %m,' .
+"  \ '%-Z%p^%.%#,' .
+"  \ '%-G%.%#',
+"  \ }
+"}}
+
+"{{ Markdown writing
 """""""""""""""""""""""""goyo.vim settings""""""""""""""""""""""""""""""
 
 " make goyo and limelight work together automatically
@@ -1398,6 +1461,17 @@ augroup goyo_work_with_limelight
     autocmd!
     autocmd! User GoyoEnter Limelight
     autocmd! User GoyoLeave Limelight!
+augroup END
+
+"""""""""""""""""""""""""vim-pandoc-syntax settings"""""""""""""""""""""""""
+
+" do not conceal urls (seems does not work)
+let g:pandoc#syntax#conceal#urls = 0
+
+" use pandoc-syntax for markdown files, it will disable conceal feature for
+" links, use it at your own risk
+augroup pandoc_syntax
+  au! BufNewFile,BufFilePre,BufRead *.md set filetype=markdown.pandoc
 augroup END
 
 """""""""""""""""""""""""plasticboy/vim-markdown settings"""""""""""""""""""
@@ -1431,55 +1505,17 @@ if has('win32') || has('macunix')
     nnoremap <M-m> :MarkdownPreview<CR>
 endif
 
-"""""""""""""""""""""""""vim-pandoc-syntax settings"""""""""""""""""""""""""
+""""""""""""""""""""""""vim-markdownfootnotes settings""""""""""""""""""""""""
 
-" do not conceal urls (seems does not work)
-let g:pandoc#syntax#conceal#urls = 0
+" replace the default mappings provided by the plugin
+imap ^^ <Plug>AddVimFootnote
+nmap ^^ <Plug>AddVimFootnote
 
-" use pandoc-syntax for markdown files, it will disable conceal feature for
-" links, use it at your own risk
-augroup pandoc_syntax
-  au! BufNewFile,BufFilePre,BufRead *.md set filetype=markdown.pandoc
-augroup END
+imap @@ <Plug>ReturnFromFootnote
+nmap @@ <Plug>ReturnFromFootnote
+"}}
 
-"""""""""""""""""""""""""python-syntax highlight settings"""""""""""""""""""
-
-" highlight all
-let g:python_highlight_all = 1
-
-"""""""""""""""""""""""""" semshi settings """""""""""""""""""""""""""""""
-
-" do not highlight variable under cursor
-let g:semshi#mark_selected_nodes=0
-
-" do not show error sign since neomake is specicialized for that
-let g:semshi#error_sign=v:false
-
-"""""""""""""""""""""""""UltiSnips settings"""""""""""""""""""
-
-" Trigger configuration. Do not use <tab> if you use
-" https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger='<tab>'
-
-" shortcut to go to next position
-let g:UltiSnipsJumpForwardTrigger='<c-j>'
-
-" shortcut to go to previous position
-let g:UltiSnipsJumpBackwardTrigger='<c-k>'
-
-" directory `my_snippets` should be put under your config directory (use
-" `:echo stdpath('config')` to show the config directory).
-let g:UltiSnipsSnippetDirectories=['UltiSnips', 'my_snippets']
-
-""""""""""""""""""""""""""""vim-titlecase settings"""""""""""""""""""""""
-
-" do not use the default mapping provided
-let g:titlecase_map_keys = 0
-
-nmap <leader>gt <Plug>Titlecase
-vmap <leader>gt <Plug>Titlecase
-nmap <leader>gT <Plug>TitlecaseLine
-
+"{{ LaTeX editting
 """"""""""""""""""""""""""""vimtex settings"""""""""""""""""""""""""""""
 
 if ( has('macunix') || has('win32')) && executable('latex')
@@ -1566,28 +1602,109 @@ if ( has('macunix') || has('win32')) && executable('latex')
         endfunction
     endif
 endif
+"}}
 
-"""""""""""""""""""""""""""""auto-pairs settings"""""""""""""""""""""""""
+"{{ status line, look
+"""""""""""""""""""""""""indentLine settings""""""""""""""""""""""""""
 
-augroup filetype_custom_autopair
-autocmd!
-    " only use the following character pairs for tex file
-    au FileType tex let b:AutoPairs = {'(':')', '[':']', '{':'}'}
+" whether to enable indentLine
+let g:indentLine_enabled = 1
 
-    " add `<>` pair to filetype vim
-    au FileType vim let b:AutoPairs = AutoPairsDefine({'<' : '>'})
-augroup END
+" the character used for indicating indentation
+" let g:indentLine_char = '┊'
+let g:indentLine_char = '│'
 
-""""""""""""""""""""""""""""open-browser.vim settings"""""""""""""""""""
+" whether to use conceal color by indentLine
+let g:indentLine_setColors = 0
 
-if has('win32') || has('macunix')
-    " disable netrw's gx mapping.
-    let g:netrw_nogx = 1
+" show raw code when cursor is current line (mainly for markdown file)
+" see https://github.com/plasticboy/vim-markdown/issues/395
+let g:indentLine_concealcursor = ''
 
-    " use another mapping for the open URL method
-    nmap ob <Plug>(openbrowser-smart-search)
-    vmap ob <Plug>(openbrowser-smart-search)
+"""""""""""""""""""""""""""vim-airline setting""""""""""""""""""""""""""""""
+
+" set a airline theme only if it exists, else we resort to default color
+let s:candidate_airlinetheme = ['alduin', 'ayu_mirage', 'base16_flat',
+    \ 'monochrome', 'base16_grayscale', 'lucius', 'base16_tomorrow',
+    \ 'base16_adwaita', 'biogoo', 'distinguished', 'gruvbox', 'jellybeans',
+    \ 'luna', 'raven', 'seagull', 'solarized_flood', 'term', 'vice', 'zenburn']
+let s:idx = RandInt(0, len(s:candidate_airlinetheme)-1)
+let s:theme = s:candidate_airlinetheme[s:idx]
+
+if HasAirlinetheme(s:theme)
+    let g:airline_theme=s:theme
 endif
+
+" tabline settings
+" show tabline
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+" buffer number display format
+let g:airline#extensions#tabline#buffer_nr_format = '%s. '
+
+" show buffer number for easier switching between buffer
+" see https://github.com/vim-airline/vim-airline/issues/1149
+let g:airline#extensions#tabline#buffer_nr_show = 1
+
+" whether to show function or other tags on status line
+let g:airline#extensions#tagbar#enabled = 0
+
+" skip empty sections if nothing to show
+" extract from https://vi.stackexchange.com/a/9637/15292
+let g:airline_skip_empty_sections = 1
+
+"make airline more beautiful, see https://goo.gl/XLY19H for more info
+let g:airline_powerline_fonts = 1
+
+" show only hunks which is non-zero (git-related)
+let g:airline#extensions#hunks#non_zero_only = 1
+
+" enable gutentags integration
+let g:airline#extensions#gutentags#enabled = 1
+
+" custom status line symbols
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+
+let g:airline_left_sep = '»'
+let g:airline_left_sep = '▶'
+let g:airline_right_sep = '«'
+let g:airline_right_sep = '◀'
+let g:airline_symbols.crypt = '🔒'
+let g:airline_symbols.linenr = '☰'
+let g:airline_symbols.linenr = '␊'
+let g:airline_symbols.linenr = '␤'
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.maxlinenr = ''
+let g:airline_symbols.maxlinenr = '㏑'
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.paste = 'Þ'
+let g:airline_symbols.paste = '∥'
+let g:airline_symbols.spell = 'Ꞩ'
+let g:airline_symbols.notexists = 'Ɇ'
+let g:airline_symbols.whitespace = 'Ξ'
+
+" powerline symbols
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = '☰'
+let g:airline_symbols.maxlinenr = ''
+"}}
+
+"{{ misc plugin setting
+""""""""""""""""""" vim-highlightedyank settings """"""""""""""
+
+" reverse the highlight color for yanked text for better visuals
+highlight HighlightedyankRegion cterm=reverse gui=reverse
+
+" let highlight endures longer
+let g:highlightedyank_highlight_duration = 1000
 
 """"""""""""""""""""""""""""vim-matchup settings"""""""""""""""""""""""""""""
 
@@ -1606,49 +1723,25 @@ augroup matchup_matchword_highlight
     autocmd ColorScheme * hi MatchWord cterm=underline gui=underline
 augroup END
 
-"""""""""""""""""""""vim-better-whitespace settings""""""""""""""""""""""""""
+""""""""""""""""""""""""""quickrun settings"""""""""""""""""""""""""""""
 
-" whether to highlight trailing whitespace with the default red color (I find
-" it distracting so I turn it off)
-let g:better_whitespace_enabled=0
+let g:quickrun_no_default_key_mappings = 1
+nnoremap<silent> <F9> :QuickRun<CR>
+let g:quickrun_config = {'outputter/buffer/close_on_empty': 1}
 
-" set a mapping for StripWhitespace command
-nnoremap <silent> <leader><Space> :StripWhitespace<CR>
+""""""""""""""""""""""""comfortable-motion settings """"""""""""""""""""""
 
-" strip white line at the end of the file
-let g:strip_whitelines_at_eof=1
+let g:comfortable_motion_scroll_down_key = 'j'
+let g:comfortable_motion_scroll_up_key = 'k'
 
-" disable whitespace operator
-let g:better_whitespace_operator=''
+" mouse settings
+noremap <silent> <ScrollWheelDown> :call comfortable_motion#flick(40)<CR>
+noremap <silent> <ScrollWheelUp>   :call comfortable_motion#flick(-40)<CR>
+"}}
+"}
 
-""""""""""""""""""""""""""""""vim-signature settings""""""""""""""""""""""""""
-
-" change mark highlight to be more visible
-augroup signature_highlight
-autocmd!
-autocmd ColorScheme * highlight SignatureMarkText cterm=bold ctermbg=10
-    \ gui=bold guifg=#aeee04
-augroup END
-
-"""""""""""""""""""""""""vim-highlighturl settings"""""""""""""""""""""""""
-
-" whether to underline the URL
-let g:highlighturl_underline=1
-
-""""""""""""""""""""""""vim-markdownfootnotes settings""""""""""""""""""""""""
-
-" replace the default mappings provided by the plugin
-imap ^^ <Plug>AddVimFootnote
-nmap ^^ <Plug>AddVimFootnote
-
-imap @@ <Plug>ReturnFromFootnote
-nmap @@ <Plug>ReturnFromFootnote
-" }}}
-
-" Colorscheme and highlight settings {{{
-
-"general settings about colors
-
+"{ Colorscheme and highlight settings
+"{{ general settings about colors
 " enable true colors support (do not use this option if your terminal does not
 " support true colors. For a comprehensive list of terminals supporting true
 " colors, see https://github.com/termstandard/colors and
@@ -1657,7 +1750,9 @@ set termguicolors
 
 " use dark background (better for the eye, IMHO)
 set background=dark
+"}}
 
+"{{ colorscheme settings
 """"""""""""""""""""""""""""gruvbox settings"""""""""""""""""""""""""""
 
 " we should check if theme exists before using it, otherwise you will get
@@ -1718,9 +1813,9 @@ endif
 
 " let g:material_style='palenight'
 " colorscheme vim-material
+"}}
 
-"""""""""""""""""""""""""""custom highlight group settings""""""""""""""""""
-
+"{{ custom highlight group settings
 " change the color of popup menu for autocompletion
 " extracted from spf13-vim, see https://goo.gl/frRXHP
 " highlight Pmenu  guifg=#000000 guibg=#F8F8F8 ctermfg=black ctermbg=Lightgray
@@ -1731,10 +1826,10 @@ endif
 
 "custom highlight for ColorColumn
 " highlight ColorColumn ctermbg=235 guibg=#2c2d27
-" }}}
+"}}
+"}
 
-" A list of resources which inspire me {{{
-
+"{ A list of resources which inspire me
 " this list is non-exhaustive as I can not remember the source of many
 " settings
 
@@ -1744,4 +1839,6 @@ endif
 " - https://blog.carbonfive.com/2011/10/17/vim-text-objects-the-definitive-guide/
 " - https://sanctum.geek.nz/arabesque/vim-anti-patterns/
 " - https://github.com/gkapfham/dotfiles/blob/master/.vimrc
-" }}}
+
+" The ascii art on the frontpage is generated using http://tinyurl.com/y6szckgd
+"}
