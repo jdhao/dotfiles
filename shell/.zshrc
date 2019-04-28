@@ -171,7 +171,7 @@ export HISTSIZE=1000
 export VISUAL=vi
 export PAGER=less
 export LC_COLLATE=C
-export LESS='-Ms'
+export LESS='-RMs'
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
