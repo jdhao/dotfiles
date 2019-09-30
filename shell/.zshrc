@@ -6,12 +6,12 @@ autoload -Uz _zplugin
 (( ${+_comps} )) && _comps[zplugin]=_zplugin
 
 # git.zsh is required by some omz plugins
-zplugin ice wait lucid
-zplugin snippet OMZ::lib/git.zsh
+# zplugin ice wait lucid
+# zplugin snippet OMZ::lib/git.zsh
 
 # Install a OMZ plugin with multiple files
-zplugin ice svn lucid
-zplugin snippet OMZ::plugins/pip
+# zplugin ice svn lucid
+# zplugin snippet OMZ::plugins/pip
 
 # pure theme
 zplugin ice pick"async.zsh" src"pure.zsh"
