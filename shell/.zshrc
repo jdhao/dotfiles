@@ -13,18 +13,14 @@ zplugin snippet OMZ::lib/git.zsh
 zplugin ice svn lucid
 zplugin snippet OMZ::plugins/pip
 
-# Install a OMZ plugin with single file
-zplugin ice wait lucid
-zplugin snippet OMZ::plugins/fzf/fzf.plugin.zsh
-
-# zplugin load zdharma/fast-syntax-highlighting
-# zplugin load skywind3000/z.lua
-zplugin load zsh-users/zsh-autosuggestions
-zplugin load softmoth/zsh-vim-mode
-
 # pure theme
 zplugin ice pick"async.zsh" src"pure.zsh"
 zplugin light sindresorhus/pure
+
+# zplugin load skywind3000/z.lua
+zplugin load softmoth/zsh-vim-mode
+zplugin load zsh-users/zsh-autosuggestions
+zplugin load zdharma/fast-syntax-highlighting
 
 #######################################################################
 #                           Plugin settings                           #
