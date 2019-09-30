@@ -158,13 +158,12 @@ echo
 export LANG=en_US.UTF-8
 # User specific environment and startup programs
 export LC_ALL="en_US.UTF-8"
-export WARP_CTC_PATH="$HOME/tools/warp-ctc/build"
 export LD_LIBRARY_PATH="$HOME/local/lib:$LD_LIBRARY_PATH"
-export LD_LIBRARY_PATH="$HOME/tools/anaconda3/lib:$LD_LIBRARY_PATH"
+export LD_LIBRARY_PATH="$HOME/tools/anaconda/lib:$LD_LIBRARY_PATH"
 export PATH="$HOME/tools/nvim/bin:$PATH"
 export PATH="$HOME/local/bin:$PATH"
-export PATH="$HOME/tools/anaconda3/bin:$PATH"
-export PATH="$HOME/tools/ripgrep-0.10.0-x86_64-unknown-linux-musl:$PATH"
+export PATH="$HOME/tools/anaconda/bin:$PATH"
+export PATH="$HOME/tools/ripgrep:$PATH"
 export MYVIMRC=$HOME/.config/nvim/init.vim
 
 export HISTSIZE=1000
