@@ -77,7 +77,7 @@ export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  git pip fzf command-not-found cp tmux colored-man-pages
+  git pip fzf command-not-found cp colored-man-pages
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -88,13 +88,13 @@ source $ZSH/oh-my-zsh.sh
 
 source ~/.zplug/init.zsh
 
-zplug "supercrabtree/k"
+# zplug "supercrabtree/k"
 
 # enhanced zsh vim mode
 zplug "softmoth/zsh-vim-mode"
 
 # smart jump to other directories
-zplug "skywind3000/z.lua"
+# zplug "skywind3000/z.lua"
 
 # configuration for theme pure
 # zplug "mafredri/zsh-async", from:github
