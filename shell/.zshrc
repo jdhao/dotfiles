@@ -65,9 +65,7 @@ export LD_LIBRARY_PATH="$HOME/tools/anaconda3/lib:$LD_LIBRARY_PATH"
 
 export PATH="$HOME/tools/anaconda/bin:$PATH"
 export PATH="$HOME/tools/ctags/bin:$PATH"
-export PATH="$HOME/tools/nvim:$PATH"
-export PATH="$HOME/tools/tmux/bin:$PATH"
-export PATH="$HOME/tools/zsh/bin:$PATH"
+export PATH="$HOME/tools/nvim/bin:$PATH"
 export PATH="$HOME/tools/ripgrep:$PATH"
 export PATH="$HOME/local/bin:$PATH"
 
