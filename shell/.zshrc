@@ -1,4 +1,27 @@
 #######################################################################
+#                          General settings                           #
+#######################################################################
+
+# case insensitive completion
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+autoload -Uz compinit
+compinit
+
+#set the PERMISSIONS for newly-created files
+umask 077
+
+#######################################################################
+#                        key binding settings                         #
+#######################################################################
+# use vim key binding instead of the default emacs key binding
+# bindkey -v
+
+# for terminal which can not understand home and end key on zsh shell
+# https://anjia0532.github.io/2017/09/10/zsh-home-end-keypad-not-work/
+bindkey '^[[H' beginning-of-line
+bindkey '^[[F' end-of-line
+
+#######################################################################
 #                        zplug configurations                         #
 #######################################################################
 source "$HOME/.zplugin/bin/zplugin.zsh"
@@ -61,8 +84,17 @@ export LANG=en_US.UTF-8
 export LC_ALL="en_US.UTF-8"
 
 export LD_LIBRARY_PATH="$HOME/local/lib:$LD_LIBRARY_PATH"
-export LD_LIBRARY_PATH="$HOME/tools/anaconda/lib:$LD_LIBRARY_PATH"
-export PATH="$HOME/tools/anaconda/bin:$PATH"
+
+if [ -d $HOME/tools/anaconda ]; then
+    CONDA_NAME="anaconda"
+fi
+
+if [ -d $HOME/tools/miniconda ]; then
+    CONDA_NAME="miniconda"
+fi
+
+export LD_LIBRARY_PATH="$HOME/tools/$CONDA_NAME/lib:$LD_LIBRARY_PATH"
+export PATH="$HOME/tools/$CONDA_NAME/bin:$PATH"
 export PATH="$HOME/tools/ctags/bin:$PATH"
 export PATH="$HOME/tools/nvim/bin:$PATH"
 export PATH="$HOME/tools/ripgrep:$PATH"
@@ -89,17 +121,3 @@ alias ldot='ls -d .??*'
 alias cp='nocorrect cp -i'
 alias mv='nocorrect mv -i'
 alias cls="clear"
-
-#set the PERMISSIONS for newly-created files
-umask 077
-
-#######################################################################
-#                        key binding settings                         #
-#######################################################################
-# use vim key binding instead of the default emacs key binding
-# bindkey -v
-
-# for terminal which can not understand home and end key on zsh shell
-# https://anjia0532.github.io/2017/09/10/zsh-home-end-keypad-not-work/
-bindkey '^[[H' beginning-of-line
-bindkey '^[[F' end-of-line
