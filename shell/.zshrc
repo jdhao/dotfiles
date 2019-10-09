@@ -4,22 +4,12 @@
 
 # case insensitive completion
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+
 autoload -Uz compinit
 compinit
 
 #set the PERMISSIONS for newly-created files
 umask 077
-
-#######################################################################
-#                        key binding settings                         #
-#######################################################################
-# use vim key binding instead of the default emacs key binding
-# bindkey -v
-
-# for terminal which can not understand home and end key on zsh shell
-# https://anjia0532.github.io/2017/09/10/zsh-home-end-keypad-not-work/
-bindkey '^[[H' beginning-of-line
-bindkey '^[[F' end-of-line
 
 #######################################################################
 #                        zplug configurations                         #
@@ -121,3 +111,14 @@ alias ldot='ls -d .??*'
 alias cp='nocorrect cp -i'
 alias mv='nocorrect mv -i'
 alias cls="clear"
+
+#######################################################################
+#                        key binding settings                         #
+#######################################################################
+# Use vim key binding instead of the default emacs key binding
+# bindkey -v
+
+# For terminal which can not understand home and end key on zsh shell
+# https://anjia0532.github.io/2017/09/10/zsh-home-end-keypad-not-work/
+bindkey '^[[H' beginning-of-line
+bindkey '^[[F' end-of-line
