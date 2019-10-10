@@ -101,7 +101,6 @@ export KEYTIMEOUT=30
 
 alias zshconfig="nvim ~/.zshrc"
 alias h="history"
-alias r="fc -s"
 alias grep="grep -E -n --color=auto"
 alias ls='ls -F --color=auto'
 alias less="less -m"
