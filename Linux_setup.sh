@@ -1,7 +1,10 @@
+!#/bin/bash
+set -eux
+set -o pipefail
+
 #######################################################################
 #                            Building Tmux                            #
 #######################################################################
-
 echo "Install Tmux"
 
 # First we need to build Tmux dependency packages: libevent and ncurses
@@ -10,13 +13,13 @@ LIBEVENT_SRC_NAME=$HOME/packages/libevent.tar.gz
 LIBEVENT_PACK_DIR=$HOME/packages/libevent
 LIBEVENT_LINK="https://github.com/libevent/libevent/releases/download/release-2.1.10-stable/libevent-2.1.10-stable.tar.gz"
 
-if [ ! -f $LIBEVENT_SRC_NAME ]; then
+if [[ ! -f $LIBEVENT_SRC_NAME ]]; then
     wget $LIBEVENT_LINK -O $LIBEVENT_SRC_NAME
 fi
 
 echo "Building libevent"
 echo "Creating libevent directory under packages directory"
-if [ ! -d "$LIBEVENT_PACK_DIR" ]; then
+if [[ ! -d "$LIBEVENT_PACK_DIR" ]]; then
     mkdir -p "$LIBEVENT_PACK_DIR"
 fi
 
@@ -33,13 +36,13 @@ NCURSES_SRC_NAME=$HOME/packages/ncurses.tar.gz
 NCURSE_PACK_DIR=$HOME/packages/ncurses
 NCURSES_LINK="ftp://ftp.gnu.org/gnu/ncurses/ncurses-6.1.tar.gz"
 
-if [ ! -f $NCURSES_SRC_NAME ]; then
+if [[ ! -f $NCURSES_SRC_NAME ]]; then
     wget $NCURSES_LINK -O $NCURSES_SRC_NAME
 fi
 
 echo "Building ncurses"
 echo "Creating ncurses directory under packages directory"
-if [ ! -d "$NCURSE_PACK_DIR" ]; then
+if [[ ! -d "$NCURSE_PACK_DIR" ]]; then
     mkdir -p "$NCURSE_PACK_DIR"
 fi
 
@@ -56,13 +59,13 @@ TMUX_SRC_NAME=$HOME/packages/tmux.tar.gz
 TMUX_PACK_DIR=$HOME/packages/tmux
 TMUX_LINK="https://github.com/tmux/tmux/releases/download/2.8/tmux-2.8.tar.gz"
 
-if [ ! -f $TMUX_SRC_NAME ]; then
+if [[ ! -f $TMUX_SRC_NAME ]]; then
     wget $TMUX_LINK -O $TMUX_SRC_NAME
 fi
 
 echo "Building Tmux"
 echo "Creating tmux directory under packages directory"
-if [ ! -d "$TMUX_PACK_DIR" ]; then
+if [[ ! -d "$TMUX_PACK_DIR" ]]; then
     mkdir -p "$TMUX_PACK_DIR"
 fi
 
@@ -86,12 +89,12 @@ ZSH_SRC_NAME=$HOME/packages/zsh.tar.xz
 ZSH_PACK_DIR=$HOME/packages/zsh
 ZSH_LINK="https://sourceforge.net/projects/zsh/files/latest/download"
 
-if [ ! -f $ZSH_SRC_NAME ]; then
+if [[ ! -f $ZSH_SRC_NAME ]]; then
     wget $ZSH_LINK -O $ZSH_SRC_NAME
 fi
 
 echo "Creating zsh directory under packages directory"
-if [ ! -d "$ZSH_PACK_DIR" ]; then
+if [[ ! -d "$ZSH_PACK_DIR" ]]; then
     mkdir -p "$ZSH_PACK_DIR"
 fi
 
