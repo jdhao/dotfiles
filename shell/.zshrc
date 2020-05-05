@@ -14,6 +14,7 @@ umask 077
 #######################################################################
 #                        zplug configurations                         #
 #######################################################################
+
 source "$HOME/.zplugin/bin/zplugin.zsh"
 autoload -Uz _zplugin
 (( ${+_comps} )) && _comps[zplugin]=_zplugin
@@ -64,16 +65,21 @@ RPS1='${MODE_INDICATOR_PROMPT} ${vcs_info_msg_0_}'
 export FZF_BASE="$HOME/.fzf"
 export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
 
+export PATH="$HOME/.fzf/bin:$PATH"
 #######################################################################
 #                        Environment variables                        #
 #######################################################################
 
-# You may need to manually set your language environment
-export LANG=en_US.UTF-8
-# User specific environment and startup programs
+# -M: verbose mode
+# -N: show line number
+# -s: squeeze blank lines to single blank line
+export LESS='-RMs'
+export PAGER=less
+export VISUAL=vi
+export LC_COLLATE='C'
 export LC_ALL="en_US.UTF-8"
-
-export LD_LIBRARY_PATH="$HOME/local/lib:$LD_LIBRARY_PATH"
+export LANG=en_US.UTF-8
+export KEYTIMEOUT=30
 
 if [ -d $HOME/tools/anaconda ]; then
     CONDA_NAME="anaconda"
@@ -89,11 +95,14 @@ export PATH="$HOME/tools/ctags/bin:$PATH"
 export PATH="$HOME/tools/nvim/bin:$PATH"
 export PATH="$HOME/tools/ripgrep:$PATH"
 export PATH="$HOME/local/bin:$PATH"
+export LD_LIBRARY_PATH="$HOME/local/lib:$LD_LIBRARY_PATH"
 
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
+setopt noclobber  # Do not overwrite existing files by default
+setopt autocd  # cd to a directory if only name is provided
 
-export KEYTIMEOUT=30
+HISTFILE=~/.histfile
+HISTSIZE=10000
+SAVEHIST=10000
 
 #######################################################################
 #                            custom alias                             #
@@ -121,3 +130,13 @@ alias cls="clear"
 # https://anjia0532.github.io/2017/09/10/zsh-home-end-keypad-not-work/
 bindkey '^[[H' beginning-of-line
 bindkey '^[[F' end-of-line
+
+#######################################################################
+#                          custom functions                           #
+#######################################################################
+
+mkcd ()
+{
+    mkdir -p -- "$1" &&
+      cd -P -- "$1"
+}
