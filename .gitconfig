@@ -1,2 +1,5 @@
 [core]
 	editor = nvim
+[alias]
+	history = log --stat -p --follow
+
