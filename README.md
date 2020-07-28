@@ -5,5 +5,5 @@ commonly used tools.
 
 # Set up environment
 
-For installing tmux, zsh and zsh plugins under Linux, you can run the script `Linux_setup.sh` 
-to get everything done.
+For installing tmux, zsh and zsh plugins under Linux, you can run the script
+`Linux_setup.sh` to get everything done.
