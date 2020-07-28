@@ -112,8 +112,8 @@ cd "$HOME"
 #                         Install zsh plugins                         #
 #######################################################################
 
-# Install zplugin
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zplugin/master/doc/install.sh)"
+# Install zinit
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"
 
 # Download rc files
 curl -Lo "$HOME/.bash_profile" https://raw.githubusercontent.com/jdhao/dotfiles/master/shell/.bash_profile \
