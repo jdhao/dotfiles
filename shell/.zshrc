@@ -12,29 +12,29 @@ compinit
 umask 077
 
 #######################################################################
-#                        zplug configurations                         #
+#                        zinit configurations                         #
 #######################################################################
 
-source "$HOME/.zplugin/bin/zplugin.zsh"
-autoload -Uz _zplugin
-(( ${+_comps} )) && _comps[zplugin]=_zplugin
+source "$HOME/.zinit/bin/zinit.zsh"
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
 
 # git.zsh is required by some omz plugins
-# zplugin ice wait lucid
-# zplugin snippet OMZ::lib/git.zsh
+# zinit ice wait lucid
+# zinit snippet OMZ::lib/git.zsh
 
 # Install a OMZ plugin with multiple files
-# zplugin ice svn lucid
-# zplugin snippet OMZ::plugins/pip
+# zinit ice svn lucid
+# zinit snippet OMZ::plugins/pip
 
 # pure theme
-zplugin ice pick"async.zsh" src"pure.zsh"
-zplugin light sindresorhus/pure
+zinit ice compile'(pure|async).zsh' pick'async.zsh' src'pure.zsh'
+zinit light sindresorhus/pure
 
-# zplugin load skywind3000/z.lua
-zplugin load softmoth/zsh-vim-mode
-zplugin load zsh-users/zsh-autosuggestions
-zplugin load zdharma/fast-syntax-highlighting
+# zinit load skywind3000/z.lua
+zinit load softmoth/zsh-vim-mode
+zinit load zsh-users/zsh-autosuggestions
+zinit load zdharma/fast-syntax-highlighting
 
 #######################################################################
 #                           Plugin settings                           #
