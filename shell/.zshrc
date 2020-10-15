@@ -97,6 +97,13 @@ export PATH="$HOME/tools/ripgrep:$PATH"
 export PATH="$HOME/local/bin:$PATH"
 export LD_LIBRARY_PATH="$HOME/local/lib:$LD_LIBRARY_PATH"
 
+# use nvim as man pager
+if [[ "$(command -v nvim)" ]]; then
+    export EDITOR='nvim'
+    export MANPAGER='nvim +Man!'
+    export MANWIDTH=999
+fi
+
 setopt noclobber  # Do not overwrite existing files by default
 setopt autocd  # cd to a directory if only name is provided
 
