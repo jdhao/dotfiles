@@ -14,10 +14,6 @@ speed.
 This plugin let you manage your proxy settings easily. You can control how to
 access each site, directly or via a proxy.
 
-# [URL shortener](https://timleland.com/link-shortener-extension/)
-
-Generate a short form of the URL.
-
 # [Extension Manager](https://chrome.google.com/webstore/detail/extension-manager/gjldcdngmdknpinoemndlidpcabkggco?utm_source=chrome-app-launcher-info-dialog)
 
 Chrome plugin manager to manage other plugins.
