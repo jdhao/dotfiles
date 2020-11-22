@@ -9,15 +9,10 @@ Vimium is the hacker's browser which brings Vim-like key bindings for quicker
 operations inside Chrome. A must have if you care about your precious time and
 speed.
 
-# [Proxy SwitchyOmega](https://github.com/FelisCatus/SwitchyOmega) 
+# [Proxy SwitchyOmega](https://github.com/FelisCatus/SwitchyOmega)
 
 This plugin let you manage your proxy settings easily. You can control how to
 access each site, directly or via a proxy.
-
-# [Quick QR Code Generator](https://chrome.google.com/webstore/detail/quick-qr-code-generator/afpbjjgbdimpioenaedcjgkaigggcdpp?hl=en)
-
-This plugin will generate a QR code for the webpage your are visiting. It is
-useful if you want to share the link to other people via your smartphone.
 
 # [URL shortener](https://timleland.com/link-shortener-extension/)
 
