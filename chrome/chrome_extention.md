@@ -43,7 +43,6 @@ All sorts of script.
 
 Automatically show image when you hover the mouse cursor to an image link.
 
-# [Enhanced
-Github](https://chrome.google.com/webstore/detail/enhanced-github/anlikcnbgdeidpacdbdljnabclhahhmd?hl=en)
+# [Enhanced Github](https://chrome.google.com/webstore/detail/enhanced-github/anlikcnbgdeidpacdbdljnabclhahhmd?hl=en)
 
 Add links to files in a GitHub repo to download it directly.
