@@ -1,5 +1,18 @@
 [core]
-	editor = nvim
-[alias]
-	history = log --stat -p --follow
-
+    quotepath = false
+    editor = "vim"
+[log]
+    decorate = true
+    abbrevCommit = true
+    date = relative
+[color]
+    branch = auto
+    decorate = auto
+    diff = auto
+    status = auto
+    showbranch = atuo
+    ui = auto
+[format]
+    pretty = %C(magenta)%h%Creset -%C(bold red)%d%Creset %s %C(green)(%cr) %C(cyan)<%an>%Creset
+[merge]
+  conflictstyle = diff3
