@@ -13,20 +13,21 @@ LIBEVENT_SRC_NAME=$HOME/packages/libevent.tar.gz
 LIBEVENT_PACK_DIR=$HOME/packages/libevent
 LIBEVENT_LINK="https://github.com/libevent/libevent/releases/download/release-2.1.10-stable/libevent-2.1.10-stable.tar.gz"
 
-if [[ ! -f $LIBEVENT_SRC_NAME ]]; then
-    wget "$LIBEVENT_LINK" -O "$LIBEVENT_SRC_NAME"
-fi
-
-echo "Building libevent"
-echo "Creating libevent directory under packages directory"
 if [[ ! -d "$LIBEVENT_PACK_DIR" ]]; then
+    echo "Creating libevent directory under packages directory"
     mkdir -p "$LIBEVENT_PACK_DIR"
 fi
 
-echo "Extracting to $HOME/packages/libevent directory"
+if [[ ! -f $LIBEVENT_SRC_NAME ]]; then
+    echo "Downloading libevent source files"
+    curl -Lo  "$LIBEVENT_SRC_NAME" "$LIBEVENT_LINK"
+fi
+
+echo "Building libevent"
+echo "Extracting to directory $HOME/packages/libevent"
+
 tar zxvf "$LIBEVENT_SRC_NAME" -C "$LIBEVENT_PACK_DIR" --strip-components 1
 cd "$LIBEVENT_PACK_DIR"
-
 ./configure --prefix="$HOME/local"
 make -j && make install
 cd "$HOME"
@@ -34,18 +35,18 @@ cd "$HOME"
 # Building ncurses
 NCURSES_SRC_NAME=$HOME/packages/ncurses.tar.gz
 NCURSE_PACK_DIR=$HOME/packages/ncurses
-NCURSES_LINK="ftp://ftp.gnu.org/gnu/ncurses/ncurses-6.1.tar.gz"
+NCURSES_LINK="https://ftp.gnu.org/pub/gnu/ncurses/ncurses-6.1.tar.gz"
 
-if [[ ! -f $NCURSES_SRC_NAME ]]; then
-    wget "$NCURSES_LINK" -O "$NCURSES_SRC_NAME"
-fi
-
-echo "Building ncurses"
-echo "Creating ncurses directory under packages directory"
 if [[ ! -d "$NCURSE_PACK_DIR" ]]; then
+    echo "Creating ncurses directory under packages directory"
     mkdir -p "$NCURSE_PACK_DIR"
 fi
 
+if [[ ! -f $NCURSES_SRC_NAME ]]; then
+    curl -Lo "$NCURSES_SRC_NAME" "$NCURSES_LINK"
+fi
+
+echo "Building ncurses"
 echo "Extracting to $HOME/packages/ncurses directory"
 tar zxvf "$NCURSES_SRC_NAME" -C "$NCURSE_PACK_DIR" --strip-components 1
 cd "$NCURSE_PACK_DIR"
@@ -59,16 +60,16 @@ TMUX_SRC_NAME=$HOME/packages/tmux.tar.gz
 TMUX_PACK_DIR=$HOME/packages/tmux
 TMUX_LINK="https://github.com/tmux/tmux/releases/download/2.8/tmux-2.8.tar.gz"
 
-if [[ ! -f $TMUX_SRC_NAME ]]; then
-    wget "$TMUX_LINK" -O "$TMUX_SRC_NAME"
-fi
-
-echo "Building Tmux"
-echo "Creating tmux directory under packages directory"
 if [[ ! -d "$TMUX_PACK_DIR" ]]; then
+    echo "Creating tmux directory under packages directory"
     mkdir -p "$TMUX_PACK_DIR"
 fi
 
+if [[ ! -f $TMUX_SRC_NAME ]]; then
+    curl -Lo "$TMUX_SRC_NAME" "$TMUX_LINK"
+fi
+
+echo "Building Tmux"
 echo "Extracting to $HOME/packages/tmux directory"
 tar zxvf "$TMUX_SRC_NAME" -C "$TMUX_PACK_DIR" --strip-components 1
 cd "$TMUX_PACK_DIR"
@@ -89,13 +90,13 @@ ZSH_SRC_NAME=$HOME/packages/zsh.tar.xz
 ZSH_PACK_DIR=$HOME/packages/zsh
 ZSH_LINK="https://sourceforge.net/projects/zsh/files/latest/download"
 
-if [[ ! -f $ZSH_SRC_NAME ]]; then
-    wget "$ZSH_LINK" -O "$ZSH_SRC_NAME"
+if [[ ! -d "$ZSH_PACK_DIR" ]]; then
+    echo "Creating zsh directory under packages directory"
+    mkdir -p "$ZSH_PACK_DIR"
 fi
 
-echo "Creating zsh directory under packages directory"
-if [[ ! -d "$ZSH_PACK_DIR" ]]; then
-    mkdir -p "$ZSH_PACK_DIR"
+if [[ ! -f $ZSH_SRC_NAME ]]; then
+    curl -Lo "$ZSH_SRC_NAME" "$ZSH_LINK"
 fi
 
 tar xJvf "$ZSH_SRC_NAME" -C "$ZSH_PACK_DIR" --strip-components 1
@@ -111,14 +112,20 @@ cd "$HOME"
 #######################################################################
 #                         Install zsh plugins                         #
 #######################################################################
-
 # Install zinit
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"
+mkdir ~/.zinit
+git clone --depth 1 https://github.com/zdharma/zinit.git ~/.zinit/bin
 
-# Download rc files
-curl -Lo "$HOME/.bash_profile" https://raw.githubusercontent.com/jdhao/dotfiles/master/shell/.bash_profile \
-    && curl -Lo "$HOME/.zshrc" https://raw.githubusercontent.com/jdhao/dotfiles/master/shell/.zshrc \
-    && curl -Lo "$HOME/.pylintrc" https://raw.githubusercontent.com/jdhao/dotfiles/master/pylint/.pylintrc
+DOT_FILES_DIR=$HOME/projects/dotfiles
+mkdir -p "$DOT_FILES_DIR"
+
+if [[ ! -d "$DOT_FILES_DIR" ]]; then
+    git clone https://github.com/jdhao/dotfiles "$DOT_FILES_DIR"
+fi
+
+ln -sf  "$DOT_FILES_DIR/shell/.bash_profile" "$HOME/.bash_profile"
+ln -sf  "$DOT_FILES_DIR/shell/.zshrc" "$HOME/.zshrc"
+ln -sf  "$DOT_FILES_DIR/pylint/.pylintrc" "$HOME/.pylintrc"
 
 # Initialize zsh and install plugins
 # shellcheck source=/dev/null
