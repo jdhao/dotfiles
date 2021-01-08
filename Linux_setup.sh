@@ -123,9 +123,10 @@ if [[ ! -d "$DOT_FILES_DIR" ]]; then
     git clone https://github.com/jdhao/dotfiles "$DOT_FILES_DIR"
 fi
 
-ln -sf  "$DOT_FILES_DIR/shell/.bash_profile" "$HOME/.bash_profile"
-ln -sf  "$DOT_FILES_DIR/shell/.zshrc" "$HOME/.zshrc"
-ln -sf  "$DOT_FILES_DIR/pylint/.pylintrc" "$HOME/.pylintrc"
+ln -sf  "$DOT_FILES_DIR/.bash_profile" "$HOME/.bash_profile"
+ln -sf  "$DOT_FILES_DIR/.zshrc" "$HOME/.zshrc"
+ln -sf  "$DOT_FILES_DIR/.pylintrc" "$HOME/.pylintrc"
+ln -sf  "$DOT_FILES_DIR/.tmux.conf" "$HOME/.tmux.conf"
 
 # Initialize zsh and install plugins
 # shellcheck source=/dev/null
