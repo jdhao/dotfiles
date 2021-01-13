@@ -1,12 +1,11 @@
 #######################################################################
 #                          General settings                           #
 #######################################################################
+# Enable autocompletion
+autoload -Uz compinit
 
 # case insensitive completion
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
-
-autoload -Uz compinit
-compinit
 
 #set the PERMISSIONS for newly-created files
 umask 077
@@ -16,7 +15,6 @@ umask 077
 #######################################################################
 
 source "$HOME/.zinit/bin/zinit.zsh"
-autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 
 # git.zsh is required by some omz plugins
@@ -27,18 +25,37 @@ autoload -Uz _zinit
 # zinit ice svn lucid
 # zinit snippet OMZ::plugins/pip
 
-# pure theme
-zinit ice compile'(pure|async).zsh' pick'async.zsh' src'pure.zsh'
-zinit light sindresorhus/pure
+zplugin ice as"completion"
+zplugin snippet OMZ::plugins/docker/_docker
 
-# zinit load skywind3000/z.lua
-zinit load softmoth/zsh-vim-mode
-zinit load zsh-users/zsh-autosuggestions
-zinit load zdharma/fast-syntax-highlighting
+# pure theme
+# zinit ice compile'(pure|async).zsh' pick'async.zsh' src'pure.zsh'
+# zinit light sindresorhus/pure
+
+# spaceship theme
+zinit ice depth'1'
+zinit light denysdovhan/spaceship-prompt
+
+# zinit light skywind3000/z.lua
+
+zinit light softmoth/zsh-vim-mode
+
+zinit ice wait lucid atload'_zsh_autosuggest_start'
+zinit light zsh-users/zsh-autosuggestions
+
+zinit ice wait lucid
+zinit light zdharma/fast-syntax-highlighting
 
 #######################################################################
 #                           Plugin settings                           #
 #######################################################################
+
+# tweak the pure theme
+zstyle :prompt:pure:path color "green"
+
+# tweak spaceship theme
+SPACESHIP_USER_SHOW=needed
+SPACESHIP_VI_MODE_SHOW=false
 
 # cursor configurations for zsh-vim-mode
 MODE_CURSOR_VICMD="green block"
@@ -147,3 +164,8 @@ mkcd ()
     mkdir -p -- "$1" &&
       cd -P -- "$1"
 }
+
+# Note that we need to use compinit command after we add new completions to
+# some command or update the completion behavior. Instead of running the
+# command multiple times, running it at the end of the zshrc seems okay.
+compinit

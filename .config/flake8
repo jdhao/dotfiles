@@ -1,0 +1,11 @@
+[flake8]
+max-line-length = 100
+max-complexity = 30
+ignore =
+    # missing whitespace around arithmetic operator
+    E226,
+    # line break before/after binary operator
+    W503,
+    W504,
+    # expected 1 blank line, found 0
+    E301,E302,
