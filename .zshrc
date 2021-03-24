@@ -29,12 +29,12 @@ zplugin ice as"completion"
 zplugin snippet OMZ::plugins/docker/_docker
 
 # pure theme
-# zinit ice compile'(pure|async).zsh' pick'async.zsh' src'pure.zsh'
-# zinit light sindresorhus/pure
+zinit ice compile'(pure|async).zsh' pick'async.zsh' src'pure.zsh'
+zinit light sindresorhus/pure
 
 # spaceship theme
-zinit ice depth'1'
-zinit light denysdovhan/spaceship-prompt
+# zinit ice depth'1'
+# zinit light denysdovhan/spaceship-prompt
 
 # zinit light skywind3000/z.lua
 
@@ -123,17 +123,26 @@ fi
 
 setopt noclobber  # Do not overwrite existing files by default
 setopt autocd  # cd to a directory if only name is provided
+setopt correct_all  # correct misspelled command
 
-HISTFILE=~/.histfile
-HISTSIZE=10000
-SAVEHIST=10000
+export HISTFILE=~/.histfile
+export HISTSIZE=1000000
+export SAVEHIST=1000000
+
+setopt HIST_IGNORE_ALL_DUPS  # do not put duplicated command into history list
+setopt HIST_SAVE_NO_DUPS  # do not save duplicated command
+setopt HIST_REDUCE_BLANKS  # remove unnecessary blanks
+setopt INC_APPEND_HISTORY_TIME  # append command to history file immediately after execution
+setopt EXTENDED_HISTORY  # record command start time
+
+alias history="fc -l 1"
+# below alias taken from https://github.com/zimfw/history/blob/master/init.zsh
+alias history-stat="fc -ln 0 | awk '{print \$1}' | sort | uniq -c | sort -nr | head"
 
 #######################################################################
 #                            custom alias                             #
 #######################################################################
-
 alias zshconfig="nvim ~/.zshrc"
-alias h="history"
 alias grep="grep -E -n --color=auto"
 alias ls='ls -F --color=auto'
 alias less="less -m"
