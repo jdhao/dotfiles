@@ -2,6 +2,9 @@
 set -eux
 set -o pipefail
 
+# The directory to put all the package tarballs
+PACK_DIR=$HOME/packages
+
 #######################################################################
 #                            Building Tmux                            #
 #######################################################################
@@ -9,8 +12,8 @@ echo "Install Tmux"
 
 # First we need to build Tmux dependency packages: libevent and ncurses
 # Building libevent
-LIBEVENT_SRC_NAME=$HOME/packages/libevent.tar.gz
-LIBEVENT_PACK_DIR=$HOME/packages/libevent
+LIBEVENT_SRC_NAME=$PACK_DIR/libevent.tar.gz
+LIBEVENT_PACK_DIR=$PACK_DIR/libevent
 LIBEVENT_LINK="https://github.com/libevent/libevent/releases/download/release-2.1.10-stable/libevent-2.1.10-stable.tar.gz"
 
 if [[ ! -d "$LIBEVENT_PACK_DIR" ]]; then
@@ -24,7 +27,7 @@ if [[ ! -f $LIBEVENT_SRC_NAME ]]; then
 fi
 
 echo "Building libevent"
-echo "Extracting to directory $HOME/packages/libevent"
+echo "Extracting to directory $LIBEVENT_PACK_DIR"
 
 tar zxvf "$LIBEVENT_SRC_NAME" -C "$LIBEVENT_PACK_DIR" --strip-components 1
 cd "$LIBEVENT_PACK_DIR"
@@ -33,8 +36,8 @@ make -j && make install
 cd "$HOME"
 
 # Building ncurses
-NCURSES_SRC_NAME=$HOME/packages/ncurses.tar.gz
-NCURSE_PACK_DIR=$HOME/packages/ncurses
+NCURSES_SRC_NAME=$PACK_DIR/ncurses.tar.gz
+NCURSE_PACK_DIR=$PACK_DIR/ncurses
 NCURSES_LINK="https://ftp.gnu.org/pub/gnu/ncurses/ncurses-6.1.tar.gz"
 
 if [[ ! -d "$NCURSE_PACK_DIR" ]]; then
@@ -43,11 +46,12 @@ if [[ ! -d "$NCURSE_PACK_DIR" ]]; then
 fi
 
 if [[ ! -f $NCURSES_SRC_NAME ]]; then
+    echo "Downloading ncurses source files"
     curl -Lo "$NCURSES_SRC_NAME" "$NCURSES_LINK"
 fi
 
 echo "Building ncurses"
-echo "Extracting to $HOME/packages/ncurses directory"
+echo "Extracting to $PACK_DIR/ncurses directory"
 tar zxvf "$NCURSES_SRC_NAME" -C "$NCURSE_PACK_DIR" --strip-components 1
 cd "$NCURSE_PACK_DIR"
 
@@ -56,8 +60,8 @@ make -j && make install
 cd "$HOME"
 
 # Building tmux
-TMUX_SRC_NAME=$HOME/packages/tmux.tar.gz
-TMUX_PACK_DIR=$HOME/packages/tmux
+TMUX_SRC_NAME=$PACK_DIR/tmux.tar.gz
+TMUX_PACK_DIR=$PACK_DIR/tmux
 TMUX_LINK="https://github.com/tmux/tmux/releases/download/2.8/tmux-2.8.tar.gz"
 
 if [[ ! -d "$TMUX_PACK_DIR" ]]; then
@@ -66,19 +70,49 @@ if [[ ! -d "$TMUX_PACK_DIR" ]]; then
 fi
 
 if [[ ! -f $TMUX_SRC_NAME ]]; then
+    echo "Downloading tmux source files"
     curl -Lo "$TMUX_SRC_NAME" "$TMUX_LINK"
 fi
 
 echo "Building Tmux"
-echo "Extracting to $HOME/packages/tmux directory"
+echo "Extracting to directory $TMUX_PACK_DIR"
 tar zxvf "$TMUX_SRC_NAME" -C "$TMUX_PACK_DIR" --strip-components 1
 cd "$TMUX_PACK_DIR"
 
 ./configure --prefix="$HOME/local" \
     CPPFLAGS="-I$HOME/local/include -I$HOME/local/include/ncurses" \
     LDFLAGS="-L$HOME/local/lib"
-    make -j && make install
+make -j && make install
 
+cd "$HOME"
+
+#######################################################################
+#                              Build git                              #
+#######################################################################
+echo "Installing git"
+
+GIT_SOURCE_NAME=$PACK_DIR/git.tar.gz
+GIT_PACK_DIR=$PACK_DIR/git
+GIT_LINK="https://github.com/git/git/archive/refs/tags/v2.31.1.tar.gz"
+
+if [[ ! -d "$GIT_PACK_DIR" ]]; then
+    echo "Creating git directory under packages directory"
+    mkdir -p "$GIT_PACK_DIR"
+fi
+
+if [[ ! -f $GIT_SOURCE_NAME ]]; then
+    echo "Downloading git source files"
+    curl -Lo "$GIT_SOURCE_NAME" "$GIT_LINK"
+fi
+
+echo "Building Git"
+echo "Extracting to directory $GIT_PACK_DIR"
+tar zxvf "$GIT_SOURCE_NAME" -C "$GIT_PACK_DIR" --strip-components 1
+cd "$GIT_PACK_DIR"
+
+make configure
+./configure --prefix=$HOME/local
+make -j && make install
 cd "$HOME"
 
 #######################################################################
@@ -86,8 +120,8 @@ cd "$HOME"
 #######################################################################
 
 echo "Installing zsh"
-ZSH_SRC_NAME=$HOME/packages/zsh.tar.xz
-ZSH_PACK_DIR=$HOME/packages/zsh
+ZSH_SRC_NAME=$PACK_DIR/zsh.tar.xz
+ZSH_PACK_DIR=$PACK_DIR/zsh
 ZSH_LINK="https://sourceforge.net/projects/zsh/files/latest/download"
 
 if [[ ! -d "$ZSH_PACK_DIR" ]]; then
@@ -96,6 +130,7 @@ if [[ ! -d "$ZSH_PACK_DIR" ]]; then
 fi
 
 if [[ ! -f $ZSH_SRC_NAME ]]; then
+    echo "Downloading zsh source files"
     curl -Lo "$ZSH_SRC_NAME" "$ZSH_LINK"
 fi
 
@@ -120,7 +155,7 @@ DOT_FILES_DIR=$HOME/projects/dotfiles
 mkdir -p "$DOT_FILES_DIR"
 
 if [[ ! -d "$DOT_FILES_DIR" ]]; then
-    git clone https://github.com/jdhao/dotfiles "$DOT_FILES_DIR"
+    git clone --depth 1 https://github.com/jdhao/dotfiles "$DOT_FILES_DIR"
 fi
 
 ln -sf  "$DOT_FILES_DIR/.bash_profile" "$HOME/.bash_profile"
