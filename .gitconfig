@@ -13,7 +13,7 @@
     showbranch = atuo
     ui = auto
 [format]
-    pretty = %C(magenta)%h%Creset -%C(bold red)%d%Creset %s %C(green)(%cr) %C(cyan)<%an>%Creset
+    pretty = %C(magenta)%h%Creset -%C(bold red)%d%Creset %s %C(green)(%ci) %C(cyan)<%an>%Creset
 [merge]
   conflictstyle = diff3
 [diff]
