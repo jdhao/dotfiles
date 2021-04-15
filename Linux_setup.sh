@@ -14,7 +14,7 @@ echo "Install Tmux"
 # Building libevent
 LIBEVENT_SRC_NAME=$PACK_DIR/libevent.tar.gz
 LIBEVENT_PACK_DIR=$PACK_DIR/libevent
-LIBEVENT_LINK="https://github.com/libevent/libevent/releases/download/release-2.1.10-stable/libevent-2.1.10-stable.tar.gz"
+LIBEVENT_LINK="https://hub.fastgit.org/libevent/libevent/releases/download/release-2.1.10-stable/libevent-2.1.10-stable.tar.gz"
 
 if [[ ! -d "$LIBEVENT_PACK_DIR" ]]; then
     echo "Creating libevent directory under packages directory"
@@ -38,7 +38,7 @@ cd "$HOME"
 # Building ncurses
 NCURSES_SRC_NAME=$PACK_DIR/ncurses.tar.gz
 NCURSE_PACK_DIR=$PACK_DIR/ncurses
-NCURSES_LINK="https://ftp.gnu.org/pub/gnu/ncurses/ncurses-6.1.tar.gz"
+NCURSES_LINK="https://hub.fastgit.org/mirror/ncurses/archive/refs/tags/v6.1.tar.gz"
 
 if [[ ! -d "$NCURSE_PACK_DIR" ]]; then
     echo "Creating ncurses directory under packages directory"
@@ -62,7 +62,7 @@ cd "$HOME"
 # Building tmux
 TMUX_SRC_NAME=$PACK_DIR/tmux.tar.gz
 TMUX_PACK_DIR=$PACK_DIR/tmux
-TMUX_LINK="https://github.com/tmux/tmux/releases/download/2.8/tmux-2.8.tar.gz"
+TMUX_LINK="https://hub.fastgit.org/tmux/tmux/releases/download/3.2/tmux-3.2.tar.gz"
 
 if [[ ! -d "$TMUX_PACK_DIR" ]]; then
     echo "Creating tmux directory under packages directory"
@@ -93,7 +93,7 @@ echo "Installing git"
 
 GIT_SOURCE_NAME=$PACK_DIR/git.tar.gz
 GIT_PACK_DIR=$PACK_DIR/git
-GIT_LINK="https://github.com/git/git/archive/refs/tags/v2.31.1.tar.gz"
+GIT_LINK="https://hub.fastgit.org/git/git/archive/refs/tags/v2.31.1.tar.gz"
 
 if [[ ! -d "$GIT_PACK_DIR" ]]; then
     echo "Creating git directory under packages directory"
@@ -120,9 +120,9 @@ cd "$HOME"
 #######################################################################
 
 echo "Installing zsh"
-ZSH_SRC_NAME=$PACK_DIR/zsh.tar.xz
+ZSH_SRC_NAME=$PACK_DIR/zsh.tar.gz
 ZSH_PACK_DIR=$PACK_DIR/zsh
-ZSH_LINK="https://sourceforge.net/projects/zsh/files/latest/download"
+ZSH_LINK="https://hub.fastgit.org/zsh-users/zsh/archive/refs/tags/zsh-5.7.tar.gz"
 
 if [[ ! -d "$ZSH_PACK_DIR" ]]; then
     echo "Creating zsh directory under packages directory"
@@ -134,7 +134,7 @@ if [[ ! -f $ZSH_SRC_NAME ]]; then
     curl -Lo "$ZSH_SRC_NAME" "$ZSH_LINK"
 fi
 
-tar xJvf "$ZSH_SRC_NAME" -C "$ZSH_PACK_DIR" --strip-components 1
+tar zxvf "$ZSH_SRC_NAME" -C "$ZSH_PACK_DIR" --strip-components 1
 cd "$ZSH_PACK_DIR"
 
 ./configure --prefix="$HOME/local" \
@@ -149,13 +149,13 @@ cd "$HOME"
 #######################################################################
 # Install zinit
 mkdir ~/.zinit
-git clone --depth 1 https://github.com/zdharma/zinit.git ~/.zinit/bin
+git clone --depth 1 https://hub.fastgit.org/zdharma/zinit.git ~/.zinit/bin
 
 DOT_FILES_DIR=$HOME/projects/dotfiles
 mkdir -p "$DOT_FILES_DIR"
 
 if [[ ! -d "$DOT_FILES_DIR" ]]; then
-    git clone --depth 1 https://github.com/jdhao/dotfiles "$DOT_FILES_DIR"
+    git clone --depth 1 https://hub.fastgit.org/jdhao/dotfiles "$DOT_FILES_DIR"
 fi
 
 ln -sf  "$DOT_FILES_DIR/.bash_profile" "$HOME/.bash_profile"
