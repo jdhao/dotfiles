@@ -106,13 +106,18 @@ if [ -d $HOME/tools/miniconda ]; then
     CONDA_NAME="miniconda"
 fi
 
-export LD_LIBRARY_PATH="$HOME/tools/$CONDA_NAME/lib:$LD_LIBRARY_PATH"
+if [-z "$LD_LIBRARY_PATH"]; then
+  export LD_LIBRARY_PATH="$HOME/tools/$CONDA_NAME/lib"
+else
+  export LD_LIBRARY_PATH="$HOME/tools/$CONDA_NAME/lib:$LD_LIBRARY_PATH"
+fi
+export LD_LIBRARY_PATH="$HOME/local/lib:$LD_LIBRARY_PATH"
+
 export PATH="$HOME/tools/$CONDA_NAME/bin:$PATH"
 export PATH="$HOME/tools/ctags/bin:$PATH"
 export PATH="$HOME/tools/nvim/bin:$PATH"
 export PATH="$HOME/tools/ripgrep:$PATH"
 export PATH="$HOME/local/bin:$PATH"
-export LD_LIBRARY_PATH="$HOME/local/lib:$LD_LIBRARY_PATH"
 
 # use nvim as man pager
 if [[ "$(command -v nvim)" ]]; then
