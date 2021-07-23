@@ -12,6 +12,8 @@
     status = auto
     showbranch = atuo
     ui = auto
+[commit]
+    verbose = true
 [format]
     pretty = %C(magenta)%h%Creset -%C(bold red)%d%Creset %s %C(green)(%ci) %C(cyan)<%an>%Creset
 [merge]
