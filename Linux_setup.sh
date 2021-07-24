@@ -14,7 +14,7 @@ echo "Install Tmux"
 # Building libevent
 LIBEVENT_SRC_NAME=$PACK_DIR/libevent.tar.gz
 LIBEVENT_PACK_DIR=$PACK_DIR/libevent
-LIBEVENT_LINK="https://hub.fastgit.org/libevent/libevent/releases/download/release-2.1.10-stable/libevent-2.1.10-stable.tar.gz"
+LIBEVENT_LINK="https://hub.fastgit.org/libevent/libevent/releases/download/release-2.1.12-stable/libevent-2.1.12-stable.tar.gz"
 
 if [[ ! -d "$LIBEVENT_PACK_DIR" ]]; then
     echo "Creating libevent directory under packages directory"
@@ -38,7 +38,7 @@ cd "$HOME"
 # Building ncurses
 NCURSES_SRC_NAME=$PACK_DIR/ncurses.tar.gz
 NCURSE_PACK_DIR=$PACK_DIR/ncurses
-NCURSES_LINK="https://hub.fastgit.org/mirror/ncurses/archive/refs/tags/v6.1.tar.gz"
+NCURSES_LINK="https://hub.fastgit.org/mirror/ncurses/archive/refs/tags/v6.2.tar.gz"
 
 if [[ ! -d "$NCURSE_PACK_DIR" ]]; then
     echo "Creating ncurses directory under packages directory"
