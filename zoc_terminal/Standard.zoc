@@ -1,0 +1,222 @@
+ZOC8.02.6
+
+// SESSION PROFILE: TERMINAL
+LocalEcho=no
+LocalEchoDontAddLF=no
+IncomingEolMode=no
+SendHostEcho=no
+IgnoreBeep=no
+DisableUrlHighlighting=no
+Software7E1=no
+StripHiBit=no
+IgnoreCharTranslation=no
+AutoUppercase=no
+AutoUppercaseAlways=no
+DoEnq=no
+EnqString="ZOC^9"
+TimeoutTime=0
+TimeoutString="^@"
+TimeoutControl=0
+JumpScroll=2
+CursorType=1
+CursorHighlight=1
+
+// SESSION PROFILE: LAYOUT
+Dynamic=2
+WinWidth=274
+WinHeight=69
+BoldFont=no
+AntiAliasing=0
+CodePage=1000
+WinFont="DejaVuSansMono NF  7 X 14 (100%)"
+KbdCodePage=1000
+
+// SESSION PROFILE: COLOR
+ColorBack=0
+ColorFore=15
+ColorItalic=11
+ColorItalicBg=0
+ColorBlink=0
+ColorBlinkBg=0
+ColorBold=18
+ColorBoldBg=17
+ColorCursor=11
+ColorMark=15
+ColorTableName="gruvbox.zpal"
+ColorDim=0
+Transparency=0
+
+// SESSION PROFILE: DEVICE
+ActiveDevice=9
+DeviceOpts#00=""
+DeviceOpts#01="[1]:38400-8N1|73|250<Standard.zat>"
+DeviceOpts#02=""
+DeviceOpts#03="[3]2048:10023|*|*|*|*|"
+DeviceOpts#04="[4]0"
+DeviceOpts#05=""
+DeviceOpts#06=""
+DeviceOpts#07="[7]-1/0|0|1:"
+DeviceOpts#08="[8]4||"
+DeviceOpts#09="[9]{v2}|nopts=0,0,1,0,1,1,0,0|proxy=ssh://|bopts={keepalive}"
+DeviceOpts#10="[10]2048:10023|*|*|*|*|"
+DeviceOpts#11=""
+DeviceOpts#12="[12]:38400-8N1|73|250<>"
+DeviceOpts#13=EOL
+Standby=no
+
+// SESSION PROFILE: EMULATION
+ActiveEmulation=18
+EmulationOpts#00=""
+EmulationOpts#01=""
+EmulationOpts#02=""
+EmulationOpts#03=""
+EmulationOpts#04=""
+EmulationOpts#05=""
+EmulationOpts#06=""
+EmulationOpts#07=""
+EmulationOpts#08=""
+EmulationOpts#09=""
+EmulationOpts#10=""
+EmulationOpts#11=""
+EmulationOpts#12=""
+EmulationOpts#13=""
+EmulationOpts#14=""
+EmulationOpts#15=""
+EmulationOpts#16=""
+EmulationOpts#17=""
+EmulationOpts#18="[18]{nrc:B}{csrutf8}{xt256c}*"
+EmulationOpts#19=EOL
+DoUnixName=yes
+UnixName="xterm-256color"
+AllowExtendedSequences=yes
+
+// SESSION PROFILE: LOGGING/TRACE
+LogfileDefaultName="ZOC^3^2_^+^8.log"
+LogfileActive=no
+LogfileTrackChanges=no
+LogfileHeaders=yes
+LogfileStripEmulationSeq=yes
+LogfileAppend=1
+LogfileTimeMarks=no
+LogfileTimeMarksWithDate=yes
+LogfileDc2Dc4=no
+TraceShowCtrlChars=no
+TraceShowHexDump=no
+TraceHexDumpToStreamCapt=no
+TraceAsciiToStreamCapt=no
+TraceWriteAscii=no
+TraceWriteBinary=no
+TraceWriteDeviceBin=no
+TraceWriteLogitLog=no
+TraceAsciiType=0
+TraceStreamAsciiType=0
+
+// SESSION PROFILE: TRANSFER
+ActiveTransfer=2
+TransferOpts#00=""
+TransferOpts#01=""
+TransferOpts#02="[2]*"
+TransferOpts#03=""
+TransferOpts#04=""
+TransferOpts#05=""
+TransferOpts#06=""
+TransferOpts#07=""
+TransferOpts#08=""
+TransferOpts#09=""
+TransferOpts#10=EOL
+ExistActionOldDate=0
+ExistActionSameDate=0
+ExistActionNewerDate=0
+ExistActionNoDate=0
+ExistActionRenameOld=no
+TransAltDir="alt|zix"
+TransAutoRemove="TMP"
+XferWinCloseQuick=no
+XferAutoStart=yes
+XferStartPictureVwr=no
+XferNoConsoleOutput=no
+
+// SESSION PROFILE: TEXT SENDING
+AsciiDelay=0
+AsciiDelay2=50
+AsciiCRLF=2
+
+// SESSION PROFILE: BUTTONS AND MACROS
+UserDesc#00="About these Buttons"
+UserDesc#01="Unix Commands"
+UserDesc#02="|Send "logout<enter>""
+UserDesc#03="|Show apache error.log "
+UserDesc#04="|Extract tar.gz"
+UserDesc#05="Run Sample Script"
+UserDesc#06="Call Host from Host Directory"
+UserDesc#07="Purchase License"
+UserDesc#08=EOL
+UserIcon#00="6"
+UserIcon#01="-1"
+UserIcon#02="0"
+UserIcon#03="0"
+UserIcon#04="0"
+UserIcon#05="11"
+UserIcon#06="8"
+UserIcon#07=""
+UserIcon#08=EOL
+UserValue#00="^RUN=REXX\buttoninfo.zrx"
+UserValue#01=""
+UserValue#02="logout^M"
+UserValue#03="sudo tail -f /var/log/apache2/error.log"
+UserValue#04="tar -xvf *.tar.gz^I"
+UserValue#05="^RUN=REXX\sample.zrx"
+UserValue#06="^CALL=Telehack"
+UserValue#07="^MENU=8501"
+UserValue#08=EOL
+AutoReplyIn#00=EOL
+AutoReplyOut#00=EOL
+AutoHighlight#00=EOL
+
+// SESSION PROFILE: KEYS
+FKey#00=""
+FKey#01=""
+FKey#02=""
+FKey#03=""
+FKey#04=""
+FKey#05=""
+FKey#06=""
+FKey#07=""
+FKey#08=""
+FKey#09=""
+FKey#10=""
+FKey#11=""
+FKey#12=""
+FKey#13=""
+FKey#14=""
+FKey#15=""
+FKey#16=""
+FKey#17=""
+FKey#18=""
+FKey#19=""
+FKey#20=""
+FKey#21=""
+FKey#22=""
+FKey#23=""
+AutoMacShort#00=EOL
+AutoMacLong#00=EOL
+ScrlLock=0
+
+// SESSION PROFILE: WINDOW
+ShowScrollbar=no
+ShowToolbar=no
+ShowStatusline=yes
+ShowUserbar=no
+ShowSnippets=no
+ShowMenu=yes
+ShowLeds=yes
+ShowTraffic=yes
+ShowLogging=yes
+ShowCursorPos=no
+UserButtonWrap=no
+
+// SESSION PROFILE: ADVANCED
+DragDrop=1
+
+// END
+

@@ -1,0 +1,96 @@
+// Black
+0=40,40,40,Black
+
+// Red
+1=204,36,29,Red
+
+// Green
+2=152,151,26,Green
+
+// Yellow
+3=215,153,33,Yellow
+
+// Blue
+4=69,133,136,Blue
+
+// Magenta
+5=177,98,134,Magenta
+
+// Cyan
+6=104,157,106,Cyan
+
+// Gray
+7=229,229,229,Gray
+
+// Dark Gray
+8=76,76,76,Dark Gray
+
+// Light Red
+9=251,73,52,Light Red
+
+// Light Green
+10=184,187,38,Light Green
+
+// Light Yellow
+11=250,189,47,Light Yellow
+
+// Light Blue
+12=131,165,152,Light Blue
+
+// Light Magenta
+13=211,134,155,Light Magenta
+
+// Light Cyan
+14=142,192,124,Light Cyan
+
+// White
+15=248,248,242,White
+
+// Custom 1
+16=235,219,178,selection_bg
+
+// Custom 2
+17=146,131,116,selection_fg
+
+// Custom 3
+18=128,175,240,Bright blue
+
+// Custom 4
+19=195,221,254,White blue
+
+// Custom 5
+20=59,35,34,Mocca
+
+// Custom 6
+21=134,67,63,Red Leather
+
+// Custom 7
+22=205,187,144,Wet Sand
+
+// Custom 8
+23=222,218,196,Cafe Latte
+
+// Custom 9
+24=64,0,128,Night Purple
+
+// Custom 10
+25=128,64,255,Medium Purple
+
+// Custom 11
+26=192,128,255,Light Purple
+
+// Custom 12
+27=236,230,255,White Purple
+
+// Custom 13
+28=32,125,71,Dark Olive
+
+// Custom 14
+29=189,224,142,Light Olive
+
+// Custom 15
+30=255,128,0,Dark Orange
+
+// Custom 16
+31=255,192,0,Medium Orange
+
