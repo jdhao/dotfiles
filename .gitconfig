@@ -18,12 +18,6 @@
     pretty = %C(magenta)%h%Creset -%C(bold red)%d%Creset %s %C(green)(%ci) %C(cyan)<%an>%Creset
 [merge]
   conflictstyle = diff3
-[diff]
-    tool = nvimdiff
-[difftool]
-    prompt = false
-[difftool "nvimdiff"]
-    cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
 [merge]
     tool = nvimdiff
 [mergetool]
