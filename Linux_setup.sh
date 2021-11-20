@@ -167,7 +167,10 @@ fi
 ln -sf  "$DOT_FILES_DIR/.bash_profile" "$HOME/.bash_profile"
 ln -sf  "$DOT_FILES_DIR/.zshrc" "$HOME/.zshrc"
 ln -sf  "$DOT_FILES_DIR/.pylintrc" "$HOME/.pylintrc"
-ln -sf  "$DOT_FILES_DIR/.tmux.conf" "$HOME/.tmux.conf"
+
+mkdir -p "$HOME/.tmux"
+cp "$DOT_FILES_DIR/tmux/tmux-switch-session.sh" "$HOME/.tmux"
+ln -sf  "$DOT_FILES_DIR/tmux/.tmux.conf" "$HOME/.tmux.conf"
 
 # Initialize zsh and install plugins
 # shellcheck source=/dev/null
