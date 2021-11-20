@@ -155,7 +155,7 @@ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 #######################################################################
 # Install zinit
 mkdir ~/.zinit
-git clone --depth 1 https://hub.fastgit.org/zdharma/zinit.git ~/.zinit/bin
+git clone --depth 1 https://hub.fastgit.org/zdharma-continuum/zinit ~/.zinit/bin
 
 DOT_FILES_DIR=$HOME/projects/dotfiles
 mkdir -p "$DOT_FILES_DIR"
