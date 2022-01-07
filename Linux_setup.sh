@@ -87,6 +87,30 @@ make -j && make install
 cd "$HOME"
 
 #######################################################################
+#                                 fd                                  #
+#######################################################################
+FD_DIR=$HOME/tools/fd
+FD_SRC_NAME=$HOME/packages/fd.tar.gz
+FD_LINK="https://hub.fastgit.org/sharkdp/fd/releases/download/v8.3.1/fd-v8.3.1-x86_64-unknown-linux-musl.tar.gz"
+
+if [[ -z "$(command -v fd)" ]] && [[ ! -f "$FD_DIR/fd" ]]; then
+    echo "Install fd"
+    if [[ ! -f $FD_SRC_NAME ]]; then
+        echo "Downloading fd and renaming"
+        wget $FD_LINK -O "$FD_SRC_NAME"
+    fi
+
+    if [[ ! -d "$FD_DIR" ]]; then
+        echo "Creating fd directory under tools directory"
+        mkdir -p "$FD_DIR"
+        echo "Extracting to $HOME/tools/fd directory"
+        tar zxvf "$FD_SRC_NAME" -C "$FD_DIR" --strip-components 1
+    fi
+else
+    echo "fd is already installed. Skip installing it."
+fi
+
+#######################################################################
 #                              Build git                              #
 #######################################################################
 echo "Installing git"

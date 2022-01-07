@@ -117,6 +117,7 @@ export PATH="$HOME/tools/$CONDA_NAME/bin:$PATH"
 export PATH="$HOME/tools/ctags/bin:$PATH"
 export PATH="$HOME/tools/nvim/bin:$PATH"
 export PATH="$HOME/tools/ripgrep:$PATH"
+export PATH="$HOME/tools/fd:$PATH"
 export PATH="$HOME/local/bin:$PATH"
 
 # use nvim as man pager
