@@ -3,7 +3,8 @@ local wezterm = require 'wezterm';
 return {
   font = wezterm.font("Iosevka Nerd Font"),
   font_size = 14.0,
-  color_scheme = "Gruvbox Dark",
+  -- color scheme can be found here: https://github.com/mbadolato/iTerm2-Color-Schemes/tree/master/wezterm
+  color_scheme = "Solarized Dark - Patched",
   default_cursor_style = "BlinkingBar",
   cursor_blink_rate = 500,
   force_reverse_video_cursor = true,
@@ -17,7 +18,7 @@ return {
     top = 0,
     bottom = 0,
   },
-  window_decorations = "RESIZE",
+  window_decorations = "TITLE | RESIZE",
   native_macos_fullscreen_mode = false,
   send_composed_key_when_left_alt_is_pressed=false,
   send_composed_key_when_right_alt_is_pressed=false,
