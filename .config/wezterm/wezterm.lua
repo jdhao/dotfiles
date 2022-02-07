@@ -23,5 +23,5 @@ return {
   send_composed_key_when_left_alt_is_pressed=false,
   send_composed_key_when_right_alt_is_pressed=false,
   use_ime = true,
-  window_background_opacity = 0.98,
+  window_background_opacity = 1.0,
 }
