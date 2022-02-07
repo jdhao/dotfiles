@@ -7,7 +7,7 @@ return {
   color_scheme = "Solarized Dark - Patched",
   default_cursor_style = "BlinkingBar",
   cursor_blink_rate = 500,
-  force_reverse_video_cursor = true,
+  force_reverse_video_cursor = false,
   enable_tab_bar = true,
   use_fancy_tab_bar = true,
   hide_tab_bar_if_only_one_tab = true,
