@@ -1,12 +1,15 @@
 -- config: https://wezfurlong.org/wezterm/config/lua/config/index.html
 local wezterm = require 'wezterm';
 return {
-  font = wezterm.font("Iosevka Nerd Font"),
+  font = wezterm.font_with_fallback({
+    "Iosevka Nerd Font",
+    "Noto Sans SC",
+  }),
   font_size = 14.0,
   -- color scheme can be found here: https://github.com/mbadolato/iTerm2-Color-Schemes/tree/master/wezterm
   color_scheme = "Solarized Dark - Patched",
   default_cursor_style = "BlinkingBar",
-  cursor_blink_rate = 500,
+  cursor_blink_rate = 400,
   force_reverse_video_cursor = false,
   enable_tab_bar = true,
   use_fancy_tab_bar = true,
