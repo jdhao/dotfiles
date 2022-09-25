@@ -28,5 +28,8 @@ return {
   send_composed_key_when_right_alt_is_pressed=false,
   use_ime = true,
   window_background_opacity = 1.0,
+  -- enable undercurl support in nvim, see also:
+  -- https://wezfurlong.org/wezterm/faq.html#how-do-i-enable-undercurl-curly-underlines
+  -- https://wezfurlong.org/wezterm/config/lua/config/term.html
   term = "wezterm",
 }
