@@ -1,5 +1,6 @@
 -- config: https://wezfurlong.org/wezterm/config/lua/config/index.html
 local wezterm = require 'wezterm';
+
 return {
   font = wezterm.font_with_fallback({
     "Iosevka Nerd Font",
@@ -27,4 +28,5 @@ return {
   send_composed_key_when_right_alt_is_pressed=false,
   use_ime = true,
   window_background_opacity = 1.0,
+  term = "wezterm",
 }
