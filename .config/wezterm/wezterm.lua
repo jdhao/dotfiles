@@ -1,12 +1,43 @@
 -- config: https://wezfurlong.org/wezterm/config/lua/config/index.html
 local wezterm = require 'wezterm';
 
+wezterm.on(
+  "update-right-status",
+  function(window)
+    local date = wezterm.strftime("%Y-%m-%d %H:%M:%S ")
+    window:set_right_status(
+      wezterm.format(
+        {
+          { Text = date }
+        }
+      )
+    )
+  end
+)
+
+wezterm.on(
+  'format-tab-title',
+  function(tab, tabs, panes, config, hover, max_width)
+    local pane = tab.active_pane
+    local cwd = pane.current_working_dir
+
+    local home_dir = os.getenv('HOME')
+    local res = string.sub(cwd, 8)
+
+    return string.gsub(res, home_dir, '~')
+  end
+)
+
 return {
   font = wezterm.font_with_fallback({
-    "Iosevka Nerd Font",
-    "Noto Sans SC",
+    -- "Azeret Mono",
+    "IBM Plex Mono",
+    -- "Iosevka Nerd Font",
+    -- "Noto Sans SC",
   }),
-  font_size = 14.0,
+  font_size = 13,
+  line_height = 1.2,
+  cell_width = 0.9,
   -- color scheme can be found here: https://github.com/mbadolato/iTerm2-Color-Schemes/tree/master/wezterm
   color_scheme = "Solarized Dark - Patched",
   default_cursor_style = "BlinkingBar",
@@ -24,12 +55,12 @@ return {
   },
   window_decorations = "TITLE | RESIZE",
   native_macos_fullscreen_mode = false,
-  send_composed_key_when_left_alt_is_pressed=false,
-  send_composed_key_when_right_alt_is_pressed=false,
+  send_composed_key_when_left_alt_is_pressed = false,
+  send_composed_key_when_right_alt_is_pressed = false,
   use_ime = true,
   window_background_opacity = 1.0,
-  -- enable undercurl support in nvim, see also:
-  -- https://wezfurlong.org/wezterm/faq.html#how-do-i-enable-undercurl-curly-underlines
-  -- https://wezfurlong.org/wezterm/config/lua/config/term.html
-  term = "wezterm",
+  -- term = "wezterm",
+  -- set term to wezterm will break the nvim titlestring option, see https://github.com/wez/wezterm/issues/2112
+  term = "xterm-256color",
+  automatically_reload_config = false,
 }
