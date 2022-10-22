@@ -15,23 +15,31 @@ wezterm.on(
   end
 )
 
+-- change the title of tab to current working directory.
+-- ref:
+-- https://wezfurlong.org/wezterm/config/lua/window-events/format-tab-title.html#format-tab-title
+-- https://wezfurlong.org/wezterm/config/lua/PaneInformation.html
+-- https://wezfurlong.org/wezterm/config/lua/pane/get_current_working_dir.html
 wezterm.on(
   'format-tab-title',
   function(tab, tabs, panes, config, hover, max_width)
     local pane = tab.active_pane
+    -- cwd is a URI with file:// as beginning
     local cwd = pane.current_working_dir
 
     local home_dir = os.getenv('HOME')
+    -- remove the prefix from directory
     local res = string.sub(cwd, 8)
-
+    -- shorten the path by using ~ as $HOME.
     return string.gsub(res, home_dir, '~')
   end
 )
 
+
 return {
   font = wezterm.font_with_fallback({
-    -- "Azeret Mono",
     "IBM Plex Mono",
+    -- "Azeret Mono",
     -- "Iosevka Nerd Font",
     -- "Noto Sans SC",
   }),
