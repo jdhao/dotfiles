@@ -18,12 +18,36 @@
     pretty = %C(magenta)%h%Creset -%C(bold red)%d%Creset %s %C(green)(%ci) %C(cyan)<%an>%Creset
 [merge]
   conflictstyle = diff3
-[merge]
-    tool = nvimdiff
+  tool = nvimdiff
 [mergetool]
     prompt = true
 [mergetool "nvimdiff"]
     cmd = "nvim -d \"$LOCAL\" \"$REMOTE\" \"$MERGED\" -c 'wincmd w' -c 'wincmd J'"
+[alias]
+    a = add
+    c = commit --verbose
+    ca = commit -a --verbose
+    cm = commit -m
+    cam = commit -a -m
+    s = status
+    co = checkout
+    cob = checkout -b
+    lg = log --decorate --graph
+    d = diff
+    ds = diff --stat
+    dc = diff --cached
+    pu = push
+    puu = push -u
+    pud = push -d
+    pl = pull
+    b = branch
+    ba = branch -a
+    bl = branch -l
+    br = branch -r
+    # list branches sorted by last modified
+    bt = "!git for-each-ref --sort='-authordate' --format='%(authordate)%09%(objectname:short)%09%(refname)' refs/heads | sed -e 's-refs/heads/--'"
+    # list aliases
+    la = "!git config -l | grep alias | cut -c 7-"
 [init]
     defaultBranch = master
 [diff]
