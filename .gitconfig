@@ -26,6 +26,7 @@
 [alias]
     a = add
     c = commit --verbose
+    conf = config
     ca = commit -a --verbose
     cm = commit -m
     cam = commit -a -m
@@ -53,4 +54,8 @@
 [diff]
     algorithm = histogram
     suppressBlankEmpty = true
-    mnemonicprefix = true
+    mnemonicPrefix = true
+    renames = copies
+[user]
+    name = jdhao
+    email = jdhao@hotmail.com
