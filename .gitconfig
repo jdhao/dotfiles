@@ -25,15 +25,15 @@
     cmd = "nvim -d \"$LOCAL\" \"$REMOTE\" \"$MERGED\" -c 'wincmd w' -c 'wincmd J'"
 [alias]
     a = add
-    c = commit --verbose
     conf = config
+    c = commit --verbose
     ca = commit -a --verbose
     cm = commit -m
     cam = commit -a -m
     s = status
     co = checkout
     cob = checkout -b
-    lg = log --decorate --graph
+    lg = log --decorate --graph --all --oneline
     d = diff
     ds = diff --stat
     dc = diff --cached
@@ -41,10 +41,10 @@
     puu = push -u
     pud = push -d
     pl = pull
-    b = branch
-    ba = branch -a
-    bl = branch -l
-    br = branch -r
+    br = branch
+    bra = branch -a
+    brl = branch -l
+    brr = branch -r
     # list branches sorted by last modified
     bt = "!git for-each-ref --sort='-authordate' --format='%(authordate)%09%(objectname:short)%09%(refname)' refs/heads | sed -e 's-refs/heads/--'"
     # list aliases
