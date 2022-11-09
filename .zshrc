@@ -13,8 +13,8 @@ umask 077
 #######################################################################
 #                        zinit configurations                         #
 #######################################################################
-
-source "$HOME/.zinit/bin/zinit.zsh"
+source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
+autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 
 # git.zsh is required by some omz plugins
@@ -44,7 +44,9 @@ zinit ice wait lucid atload'_zsh_autosuggest_start'
 zinit light zsh-users/zsh-autosuggestions
 
 zinit ice wait lucid
-zinit light zdharma/fast-syntax-highlighting
+zinit load zdharma-continuum/fast-syntax-highlighting
+
+zinit load MichaelAquilina/zsh-auto-notify
 
 #######################################################################
 #                           Plugin settings                           #
@@ -73,6 +75,10 @@ MODE_INDICATOR_VLINE='%F{12}<%F{4}V-LINE<%f'
 # Make it work with your existing RPS1 if it is set. Note the single quotes
 setopt PROMPT_SUBST
 RPS1='${MODE_INDICATOR_PROMPT} ${vcs_info_msg_0_}'
+
+# configuration for zsh-auto-notify
+export AUTO_NOTIFY_THRESHOLD=20
+
 
 #######################################################################
 #                         fzf configurations                          #

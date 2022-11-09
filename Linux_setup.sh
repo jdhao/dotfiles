@@ -178,8 +178,7 @@ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 #                         Install zsh plugins                         #
 #######################################################################
 # Install zinit
-mkdir ~/.zinit
-git clone --depth 1 https://hub.fastgit.org/zdharma-continuum/zinit ~/.zinit/bin
+bash -c "$(curl --fail --show-error --silent --location https://raw.githubusercontent.com/zdharma-continuum/zinit/HEAD/scripts/install.sh)"
 
 DOT_FILES_DIR=$HOME/projects/dotfiles
 mkdir -p "$DOT_FILES_DIR"
