@@ -25,8 +25,8 @@ source "$HOME/.zinit/bin/zinit.zsh"
 # zinit ice svn lucid
 # zinit snippet OMZ::plugins/pip
 
-zplugin ice as"completion"
-zplugin snippet OMZ::plugins/docker/_docker
+zinit ice as"completion"
+zinit snippet OMZ::plugins/docker/_docker
 
 # pure theme
 zinit ice compile'(pure|async).zsh' pick'async.zsh' src'pure.zsh'
