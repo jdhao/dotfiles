@@ -47,7 +47,7 @@ return {
   line_height = 1.2,
   cell_width = 0.9,
   -- color scheme can be found here: https://github.com/mbadolato/iTerm2-Color-Schemes/tree/master/wezterm
-  color_scheme = "Solarized Dark - Patched",
+  color_scheme = "Solarized Dark (Gogh)",
   default_cursor_style = "BlinkingBar",
   cursor_blink_rate = 400,
   force_reverse_video_cursor = false,
