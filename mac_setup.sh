@@ -14,7 +14,11 @@ brew install \
   fontconfig \
   hugo \
   miniconda \
-  tmux
+  tmux \
+  jq \
+  fd \
+  wget \
+  poppler
 
 # HomeBrew casks
 brew install --cask \
@@ -22,4 +26,5 @@ brew install --cask \
   calibre \
   keycastr \
   wezterm \
-  kitty
+  kitty \
+  miniconda
