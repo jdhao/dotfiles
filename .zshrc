@@ -136,6 +136,7 @@ fi
 setopt noclobber  # Do not overwrite existing files by default
 setopt autocd  # cd to a directory if only name is provided
 setopt correct_all  # correct misspelled command
+setopt no_case_glob  # case-insensitive globbing
 
 export HISTFILE=~/.histfile
 export HISTSIZE=1000000
@@ -147,9 +148,8 @@ setopt HIST_REDUCE_BLANKS  # remove unnecessary blanks
 setopt INC_APPEND_HISTORY_TIME  # append command to history file immediately after execution
 setopt EXTENDED_HISTORY  # record command start time
 
-alias history="fc -l 1"
-# below alias taken from https://github.com/zimfw/history/blob/master/init.zsh
-alias history-stat="fc -ln 0 | awk '{print \$1}' | sort | uniq -c | sort -nr | head"
+# let comments work in interactive shell
+setopt INTERACTIVE_COMMENTS
 
 #######################################################################
 #                            custom alias                             #
@@ -164,6 +164,10 @@ alias ldot='ls -d .??*'
 alias cp='nocorrect cp -i'
 alias mv='nocorrect mv -i'
 alias cls="clear"
+
+alias history="fc -l 1"
+# below alias taken from https://github.com/zimfw/history/blob/master/init.zsh
+alias history-stat="fc -ln 0 | awk '{print \$1}' | sort | uniq -c | sort -nr | head"
 
 #######################################################################
 #                        key binding settings                         #
