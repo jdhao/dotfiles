@@ -79,16 +79,6 @@ RPS1='${MODE_INDICATOR_PROMPT} ${vcs_info_msg_0_}'
 # configuration for zsh-auto-notify
 export AUTO_NOTIFY_THRESHOLD=20
 
-
-#######################################################################
-#                         fzf configurations                          #
-#######################################################################
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export FZF_BASE="$HOME/.fzf"
-export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
-
-export PATH="$HOME/.fzf/bin:$PATH"
 #######################################################################
 #                        Environment variables                        #
 #######################################################################
@@ -103,28 +93,6 @@ export LC_COLLATE='C'
 export LC_ALL="en_US.UTF-8"
 export LANG=en_US.UTF-8
 export KEYTIMEOUT=30
-
-if [ -d $HOME/tools/anaconda ]; then
-    CONDA_NAME="anaconda"
-fi
-
-if [ -d $HOME/tools/miniconda ]; then
-    CONDA_NAME="miniconda"
-fi
-
-if [-z "$LD_LIBRARY_PATH"]; then
-  export LD_LIBRARY_PATH="$HOME/tools/$CONDA_NAME/lib"
-else
-  export LD_LIBRARY_PATH="$HOME/tools/$CONDA_NAME/lib:$LD_LIBRARY_PATH"
-fi
-export LD_LIBRARY_PATH="$HOME/local/lib:$LD_LIBRARY_PATH"
-
-export PATH="$HOME/tools/$CONDA_NAME/bin:$PATH"
-export PATH="$HOME/tools/ctags/bin:$PATH"
-export PATH="$HOME/tools/nvim/bin:$PATH"
-export PATH="$HOME/tools/ripgrep:$PATH"
-export PATH="$HOME/tools/fd:$PATH"
-export PATH="$HOME/local/bin:$PATH"
 
 # use nvim as man pager
 if [[ "$(command -v nvim)" ]]; then
@@ -194,3 +162,9 @@ mkcd ()
 # some command or update the completion behavior. Instead of running the
 # command multiple times, running it at the end of the zshrc seems okay.
 compinit
+
+if [[ $(uname) == "Darwin" ]]; then
+  source .zshrc_mac
+else
+  source .zshrc_linux
+fi

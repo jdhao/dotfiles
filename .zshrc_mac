@@ -1,0 +1,4 @@
+copydir ()
+{
+  pwd | pbcopy
+}

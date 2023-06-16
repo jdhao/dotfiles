@@ -1,0 +1,36 @@
+#######################################################################
+#                         fzf configurations                          #
+#######################################################################
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export FZF_BASE="$HOME/.fzf"
+export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
+
+export PATH="$HOME/.fzf/bin:$PATH"
+
+#######################################################################
+#                                PATH                                 #
+#######################################################################
+
+if [ -d $HOME/tools/anaconda ]; then
+    CONDA_NAME="anaconda"
+fi
+
+if [ -d $HOME/tools/miniconda ]; then
+    CONDA_NAME="miniconda"
+fi
+
+if [-z "$LD_LIBRARY_PATH"]; then
+  export LD_LIBRARY_PATH="$HOME/tools/$CONDA_NAME/lib"
+else
+  export LD_LIBRARY_PATH="$HOME/tools/$CONDA_NAME/lib:$LD_LIBRARY_PATH"
+fi
+export LD_LIBRARY_PATH="$HOME/local/lib:$LD_LIBRARY_PATH"
+
+export PATH="$HOME/tools/$CONDA_NAME/bin:$PATH"
+export PATH="$HOME/tools/ctags/bin:$PATH"
+export PATH="$HOME/tools/nvim/bin:$PATH"
+export PATH="$HOME/tools/ripgrep:$PATH"
+export PATH="$HOME/tools/fd:$PATH"
+export PATH="$HOME/local/bin:$PATH"
+
