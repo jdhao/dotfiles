@@ -4,7 +4,7 @@
 brew install \
   neovim \
   node \
-  ctags \
+  universal-ctags \
   lua-language-server \
   stylua \
   ripgrep \
