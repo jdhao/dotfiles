@@ -35,10 +35,9 @@ wezterm.on(
   end
 )
 
-
-return {
+local wez_conf = {
   font = wezterm.font_with_fallback({
-    "IBM Plex Mono",
+     "IBM Plex Mono",
     -- "Azeret Mono",
     -- "Iosevka Nerd Font",
     -- "Noto Sans SC",
@@ -72,3 +71,13 @@ return {
   term = "xterm-256color",
   automatically_reload_config = false,
 }
+
+-- move current tab left or right, modified from https://wezfurlong.org/wezterm/config/lua/keyassignment/MoveTabRelative.html.
+-- For the key notation, check https://wezfurlong.org/wezterm/config/keys.html#configuring-key-assignments
+local action = wezterm.action
+wez_conf.keys = {
+  { key = 'LeftArrow', mods = 'SHIFT|ALT', action = action.MoveTabRelative(-1) },
+  { key = 'RightArrow', mods = 'SHIFT|ALT', action = action.MoveTabRelative(1) },
+}
+
+return wez_conf
