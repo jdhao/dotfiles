@@ -27,6 +27,9 @@ wezterm.on(
 
     -- cwd is a URL object with file:// as beginning.
     local cwd = active_pane.current_working_dir
+    if cwd == nil then
+      return
+    end
 
     -- get cwd in string format, https://wezfurlong.org/wezterm/config/lua/wezterm.url/Url.html
     local cwd_str = cwd.file_path
