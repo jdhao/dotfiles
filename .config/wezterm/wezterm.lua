@@ -25,14 +25,15 @@ wezterm.on(
   function(tab, tabs, panes, config, hover, max_width)
     local active_pane = tab.active_pane
 
-    -- cwd is a URI object with file:// as beginning, and we need to convert it to string
+    -- cwd is a URL object with file:// as beginning.
     local cwd = active_pane.current_working_dir
-    local cwd_str = tostring(cwd)
 
-    -- remove the prefix from directory and shorten the path by using ~ as $HOME.
-    local res = string.sub(cwd_str, 8)
+    -- get cwd in string format, https://wezfurlong.org/wezterm/config/lua/wezterm.url/Url.html
+    local cwd_str = cwd.file_path
+
+    -- shorten the path by using ~ as $HOME.
     local home_dir = os.getenv('HOME')
-    return string.gsub(res, home_dir, '~')
+    return string.gsub(cwd_str, home_dir, '~')
   end
 )
 
