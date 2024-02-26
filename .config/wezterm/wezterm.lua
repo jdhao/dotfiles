@@ -23,14 +23,15 @@ wezterm.on(
 wezterm.on(
   'format-tab-title',
   function(tab, tabs, panes, config, hover, max_width)
-    local pane = tab.active_pane
-    -- cwd is a URI with file:// as beginning
-    local cwd = pane.current_working_dir
+    local active_pane = tab.active_pane
 
+    -- cwd is a URI object with file:// as beginning, and we need to convert it to string
+    local cwd = active_pane.current_working_dir
+    local cwd_str = tostring(cwd)
+
+    -- remove the prefix from directory and shorten the path by using ~ as $HOME.
+    local res = string.sub(cwd_str, 8)
     local home_dir = os.getenv('HOME')
-    -- remove the prefix from directory
-    local res = string.sub(cwd, 8)
-    -- shorten the path by using ~ as $HOME.
     return string.gsub(res, home_dir, '~')
   end
 )
