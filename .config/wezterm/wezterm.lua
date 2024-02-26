@@ -54,6 +54,7 @@ local wez_conf = {
   color_scheme = "Solarized Dark (Gogh)",
   default_cursor_style = "BlinkingBar",
   cursor_blink_rate = 400,
+  cursor_thickness = '1pt',
   force_reverse_video_cursor = false,
   enable_tab_bar = true,
   use_fancy_tab_bar = true,
