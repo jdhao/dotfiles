@@ -45,7 +45,7 @@ local wez_conf = {
      "IBM Plex Mono",
     -- "Azeret Mono",
     -- "Iosevka Nerd Font",
-    -- "Noto Sans SC",
+    "Noto Sans SC",
   }),
   font_size = 13,
   line_height = 1.2,
