@@ -2,14 +2,13 @@
 
 local hyper = { "alt", "ctrl", "cmd" }
 
-require("./scripts/intput_source_switch")
+require("scripts.intput_source_switch")
+require("scripts.network")
 
 hs.loadSpoon("SpoonInstall")
 
 -- Show EmmyLua annotations for Hammerspoon itself and also for spoons
 spoon.SpoonInstall:andUse("EmmyLua")
-
-spoon.SpoonInstall:andUse("SpeedMenu")
 
 -- move current window between different monitors, source: https://stackoverflow.com/a/58662204/6064933
 hs.hotkey.bind(hyper, 'n', function()
