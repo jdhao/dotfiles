@@ -1,26 +1,14 @@
 -- config for hammerspoon
 
--- require("./scripts/intput_source_switch")
+require("./scripts/intput_source_switch")
 
 hs.loadSpoon("SpoonInstall")
-
-spoon.SpoonInstall:andUse("InputSourceSwitch")
-
-spoon.InputSourceSwitch:setApplications({
-    ["WeChat"] = "Pinyin - Simplified",
-    ["Telegram"] = "Pinyin - Simplified",
-    ["Raycast"] = "ABC",
-    ["Google Chrome"] = "ABC",
-    ["WezTerm"] = "ABC",
-})
-
-spoon.InputSourceSwitch:start()
 
 -- Show EmmyLua annotations for Hammerspoon itself and also for spoons
 spoon.SpoonInstall:andUse("EmmyLua")
 
 
--- move current window between different monitors
+-- move current window between different monitors, source: https://stackoverflow.com/a/58662204/6064933
 hs.hotkey.bind({'alt', 'ctrl', 'cmd'}, 'n', function()
   -- get the focused window
   local win = hs.window.focusedWindow()
@@ -28,8 +16,9 @@ hs.hotkey.bind({'alt', 'ctrl', 'cmd'}, 'n', function()
   local screen = win:screen()
   -- compute the unitRect of the focused window relative to the current screen
   -- and move the window to the next screen setting the same unitRect
-  win:move(win:frame():toUnitRect(screen:frame()), screen:next(), true, 0)
+  win:move(win:frame():toUnitRect(screen:frame()), screen:next(), true, 0.2)
 end)
+
 
 -- Note that we need to enabel notficaton for Hammerspoon in system "notification" setting,
 -- in oder to send notification below, otherwise, you see nothing.
