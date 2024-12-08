@@ -2,3 +2,4 @@
 *.merged-ca-bundle
 *.user-ca-bundle
 tags
+Spoons/
