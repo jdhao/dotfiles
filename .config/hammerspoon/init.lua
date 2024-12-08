@@ -1,5 +1,7 @@
 -- config for hammerspoon
 
+local hyper = { "alt", "ctrl", "cmd" }
+
 require("./scripts/intput_source_switch")
 
 hs.loadSpoon("SpoonInstall")
@@ -7,9 +9,10 @@ hs.loadSpoon("SpoonInstall")
 -- Show EmmyLua annotations for Hammerspoon itself and also for spoons
 spoon.SpoonInstall:andUse("EmmyLua")
 
+spoon.SpoonInstall:andUse("SpeedMenu")
 
 -- move current window between different monitors, source: https://stackoverflow.com/a/58662204/6064933
-hs.hotkey.bind({'alt', 'ctrl', 'cmd'}, 'n', function()
+hs.hotkey.bind(hyper, 'n', function()
   -- get the focused window
   local win = hs.window.focusedWindow()
   -- get the screen where the focused window is displayed, a.k.a. current screen
@@ -19,6 +22,10 @@ hs.hotkey.bind({'alt', 'ctrl', 'cmd'}, 'n', function()
   win:move(win:frame():toUnitRect(screen:frame()), screen:next(), true, 0.2)
 end)
 
+-- reload config
+hs.hotkey.bind(hyper, 'r', function()
+  hs.reload()
+end)
 
 -- Note that we need to enabel notficaton for Hammerspoon in system "notification" setting,
 -- in oder to send notification below, otherwise, you see nothing.
