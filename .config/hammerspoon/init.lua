@@ -23,6 +23,7 @@ end)
 
 -- reload config
 hs.hotkey.bind(hyper, 'r', function()
+  hs.console.clearConsole()
   hs.reload()
 end)
 
