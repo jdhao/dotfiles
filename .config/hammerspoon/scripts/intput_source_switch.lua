@@ -47,6 +47,7 @@ function applicationWatcher(appName, eventType, appObject)
   end
 end
 
+-- define a global variable to avoid garbage collection: https://www.hammerspoon.org/go/#variablelife
 appWatcher = hs.application.watcher.new(applicationWatcher):start()
 
 -- 输入法切换提示
