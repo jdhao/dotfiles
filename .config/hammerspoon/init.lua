@@ -1,9 +1,10 @@
 -- config for hammerspoon
 
-local hyper = { "alt", "ctrl", "cmd" }
+hyper = { "alt", "ctrl", "cmd" }
 
 require("scripts.intput_source_switch")
 require("scripts.network")
+require("scripts.window_ops")
 
 hs.loadSpoon("SpoonInstall")
 
