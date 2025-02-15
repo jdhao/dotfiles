@@ -27,4 +27,5 @@ brew install --cask \
   keycastr \
   wezterm \
   kitty \
-  shottr
+  shottr \
+  hammerspoon
