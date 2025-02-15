@@ -30,4 +30,5 @@ brew install --cask \
   shottr \
   hammerspoon \
   raycast \
-  popclip
+  popclip \
+  itsycal
