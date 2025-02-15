@@ -26,5 +26,4 @@ brew install --cask \
   calibre \
   keycastr \
   wezterm \
-  kitty \
-  miniconda
+  kitty

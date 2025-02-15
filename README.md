@@ -23,7 +23,7 @@
 
 # Introduction
 
-This repo is created to store my personal settings for bash, zsh and other commonly used tools.
+This repo is created to store my personal settings for bash, zsh, tmux and other commonly used tools.
 
 # Set up environment
 

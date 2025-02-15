@@ -1,5 +1,0 @@
-// These settings override both User and Default settings for the Python syntax
-{
-	"translate_tabs_to_spaces": true,
-	"auto_complete_triggers": [{"selector": "source.python", "characters": "."}]
-}
