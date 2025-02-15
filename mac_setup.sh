@@ -26,4 +26,5 @@ brew install --cask \
   calibre \
   keycastr \
   wezterm \
-  kitty
+  kitty \
+  shottr
