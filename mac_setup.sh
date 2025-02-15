@@ -31,4 +31,5 @@ brew install --cask \
   hammerspoon \
   raycast \
   popclip \
-  itsycal
+  itsycal \
+  swish
