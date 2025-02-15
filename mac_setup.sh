@@ -28,4 +28,5 @@ brew install --cask \
   wezterm \
   kitty \
   shottr \
-  hammerspoon
+  hammerspoon \
+  raycast
