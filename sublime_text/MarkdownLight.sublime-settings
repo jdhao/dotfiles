@@ -1,9 +1,0 @@
-{
-	"color_scheme": "Packages/MarkdownLight/MarkdownDark.tmTheme",
-	"extensions":
-	[
-		"markdown",
-		"mdown",
-		"markdn"
-	]
-}
