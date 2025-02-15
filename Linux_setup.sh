@@ -62,7 +62,7 @@ cd "$HOME"
 # Building tmux
 TMUX_SRC_NAME=$PACK_DIR/tmux.tar.gz
 TMUX_PACK_DIR=$PACK_DIR/tmux
-TMUX_LINK="https://hub.fastgit.org/tmux/tmux/releases/download/3.2/tmux-3.2.tar.gz"
+TMUX_LINK="https://github.com/tmux/tmux/releases/download/3.5a/tmux-3.5a.tar.gz"
 
 if [[ ! -d "$TMUX_PACK_DIR" ]]; then
     echo "Creating tmux directory under packages directory"
