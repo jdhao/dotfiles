@@ -14,7 +14,7 @@ echo "Install Tmux"
 # Building libevent
 LIBEVENT_SRC_NAME=$PACK_DIR/libevent.tar.gz
 LIBEVENT_PACK_DIR=$PACK_DIR/libevent
-LIBEVENT_LINK="https://hub.fastgit.org/libevent/libevent/releases/download/release-2.1.12-stable/libevent-2.1.12-stable.tar.gz"
+LIBEVENT_LINK="https://github.com/libevent/libevent/releases/download/release-2.1.12-stable/libevent-2.1.12-stable.tar.gz"
 
 if [[ ! -d "$LIBEVENT_PACK_DIR" ]]; then
     echo "Creating libevent directory under packages directory"
@@ -38,7 +38,7 @@ cd "$HOME"
 # Building ncurses
 NCURSES_SRC_NAME=$PACK_DIR/ncurses.tar.gz
 NCURSE_PACK_DIR=$PACK_DIR/ncurses
-NCURSES_LINK="https://hub.fastgit.org/mirror/ncurses/archive/refs/tags/v6.2.tar.gz"
+NCURSES_LINK="https://github.com/mirror/ncurses/archive/refs/tags/v6.4.tar.gz"
 
 if [[ ! -d "$NCURSE_PACK_DIR" ]]; then
     echo "Creating ncurses directory under packages directory"
@@ -91,7 +91,7 @@ cd "$HOME"
 #######################################################################
 FD_DIR=$HOME/tools/fd
 FD_SRC_NAME=$HOME/packages/fd.tar.gz
-FD_LINK="https://hub.fastgit.org/sharkdp/fd/releases/download/v8.3.1/fd-v8.3.1-x86_64-unknown-linux-musl.tar.gz"
+FD_LINK="https://github.com/sharkdp/fd/releases/download/v10.2.0/fd-v10.2.0-x86_64-unknown-linux-musl.tar.gz"
 
 if [[ -z "$(command -v fd)" ]] && [[ ! -f "$FD_DIR/fd" ]]; then
     echo "Install fd"
@@ -117,7 +117,7 @@ echo "Installing git"
 
 GIT_SOURCE_NAME=$PACK_DIR/git.tar.gz
 GIT_PACK_DIR=$PACK_DIR/git
-GIT_LINK="https://hub.fastgit.org/git/git/archive/refs/tags/v2.31.1.tar.gz"
+GIT_LINK="https://github.com/git/git/archive/refs/tags/v2.48.1.tar.gz"
 
 if [[ ! -d "$GIT_PACK_DIR" ]]; then
     echo "Creating git directory under packages directory"
@@ -146,7 +146,7 @@ cd "$HOME"
 echo "Installing zsh"
 ZSH_SRC_NAME=$PACK_DIR/zsh.tar.gz
 ZSH_PACK_DIR=$PACK_DIR/zsh
-ZSH_LINK="https://hub.fastgit.org/zsh-users/zsh/archive/refs/tags/zsh-5.7.tar.gz"
+ZSH_LINK="https://github.com/zsh-users/zsh/archive/refs/tags/zsh-5.9.tar.gz"
 
 if [[ ! -d "$ZSH_PACK_DIR" ]]; then
     echo "Creating zsh directory under packages directory"
