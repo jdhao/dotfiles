@@ -184,7 +184,7 @@ DOT_FILES_DIR=$HOME/projects/dotfiles
 mkdir -p "$DOT_FILES_DIR"
 
 if [[ ! -d "$DOT_FILES_DIR" ]]; then
-    git clone --depth 1 https://hub.fastgit.org/jdhao/dotfiles "$DOT_FILES_DIR"
+    git clone --depth 1 https://github.com/jdhao/dotfiles "$DOT_FILES_DIR"
 fi
 
 ln -sf  "$DOT_FILES_DIR/.bash_profile" "$HOME/.bash_profile"
