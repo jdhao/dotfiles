@@ -26,4 +26,9 @@ brew install --cask \
   calibre \
   keycastr \
   wezterm \
-  kitty
+  kitty \
+  shottr \
+  hammerspoon \
+  raycast \
+  popclip \
+  itsycal
