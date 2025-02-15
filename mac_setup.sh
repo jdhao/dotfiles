@@ -29,4 +29,5 @@ brew install --cask \
   kitty \
   shottr \
   hammerspoon \
-  raycast
+  raycast \
+  popclip
