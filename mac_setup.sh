@@ -32,4 +32,5 @@ brew install --cask \
   raycast \
   popclip \
   itsycal \
-  swish
+  swish \
+  telegram
