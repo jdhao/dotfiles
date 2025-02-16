@@ -13,7 +13,6 @@ brew install \
   ffmpeg \
   fontconfig \
   hugo \
-  miniconda \
   tmux \
   jq \
   fd \
