@@ -13,7 +13,6 @@ brew install \
   ffmpeg \
   fontconfig \
   hugo \
-  miniconda \
   tmux \
   jq \
   fd \
@@ -26,9 +25,10 @@ brew install --cask \
   calibre \
   keycastr \
   wezterm \
-  kitty \
   shottr \
   hammerspoon \
   raycast \
   popclip \
-  itsycal
+  itsycal \
+  swish \
+  telegram
