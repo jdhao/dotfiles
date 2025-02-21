@@ -17,7 +17,9 @@ brew install \
   jq \
   fd \
   wget \
-  poppler
+  poppler \
+  tree \
+  watch
 
 # HomeBrew casks
 brew install --cask \
