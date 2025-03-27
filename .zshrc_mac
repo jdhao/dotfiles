@@ -2,3 +2,10 @@ copydir ()
 {
   pwd | pbcopy
 }
+
+# for glcoud
+source "$(brew --prefix)/share/google-cloud-sdk/path.zsh.inc"
+source "$(brew --prefix)/share/google-cloud-sdk/completion.zsh.inc"
+
+# change fpath
+fpath+=$(brew --prefix)/share/zsh/site-functions
