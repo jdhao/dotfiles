@@ -173,6 +173,27 @@ mkcd ()
 # command multiple times, running it at the end of the zshrc seems okay.
 compinit
 
+activate_venv() {
+  local -a venv_paths=(
+    "./venv"
+    "./.venv"
+    "./env"
+    "./.env"
+    )
+
+    for venv_path in $venv_paths; do
+      if [[ -f "$venv_path/bin/activate" ]]; then
+        source "$venv_path/bin/activate"
+        return 0
+      fi
+    done
+
+    return 1
+}
+
+# activate_venv by default
+activate_venv
+
 if [[ $(uname) == "Darwin" ]]; then
   source .zshrc_mac
 else
