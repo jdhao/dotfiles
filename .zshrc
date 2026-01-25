@@ -97,7 +97,7 @@ export AUTO_NOTIFY_THRESHOLD=20
 # -N: show line number
 # -s: squeeze blank lines to single blank line
 export LESS='-RMs'
-export PAGER=less
+export PAGER="nvim --clean R"
 export VISUAL=vi
 export LC_COLLATE='C'
 export LC_ALL="en_US.UTF-8"
