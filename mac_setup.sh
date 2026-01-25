@@ -1,4 +1,4 @@
-# install homebrew first
+# install homebrew first: https://brew.sh/
 
 # command lines tools
 brew install \
@@ -19,7 +19,9 @@ brew install \
   wget \
   poppler \
   tree \
-  watch
+  watch \
+  uv \
+  ruff
 
 # HomeBrew casks
 brew install --cask \
