@@ -116,6 +116,7 @@ setopt autocd  # cd to a directory if only name is provided
 setopt correct_all  # correct misspelled command
 setopt no_case_glob  # case-insensitive globbing
 
+# history option can be found here: https://zsh.sourceforge.io/Doc/Release/Options.html
 export HISTFILE=~/.histfile
 export HISTSIZE=1000000
 export SAVEHIST=1000000
