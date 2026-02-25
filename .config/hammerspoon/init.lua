@@ -1,6 +1,6 @@
 -- config for hammerspoon
 
-hyper = { "alt", "ctrl", "cmd" }
+local hyper = { "alt", "ctrl", "cmd" }
 
 require("scripts.intput_source_switch")
 require("scripts.network")
