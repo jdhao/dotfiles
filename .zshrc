@@ -111,6 +111,9 @@ if [[ "$(command -v nvim)" ]]; then
     export MANWIDTH=999
 fi
 
+# set ripgrep config
+export RIPGREP_CONFIG_PATH=$HOME/.config/ripgrep/config
+
 setopt noclobber  # Do not overwrite existing files by default
 setopt autocd  # cd to a directory if only name is provided
 setopt correct_all  # correct misspelled command
