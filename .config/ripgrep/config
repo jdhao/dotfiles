@@ -1,0 +1,20 @@
+# show line and column number for each match
+--line-number
+--column
+
+# do not print the file heading
+--no-heading
+
+--color=always
+--smart-case
+
+--max-columns=4096
+
+# use regex by default
+# --regexp
+
+# search hidden files and directories
+--hidden
+
+# do not search .git
+--glob=!.git/
