@@ -42,6 +42,7 @@ wezterm.on(
 
 local wez_conf = {
   font = wezterm.font_with_fallback({
+    "Google Sans Code",
      "IBM Plex Mono",
     -- "Azeret Mono",
     -- "Iosevka Nerd Font",

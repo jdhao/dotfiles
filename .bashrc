@@ -9,7 +9,6 @@ fi
 ################  shell options ############################
 
 # forbid the use of ctrl + d to logout the login shell
-# see  https://goo.gl/nUCd8o 
 set -o ignoreeof
 
 # keep you from accidentally overwrite existing files
