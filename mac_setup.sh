@@ -6,6 +6,10 @@ brew install \
   node \
   universal-ctags \
   lua-language-server \
+  tree-sitter-cli \
+  yaml-language-server \
+  vim-language-server \
+  bash-language-server \
   stylua \
   ripgrep \
   pandoc \
