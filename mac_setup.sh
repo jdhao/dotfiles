@@ -35,4 +35,7 @@ brew install --cask \
   popclip \
   itsycal \
   swish \
-  telegram
+  telegram \
+  keka \
+  appcleaner \
+  monitorcontrol
