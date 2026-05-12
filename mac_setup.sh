@@ -11,6 +11,7 @@ brew install \
   vim-language-server \
   bash-language-server \
   gopls \
+  golangci-lint \
   golangci-lint-langserver \
   stylua \
   ripgrep \
