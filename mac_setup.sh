@@ -10,6 +10,8 @@ brew install \
   yaml-language-server \
   vim-language-server \
   bash-language-server \
+  gopls \
+  golangci-lint-langserver \
   stylua \
   ripgrep \
   pandoc \
