@@ -98,7 +98,6 @@ export AUTO_NOTIFY_THRESHOLD=20
 # -s: squeeze blank lines to single blank line
 export LESS='-RMs'
 export PAGER="nvim --clean R"
-export VISUAL=vi
 export LC_COLLATE='C'
 export LC_ALL="en_US.UTF-8"
 export LANG=en_US.UTF-8
@@ -106,6 +105,7 @@ export KEYTIMEOUT=30
 
 # use nvim as man pager
 if [[ "$(command -v nvim)" ]]; then
+    export VISUAL='nvim'
     export EDITOR='nvim'
     export MANPAGER='nvim +Man!'
     export MANWIDTH=999
