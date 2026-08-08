@@ -2,33 +2,33 @@
 
 # command lines tools
 brew install \
-  neovim \
-  node \
-  universal-ctags \
-  lua-language-server \
-  tree-sitter-cli \
-  yaml-language-server \
-  vim-language-server \
   bash-language-server \
-  gopls \
-  golangci-lint \
-  golangci-lint-langserver \
-  stylua \
-  ripgrep \
-  pandoc \
-  fzf \
+  fd \
   ffmpeg \
   fontconfig \
+  fzf \
+  golangci-lint \
+  golangci-lint-langserver \
+  gopls \
   hugo \
-  tmux \
   jq \
-  fd \
-  wget \
+  lua-language-server \
+  neovim \
+  node \
+  pandoc \
   poppler \
+  ripgrep \
+  ruff \
+  stylua \
+  tmux \
   tree \
-  watch \
+  tree-sitter-cli \
+  universal-ctags \
   uv \
-  ruff
+  vim-language-server \
+  watch \
+  wget \
+  yaml-language-server
 
 # HomeBrew casks
 brew install --cask \
