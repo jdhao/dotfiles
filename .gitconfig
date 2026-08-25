@@ -1,6 +1,7 @@
 [core]
     quotepath = false
-    editor = "vim"
+    editor = "nvim"
+    pager = "nvim -R -c 'set ft=git'"
 [log]
     decorate = true
     abbrevCommit = true
@@ -12,6 +13,7 @@
     status = auto
     showbranch = atuo
     ui = auto
+    pager = false
 [commit]
     verbose = true
 [format]
