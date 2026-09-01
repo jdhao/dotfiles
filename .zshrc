@@ -203,3 +203,6 @@ if [[ $(uname) == "Darwin" ]]; then
 else
   source .zshrc_linux
 fi
+
+eval "$(zoxide init zsh)"
+eval "$(mise activate zsh)"
