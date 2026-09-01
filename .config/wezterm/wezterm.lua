@@ -48,7 +48,7 @@ local wez_conf = {
     -- "Iosevka Nerd Font",
     "Noto Sans SC",
   }),
-  font_size = 13,
+  font_size = 14,
   line_height = 1.2,
   cell_width = 0.9,
   -- color scheme can be found here: https://github.com/mbadolato/iTerm2-Color-Schemes/tree/master/wezterm
