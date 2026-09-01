@@ -31,7 +31,9 @@ brew install \
   wget \
   yaml-language-server \
   mise \
-  zoxide
+  zoxide \
+  typos-cli \
+  typos-lsp
 
 # HomeBrew casks
 brew install --cask \
