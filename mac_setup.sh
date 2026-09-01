@@ -15,6 +15,7 @@ brew install \
   lua-language-server \
   neovim \
   node \
+  pnpm \
   pandoc \
   poppler \
   ripgrep \
@@ -28,7 +29,9 @@ brew install \
   vim-language-server \
   watch \
   wget \
-  yaml-language-server
+  yaml-language-server \
+  mise \
+  zoxide
 
 # HomeBrew casks
 brew install --cask \
