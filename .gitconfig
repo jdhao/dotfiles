@@ -59,5 +59,6 @@
     mnemonicPrefix = true
     renames = copies
 [user]
-    name = jdhao
-    email = jdhao@hotmail.com
+    name = Jiedong Hao
+    # do not guess my identity, see also https://github.blog/open-source/git/git-2-8-has-been-released/#dont-guess-my-identity
+	  useconfigonly = true
