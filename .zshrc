@@ -90,6 +90,33 @@ RPS1='${MODE_INDICATOR_PROMPT} ${vcs_info_msg_0_}'
 export AUTO_NOTIFY_THRESHOLD=20
 
 #######################################################################
+#                            custom alias                             #
+#######################################################################
+alias zshconfig="nvim ~/.zshrc"
+alias grep="grep -E -n --color=auto"
+
+if [[ "$(command -v eza)" ]]; then
+  alias ll="eza -l -F --smart-group"
+  alias ls="eza --classify=always"
+  alias la="eza -a"
+  alias lal="eza -al"
+  alias ldot='eza -d .??*'
+else
+  alias ls='ls -F --color=auto'
+  alias ll="ls -l --color=auto"
+  alias la="ls -a"
+  alias lal="ls -al"
+  alias ldot='ls -d .??*'
+fi
+alias cp='nocorrect cp -i'
+alias mv='nocorrect mv -i'
+alias cls="clear"
+
+alias history="fc -l 1"
+# below alias taken from https://github.com/zimfw/history/blob/master/init.zsh
+alias history-stat="fc -ln 0 | awk '{print \$1}' | sort | uniq -c | sort -nr | head"
+
+#######################################################################
 #                        Environment variables                        #
 #######################################################################
 
@@ -97,7 +124,7 @@ export AUTO_NOTIFY_THRESHOLD=20
 # -N: show line number
 # -s: squeeze blank lines to single blank line
 export LESS='-RMs'
-export PAGER="nvim --clean R"
+export PAGER="nvim --clean -R"
 export LC_COLLATE='C'
 export LC_ALL="en_US.UTF-8"
 export LANG=en_US.UTF-8
@@ -132,24 +159,6 @@ setopt EXTENDED_HISTORY  # record command start time
 
 # let comments work in interactive shell
 setopt INTERACTIVE_COMMENTS
-
-#######################################################################
-#                            custom alias                             #
-#######################################################################
-alias zshconfig="nvim ~/.zshrc"
-alias grep="grep -E -n --color=auto"
-alias ls='ls -F --color=auto'
-alias less="less -m"
-alias hexdump='hexdump -C'
-alias ll="ls -l --color=auto"
-alias ldot='ls -d .??*'
-alias cp='nocorrect cp -i'
-alias mv='nocorrect mv -i'
-alias cls="clear"
-
-alias history="fc -l 1"
-# below alias taken from https://github.com/zimfw/history/blob/master/init.zsh
-alias history-stat="fc -ln 0 | awk '{print \$1}' | sort | uniq -c | sort -nr | head"
 
 #######################################################################
 #                        key binding settings                         #
