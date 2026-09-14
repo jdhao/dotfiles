@@ -1,4 +1,19 @@
 #######################################################################
+#                          3rd party tools                            #
+#######################################################################
+if [[ "$(command -v zoxide)" ]]; then
+  eval "$(zoxide init zsh)"
+fi
+
+if [[ "$(command -v mise)" ]]; then
+  eval "$(mise activate zsh)"
+fi
+
+if [[ "$(command -v atuin)" ]]; then
+  eval "$(atuin init zsh)"
+fi
+
+#######################################################################
 #                          General settings                           #
 #######################################################################
 # Enable autocompletion
@@ -135,7 +150,7 @@ if [[ "$(command -v nvim)" ]]; then
     export VISUAL='nvim'
     export EDITOR='nvim'
     export MANPAGER='nvim +Man!'
-    export MANWIDTH=999
+    export MANWIDTH=300
 fi
 
 # set ripgrep config
@@ -208,10 +223,7 @@ activate_venv() {
 activate_venv
 
 if [[ $(uname) == "Darwin" ]]; then
-  source .zshrc_mac
+  source $HOME/.zshrc_mac
 else
-  source .zshrc_linux
+  source $HOME/.zshrc_linux
 fi
-
-eval "$(zoxide init zsh)"
-eval "$(mise activate zsh)"
