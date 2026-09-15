@@ -13,10 +13,11 @@ brew install \
   hugo \
   jq \
   lua-language-server \
+  mise \
   neovim \
   node \
-  pnpm \
   pandoc \
+  pnpm \
   poppler \
   ripgrep \
   ruff \
@@ -24,21 +25,18 @@ brew install \
   tmux \
   tree \
   tree-sitter-cli \
-  universal-ctags \
+  typos-cli \
+  typos-lsp \
   uv \
-  vim-language-server \
   watch \
   wget \
   yaml-language-server \
-  mise \
-  zoxide \
-  typos-cli \
-  typos-lsp
+  xh \
+  zoxide
 
 # HomeBrew casks
 brew install --cask \
   skim \
-  calibre \
   keycastr \
   wezterm \
   shottr \
@@ -47,7 +45,6 @@ brew install --cask \
   popclip \
   itsycal \
   swish \
-  telegram \
   keka \
   appcleaner \
   monitorcontrol
